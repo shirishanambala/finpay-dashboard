@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Settings — FinPay</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+/* ============================================================
+   1. CSS VARIABLES
+   ============================================================ */
+:root {
+  --bg: #F4F6F9;
+  --bg-secondary: #F1F5F9;
+  --card: #FFFFFF;
+
+  --tint-blue: #EAF4FF;
+  --tint-purple: #EEF2FF;
+  --tint-pink: #FFF1F6;
+  --tint-green: #ECFDF3;
+  --tint-orange: #FFF1E8;
+
+  --primary: #2563EB;
+  --secondary: #7C3AED;
+  --cta-start: #FF8A4C;
+  --cta-end: #FF6B35;
+
+  --text-primary: #0F172A;
+  --text-secondary: #64748B;
+  --text-muted: #94A3B8;
+
+  --border: #E2E8F0;
+  --border-hover: #CBD5E1;
+
+  --shadow-sm: 0 2px 8px rgba(15,23,42,.05);
+  --shadow: 0 10px 30px rgba(15,23,42,.08);
+  --shadow-hover: 0 20px 40px rgba(15,23,42,.12);
+  --shadow-cta: 0 10px 24px rgba(255,107,53,.28);
+
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 18px;
+  --r-xl: 22px;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 28px;
+  --space-7: 36px;
+
+  --sidebar-w: 240px;
+  --tabs-h: 60px;
+
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* ============================================================
+   2. RESET & BASE
+   ============================================================ */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+[data-theme-pref="dark"] body {
+  background: #0B0F19;
+  color: #F1F5F9;
+}
+
+button { font: inherit; cursor: pointer; border: none; background: none; }
+input, select, textarea { font: inherit; color: inherit; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+svg { display: block; }
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: var(--border-hover); border-radius: 999px; }
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ============================================================
+   3. LAYOUT SHELL
+   ============================================================ */
+.dashboard { display: flex; min-height: 100vh; }
+
+/* ---------- Mobile header ---------- */
+.mobile-header {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+  padding: 0 var(--space-4);
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 250;
+}
+
+.menu-toggle {
+  width: 38px; height: 38px;
+  border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  background: var(--bg-secondary);
+  font-size: 16px;
+}
+
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(15,23,42,.45);
+  z-index: 290;
+}
+
+.sidebar-overlay.open { display: block; }
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  width: var(--sidebar-w);
+  flex-shrink: 0;
+  background: var(--card);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-5) var(--space-4);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 300;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: var(--space-6);
+  padding: 0 var(--space-2);
+}
+
+.brand-mark {
+  width: 32px; height: 32px;
+  border-radius: 9px;
+  background: linear-gradient(135deg, var(--cta-start), var(--cta-end));
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800;
+  font-size: 14px;
+  box-shadow: var(--shadow-cta);
+}
+
+.brand-name { font-weight: 800; font-size: 17px; letter-spacing: -0.01em; }
+
+.nav-section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 0 var(--space-2);
+  margin: var(--space-4) 0 var(--space-2);
+}
+
+.nav-list { display: flex; flex-direction: column; gap: 2px; margin-bottom: var(--space-2); }
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px var(--space-3);
+  border-radius: var(--r-sm);
+  font-size: 13.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: background .2s ease, color .2s ease;
+}
+
+.nav-icon { width: 18px; height: 18px; flex-shrink: 0; }
+.nav-icon svg { width: 100%; height: 100%; }
+
+.nav-item:hover { background: var(--bg-secondary); color: var(--text-primary); }
+
+.nav-item.active {
+  background: linear-gradient(135deg, var(--tint-orange), var(--tint-purple));
+  color: var(--text-primary);
+  font-weight: 600;
+  box-shadow: inset 0 0 0 1px rgba(255,138,76,.25);
+}
+
+.nav-item.active .nav-icon { color: var(--cta-end); }
+
+.sidebar-footer { margin-top: auto; padding-top: var(--space-4); }
+
+.upgrade-card {
+  background: linear-gradient(160deg, var(--tint-blue), #fff);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.upgrade-card strong { display: block; font-size: 13.5px; margin-bottom: 4px; }
+.upgrade-card p { font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin-bottom: var(--space-3); }
+
+.upgrade-btn {
+  width: 100%;
+  padding: 9px;
+  border-radius: var(--r-sm);
+  background: linear-gradient(135deg, var(--cta-start), var(--cta-end));
+  color: #fff;
+  font-weight: 700;
+  font-size: 12.5px;
+  box-shadow: var(--shadow-cta);
+  transition: transform .2s ease;
+}
+
+.upgrade-btn:hover { transform: translateY(-2px); }
+
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: var(--space-2);
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+}
+
+.user-avatar {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+  font-size: 12.5px;
+  flex-shrink: 0;
+}
+
+.user-info { flex: 1; min-width: 0; }
+.user-name { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.user-role { font-size: 11.5px; color: var(--text-muted); }
+
+.user-menu-btn {
+  width: 26px; height: 26px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 7px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+.user-menu-btn:hover { background: var(--bg-secondary); }
+
+/* ---------- Main content ---------- */
+.main-content {
+  flex: 1;
+  min-width: 0;
+  background:
+    radial-gradient(520px 320px at 92% -6%, rgba(255,138,76,.07), transparent 70%),
+    radial-gradient(560px 360px at -4% 18%, rgba(37,99,235,.06), transparent 70%),
+    radial-gradient(480px 320px at 50% 90%, rgba(255,113,161,.05), transparent 70%),
+    var(--bg);
+}
+
+.page-header {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: var(--space-6) var(--space-5) 0;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin-bottom: var(--space-3);
+}
+
+.breadcrumb a { color: var(--text-secondary); font-weight: 500; transition: color .2s ease; }
+.breadcrumb a:hover { color: var(--primary); }
+.breadcrumb i { font-size: 9px; }
+
+.page-title {
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+
+.page-description { font-size: 14px; color: var(--text-secondary); margin-bottom: var(--space-5); }
+
+/* ============================================================
+   4. TOP TAB NAVIGATION (replaces old settings sidebar)
+   ============================================================ */
+.settings-container {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 var(--space-5) var(--space-7);
+}
+
+.settings-tabs-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: rgba(244,246,249,.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: var(--space-3) 0 var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.settings-tabs {
+  display: flex;
+  gap: 6px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 5px;
+  box-shadow: var(--shadow-sm);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.settings-tabs::-webkit-scrollbar { display: none; }
+
+.settings-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  transition: background .25s ease, color .25s ease, box-shadow .25s ease;
+  flex-shrink: 0;
+}
+
+.settings-tab i { font-size: 12.5px; }
+
+.settings-tab:hover { color: var(--text-primary); }
+
+.settings-tab.active {
+  background: linear-gradient(135deg, var(--cta-start), var(--cta-end));
+  color: #fff;
+  box-shadow: var(--shadow-cta);
+}
+
+/* ============================================================
+   5. SETTINGS CARDS
+   ============================================================ */
+.settings-card {
+  display: none;
+  background: rgba(255,255,255,.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow);
+  animation: fadeUp .4s ease;
+}
+
+.settings-card.active { display: block; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--border);
+}
+
+.card-icon {
+  width: 42px; height: 42px;
+  border-radius: var(--r-md);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.card-icon.blue { background: var(--tint-blue); color: var(--primary); }
+.card-icon.purple { background: var(--tint-purple); color: var(--secondary); }
+.card-icon.green { background: var(--tint-green); color: #16A34A; }
+.card-icon.orange { background: var(--tint-orange); color: var(--cta-end); }
+.card-icon.pink { background: var(--tint-pink); color: #DB2777; }
+
+.card-title { font-size: 17px; font-weight: 700; margin-bottom: 3px; }
+.card-description { font-size: 13.5px; color: var(--text-secondary); }
+
+/* ============================================================
+   6. FORMS
+   ============================================================ */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4) var(--space-4);
+}
+
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group.full-width { grid-column: 1 / -1; }
+
+.form-label { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+.required { color: #EF4444; font-weight: 600; }
+.optional { color: var(--text-muted); font-weight: 400; font-size: 12px; }
+
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  padding: 11px 14px;
+  font-size: 13.5px;
+  color: var(--text-primary);
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.form-textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  outline: none;
+  background: var(--card);
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(37,99,235,.12);
+}
+
+.input-with-icon { position: relative; }
+
+.input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12.5px;
+  color: var(--text-muted);
+}
+
+.input-with-icon .form-input { padding-left: 38px; }
+
+.form-hint { font-size: 11.5px; color: var(--text-muted); }
+
+/* ---------- Avatar upload ---------- */
+.avatar-upload { display: flex; align-items: center; gap: var(--space-4); }
+
+.avatar-preview {
+  position: relative;
+  width: 76px; height: 76px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700;
+  font-size: 24px;
+  flex-shrink: 0;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform .25s ease, box-shadow .25s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.avatar-preview img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+.avatar-preview:hover { transform: scale(1.04); box-shadow: var(--shadow-hover); }
+
+.avatar-preview::after {
+  content: '\f030';
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15,23,42,.45);
+  color: #fff;
+  font-size: 16px;
+  opacity: 0;
+  transition: opacity .2s ease;
+}
+
+.avatar-preview:hover::after { opacity: 1; }
+
+.avatar-actions { display: flex; gap: 10px; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 13.5px;
+  padding: 10px 20px;
+  border-radius: var(--r-sm);
+  transition: transform .22s ease, box-shadow .22s ease, background .22s ease, border-color .22s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--cta-start), var(--cta-end));
+  color: #fff;
+  box-shadow: var(--shadow-cta);
+}
+
+.btn-primary:hover { transform: translateY(-2px) scale(1.01); box-shadow: 0 14px 30px rgba(255,107,53,.34); }
+
+.btn-secondary {
+  background: var(--card);
+  border: 1px solid var(--border);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover { border-color: var(--border-hover); box-shadow: var(--shadow-sm); transform: translateY(-1px); }
+
+.btn-ghost { color: var(--text-secondary); font-weight: 600; padding: 10px 12px; }
+.btn-ghost:hover { color: #EF4444; }
+
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border);
+}
+
+/* ============================================================
+   7. PASSWORD STRENGTH
+   ============================================================ */
+.password-strength { display: flex; align-items: center; gap: 10px; margin-top: 4px; }
+
+.strength-bar {
+  flex: 1;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--bg-secondary);
+  overflow: hidden;
+}
+
+.strength-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 999px;
+  background: #EF4444;
+  transition: width .3s ease, background .3s ease;
+}
+
+.strength-text { font-size: 11.5px; font-weight: 600; color: var(--text-muted); white-space: nowrap; }
+
+.password-requirements {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+  background: var(--bg-secondary);
+  border-radius: var(--r-md);
+  padding: var(--space-4);
+}
+
+.password-requirements li {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  transition: color .2s ease;
+}
+
+.password-requirements li i { font-size: 7px; color: var(--border-hover); transition: color .2s ease, transform .2s ease; }
+
+.password-requirements li.met { color: #16A34A; font-weight: 600; }
+.password-requirements li.met i { color: #16A34A; transform: scale(1.3); }
+.password-requirements li.met i::before { content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; font-size: 9px; }
+
+/* ============================================================
+   8. TOGGLE SWITCHES
+   ============================================================ */
+.toggle-list { display: flex; flex-direction: column; gap: var(--space-2); }
+
+.toggle-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-radius: var(--r-md);
+  border: 1px solid var(--border);
+  background: var(--card);
+  transition: border-color .2s ease, background .2s ease;
+}
+
+.toggle-item:hover { border-color: var(--border-hover); background: var(--bg-secondary); }
+
+.toggle-content { display: flex; align-items: center; gap: 13px; min-width: 0; }
+
+.toggle-icon {
+  width: 38px; height: 38px;
+  border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.toggle-text h4 { font-size: 13.5px; font-weight: 600; margin-bottom: 2px; }
+.toggle-text p { font-size: 12px; color: var(--text-secondary); }
+
+.toggle-switch { position: relative; width: 44px; height: 25px; flex-shrink: 0; }
+
+.toggle-switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+
+.toggle-slider {
+  position: absolute;
+  inset: 0;
+  background: #CBD5E1;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .25s ease;
+}
+
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 19px; height: 19px;
+  left: 3px; top: 3px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,.25);
+  transition: transform .25s ease;
+}
+
+.toggle-switch input:checked + .toggle-slider {
+  background: linear-gradient(135deg, var(--cta-start), var(--cta-end));
+}
+
+.toggle-switch input:checked + .toggle-slider::before { transform: translateX(19px); }
+
+/* ============================================================
+   9. THEME OPTIONS (Appearance)
+   ============================================================ */
+.theme-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+}
+
+.theme-option {
+  border: 1.5px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--space-4);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color .25s ease, transform .25s ease, box-shadow .25s ease;
+  background: var(--card);
+}
+
+.theme-option:hover { transform: translateY(-3px); box-shadow: var(--shadow-sm); }
+
+.theme-option.active { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(37,99,235,.12); }
+
+.theme-preview {
+  width: 100%;
+  height: 64px;
+  border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  margin-bottom: var(--space-3);
+}
+
+.theme-preview.light { background: linear-gradient(160deg, #fff, var(--tint-orange)); border: 1px solid var(--border); }
+.theme-preview.dark { background: linear-gradient(160deg, #1E293B, #0F172A); }
+.theme-preview.auto { background: linear-gradient(160deg, #fff 50%, #1E293B 50%); }
+
+.theme-name { font-size: 13.5px; font-weight: 700; margin-bottom: 2px; }
+.theme-desc { font-size: 11.5px; color: var(--text-secondary); }
+
+/* ============================================================
+   10. TOAST
+   ============================================================ */
+.toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #0F172A;
+  color: #fff;
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 13px 22px;
+  border-radius: 999px;
+  box-shadow: 0 14px 34px rgba(0,0,0,.28);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .3s ease, transform .3s ease;
+  z-index: 999;
+}
+
+.toast i { color: #34D399; font-size: 15px; }
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================================
+   11. RESPONSIVE
+   ============================================================ */
+@media (max-width: 980px) {
+  .mobile-header { display: flex; }
+
+  .sidebar {
+    position: fixed;
+    left: 0; top: 0;
+    transform: translateX(-100%);
+    box-shadow: var(--shadow-hover);
+    transition: transform .3s ease;
+  }
+
+  .sidebar.open { transform: translateX(0); }
+
+  .page-header, .settings-container { padding-left: var(--space-4); padding-right: var(--space-4); }
+}
+
+@media (max-width: 720px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .theme-options { grid-template-columns: 1fr; }
+  .password-requirements { grid-template-columns: 1fr; }
+  .card-actions { flex-direction: column-reverse; }
+  .card-actions .btn { width: 100%; justify-content: center; }
+  .avatar-upload { flex-direction: column; align-items: flex-start; }
+  .settings-card { padding: var(--space-4); }
+}
+
+@media (max-width: 480px) {
+  .page-title { font-size: 21px; }
+  .toggle-item { flex-direction: row; }
+  .toggle-text p { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <button class="menu-toggle" onclick="toggleSidebar()" aria-label="Open menu">
+    <i class="fas fa-bars"></i>
+  </button>
+  <div class="brand">
+    <div class="brand-mark">F</div>
+    <div class="brand-name">FinPay</div>
+  </div>
+  <span style="width:38px;"></span>
+</header>
+
+<!-- Sidebar Overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+<div class="dashboard">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">F</div>
+      <div class="brand-name">FinPay</div>
+    </div>
+
+    <div class="nav-section-label">Main</div>
+   <ul class="nav-list">
+  <li>
+    <a href="dashboard.html" class="nav-item">
+      <span class="nav-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 12l9-9 9 9M5 10v10h14V10"/>
+        </svg>
+      </span>
+      Home
+    </a>
+  </li>
+
+  <li>
+    <a href="payments-product.html" class="nav-item">
+      <span class="nav-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 10h18M7 15h2M3 6h18v12H3z"/>
+        </svg>
+      </span>
+      Payments
+    </a>
+  </li>
+
+  <li>
+    <a href="Customers.html" class="nav-item">
+      <span class="nav-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="9" cy="8" r="3.2"/>
+          <path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M16 4.2a3.2 3.2 0 0 1 0 6.3M21 20c0-2.6-1.9-4.8-4.5-5.6"/>
+        </svg>
+      </span>
+      Customers
+    </a>
+  </li>
+
+  <li>
+    <a href="analytics.html" class="nav-item">
+      <span class="nav-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 19h16M6 15l4-5 3 3 5-7"/>
+        </svg>
+      </span>
+      Analytics
+    </a>
+  </li>
+
+  <li>
+    <a href="Settlements.html" class="nav-item">
+      <span class="nav-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M9 2h6l1 3h3v3l-2 1 2 1v3h-3l-1 3H9l-1-3H5v-3l2-1-2-1V5h3z"/>
+          <circle cx="12" cy="12" r="2.4"/>
+        </svg>
+      </span>
+      Settlements
+    </a>
+  </li>
+
+  <li>
+    <a href="payouts.html" class="nav-item">
+      <span class="nav-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M17 8l4 4-4 4M3 12h18"/>
+        </svg>
+      </span>
+      Payouts
+    </a>
+  </li>
+
+  <li>
+    <a href="Transactions.html" class="nav-item">
+      <span class="nav-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 12h4l3 8 4-16 3 8h4"/>
+        </svg>
+      </span>
+      Transactions
+    </a>
+  </li>
+</ul>
+
+<div class="nav-section-label">Manage</div>
+
+<ul class="nav-list">
+  <li>
+    <a href="settings.html" class="nav-item active">
+      <span class="nav-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.6 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.6-1 1.7 1.7 0 0 0-.3-1.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.9V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>
+        </svg>
+      </span>
+      Settings
+    </a>
+  </li>
+</ul>
+
+    <div class="sidebar-footer">
+      <div class="upgrade-card">
+        <strong>Go Premium</strong>
+        <p>Unlock advanced fraud detection and priority support.</p>
+        <button class="upgrade-btn">Upgrade plan</button>
+      </div>
+
+      <div class="user-card">
+        <div class="user-avatar">JD</div>
+        <div class="user-info">
+          <div class="user-name">John Doe</div>
+          <div class="user-role">Administrator</div>
+        </div>
+        <button class="user-menu-btn"><i class="fas fa-ellipsis-v"></i></button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+
+    <div class="page-header">
+      <nav class="breadcrumb">
+        <a href="#">Dashboard</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Settings</span>
+      </nav>
+      <h1 class="page-title">Settings</h1>
+      <p class="page-description">Manage your account settings, preferences, and business information.</p>
+    </div>
+
+    <div class="settings-container">
+
+      <!-- TOP TAB NAVIGATION -->
+      <div class="settings-tabs-wrap">
+        <nav class="settings-tabs" id="settingsTabs">
+          <button class="settings-tab active" data-section="profile" type="button"><i class="fas fa-user"></i>Profile</button>
+          <button class="settings-tab" data-section="business" type="button"><i class="fas fa-building"></i>Business</button>
+          <button class="settings-tab" data-section="security" type="button"><i class="fas fa-lock"></i>Security</button>
+          <button class="settings-tab" data-section="notifications" type="button"><i class="fas fa-bell"></i>Notifications</button>
+          <button class="settings-tab" data-section="appearance" type="button"><i class="fas fa-palette"></i>Appearance</button>
+        </nav>
+      </div>
+
+      <!-- ============== PROFILE ============== -->
+      <section class="settings-card active" id="profile" data-panel="profile">
+        <div class="card-header">
+          <div class="card-icon blue"><i class="fas fa-user"></i></div>
+          <div>
+            <h2 class="card-title">Profile Information</h2>
+            <p class="card-description">Update your personal details and profile picture.</p>
+          </div>
+        </div>
+
+        <form onsubmit="event.preventDefault(); showToast();">
+          <div class="form-group full-width" style="margin-bottom: var(--space-6);">
+            <label class="form-label">Profile Photo</label>
+            <div class="avatar-upload">
+              <div class="avatar-preview" id="avatarPreview" onclick="document.getElementById('avatarInput').click()">
+                <span id="avatarInitials">JD</span>
+              </div>
+              <input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="handleAvatarUpload(event)">
+              <div class="avatar-actions">
+                <button type="button" class="btn btn-secondary" onclick="document.getElementById('avatarInput').click()">
+                  <i class="fas fa-upload"></i> Upload Photo
+                </button>
+                <button type="button" class="btn btn-ghost" onclick="removeAvatar()">Remove</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">First Name <span class="required">*</span></label>
+              <input type="text" class="form-input" value="John" placeholder="Enter first name">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name <span class="required">*</span></label>
+              <input type="text" class="form-input" value="Doe" placeholder="Enter last name">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address <span class="required">*</span></label>
+              <div class="input-with-icon">
+                <i class="fas fa-envelope input-icon"></i>
+                <input type="email" class="form-input" value="john.doe@company.com" placeholder="Enter email">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone Number <span class="optional">(Optional)</span></label>
+              <div class="input-with-icon">
+                <i class="fas fa-phone input-icon"></i>
+                <input type="tel" class="form-input" value="+1 (555) 123-4567" placeholder="Enter phone number">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Job Title</label>
+              <input type="text" class="form-input" value="Product Manager" placeholder="Enter job title">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Timezone</label>
+              <select class="form-select">
+                <option value="utc-8">Pacific Time (UTC-8)</option>
+                <option value="utc-5" selected>Eastern Time (UTC-5)</option>
+                <option value="utc+0">Greenwich Mean Time (UTC+0)</option>
+                <option value="utc+5.5">India Standard Time (UTC+5:30)</option>
+              </select>
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label">Bio</label>
+              <textarea class="form-textarea" placeholder="Tell us about yourself...">Product Manager with 8+ years of experience in fintech and payments industry. Passionate about building user-centric products.</textarea>
+              <span class="form-hint">Brief description for your profile. Max 200 characters.</span>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <button type="button" class="btn btn-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Save Changes</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- ============== BUSINESS ============== -->
+      <section class="settings-card" id="business" data-panel="business">
+        <div class="card-header">
+          <div class="card-icon purple"><i class="fas fa-building"></i></div>
+          <div>
+            <h2 class="card-title">Business Information</h2>
+            <p class="card-description">Manage your business details and legal information.</p>
+          </div>
+        </div>
+
+        <form onsubmit="event.preventDefault(); showToast();">
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Business Name <span class="required">*</span></label>
+              <input type="text" class="form-input" value="Acme Corporation" placeholder="Enter business name">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Business Type <span class="required">*</span></label>
+              <select class="form-select">
+                <option value="llc">Limited Liability Company (LLC)</option>
+                <option value="corp" selected>Corporation</option>
+                <option value="sole">Sole Proprietorship</option>
+                <option value="partnership">Partnership</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tax ID / EIN <span class="required">*</span></label>
+              <input type="text" class="form-input" value="XX-XXXXXXX" placeholder="Enter Tax ID">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Industry</label>
+              <select class="form-select">
+                <option value="tech" selected>Technology</option>
+                <option value="finance">Finance</option>
+                <option value="retail">Retail</option>
+                <option value="healthcare">Healthcare</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label">Business Address</label>
+              <input type="text" class="form-input" value="123 Business Avenue, Suite 400" placeholder="Street address">
+            </div>
+            <div class="form-group">
+              <label class="form-label">City</label>
+              <input type="text" class="form-input" value="San Francisco" placeholder="City">
+            </div>
+            <div class="form-group">
+              <label class="form-label">State / Province</label>
+              <input type="text" class="form-input" value="California" placeholder="State">
+            </div>
+            <div class="form-group">
+              <label class="form-label">ZIP / Postal Code</label>
+              <input type="text" class="form-input" value="94102" placeholder="ZIP code">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Country</label>
+              <select class="form-select">
+                <option value="us" selected>United States</option>
+                <option value="ca">Canada</option>
+                <option value="uk">United Kingdom</option>
+                <option value="de">Germany</option>
+              </select>
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label">Business Website</label>
+              <div class="input-with-icon">
+                <i class="fas fa-globe input-icon"></i>
+                <input type="url" class="form-input" value="https://acmecorp.com" placeholder="https://yourwebsite.com">
+              </div>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <button type="button" class="btn btn-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-check"></i> Save Changes</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- ============== SECURITY ============== -->
+      <section class="settings-card" id="security" data-panel="security">
+        <div class="card-header">
+          <div class="card-icon green"><i class="fas fa-lock"></i></div>
+          <div>
+            <h2 class="card-title">Change Password</h2>
+            <p class="card-description">Update your password to keep your account secure.</p>
+          </div>
+        </div>
+
+        <form onsubmit="event.preventDefault(); showToast();">
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label class="form-label">Current Password <span class="required">*</span></label>
+              <div class="input-with-icon">
+                <i class="fas fa-lock input-icon"></i>
+                <input type="password" class="form-input" id="currentPassword" placeholder="Enter current password">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">New Password <span class="required">*</span></label>
+              <div class="input-with-icon">
+                <i class="fas fa-key input-icon"></i>
+                <input type="password" class="form-input" id="newPassword" placeholder="Enter new password" oninput="checkPasswordStrength()">
+              </div>
+              <div class="password-strength">
+                <div class="strength-bar"><div class="strength-fill" id="strengthFill"></div></div>
+                <span class="strength-text" id="strengthText">Enter a password</span>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Confirm New Password <span class="required">*</span></label>
+              <div class="input-with-icon">
+                <i class="fas fa-key input-icon"></i>
+                <input type="password" class="form-input" id="confirmPassword" placeholder="Confirm new password" oninput="checkPasswordStrength()">
+              </div>
+            </div>
+
+            <div class="form-group full-width">
+              <ul class="password-requirements" id="passwordRequirements">
+                <li id="req-length"><i></i>At least 8 characters</li>
+                <li id="req-upper"><i></i>One uppercase letter</li>
+                <li id="req-lower"><i></i>One lowercase letter</li>
+                <li id="req-number"><i></i>One number</li>
+                <li id="req-special"><i></i>One special character</li>
+                <li id="req-match"><i></i>Passwords match</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <button type="button" class="btn btn-secondary">Cancel</button>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-shield-alt"></i> Update Password</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- ============== NOTIFICATIONS ============== -->
+      <section class="settings-card" id="notifications" data-panel="notifications">
+        <div class="card-header">
+          <div class="card-icon orange"><i class="fas fa-bell"></i></div>
+          <div>
+            <h2 class="card-title">Notification Preferences</h2>
+            <p class="card-description">Choose how you want to receive notifications.</p>
+          </div>
+        </div>
+
+        <div class="toggle-list">
+          <div class="toggle-item">
+            <div class="toggle-content">
+              <div class="toggle-icon" style="background: var(--tint-blue); color: var(--primary);"><i class="fas fa-envelope"></i></div>
+              <div class="toggle-text"><h4>Email Notifications</h4><p>Receive updates and alerts via email</p></div>
+            </div>
+            <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+          </div>
+
+          <div class="toggle-item">
+            <div class="toggle-content">
+              <div class="toggle-icon" style="background: var(--tint-purple); color: var(--secondary);"><i class="fas fa-mobile-alt"></i></div>
+              <div class="toggle-text"><h4>Push Notifications</h4><p>Get real-time alerts on your device</p></div>
+            </div>
+            <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+          </div>
+
+          <div class="toggle-item">
+            <div class="toggle-content">
+              <div class="toggle-icon" style="background: var(--tint-green); color: #059669;"><i class="fas fa-money-bill-wave"></i></div>
+              <div class="toggle-text"><h4>Transaction Alerts</h4><p>Get notified for every transaction</p></div>
+            </div>
+            <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+          </div>
+
+          <div class="toggle-item">
+            <div class="toggle-content">
+              <div class="toggle-icon" style="background: var(--tint-pink); color: #E11D48;"><i class="fas fa-exclamation-triangle"></i></div>
+              <div class="toggle-text"><h4>Security Alerts</h4><p>Important security-related notifications</p></div>
+            </div>
+            <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+          </div>
+
+          <div class="toggle-item">
+            <div class="toggle-content">
+              <div class="toggle-icon" style="background: var(--tint-orange); color: var(--cta-end);"><i class="fas fa-bullhorn"></i></div>
+              <div class="toggle-text"><h4>Marketing Updates</h4><p>News, features, and promotional content</p></div>
+            </div>
+            <label class="toggle-switch"><input type="checkbox"><span class="toggle-slider"></span></label>
+          </div>
+
+          <div class="toggle-item">
+            <div class="toggle-content">
+              <div class="toggle-icon" style="background: var(--tint-blue); color: var(--primary);"><i class="fas fa-chart-bar"></i></div>
+              <div class="toggle-text"><h4>Weekly Reports</h4><p>Summary of your weekly activity</p></div>
+            </div>
+            <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <button type="button" class="btn btn-secondary">Reset to Default</button>
+          <button type="button" class="btn btn-primary" onclick="showToast()"><i class="fas fa-check"></i> Save Preferences</button>
+        </div>
+      </section>
+
+      <!-- ============== APPEARANCE ============== -->
+      <section class="settings-card" id="appearance" data-panel="appearance">
+        <div class="card-header">
+          <div class="card-icon pink"><i class="fas fa-palette"></i></div>
+          <div>
+            <h2 class="card-title">Appearance</h2>
+            <p class="card-description">Customize how the dashboard looks and feels.</p>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: var(--space-6);">
+          <label class="form-label" style="margin-bottom: var(--space-3);">Theme Mode</label>
+          <div class="theme-options">
+            <div class="theme-option active" onclick="selectTheme(this)">
+              <div class="theme-preview light"><i class="fas fa-sun" style="color: var(--cta-end);"></i></div>
+              <div class="theme-name">Light</div>
+              <div class="theme-desc">Clean and bright</div>
+            </div>
+            <div class="theme-option" onclick="selectTheme(this)">
+              <div class="theme-preview dark"><i class="fas fa-moon" style="color: #A78BFA;"></i></div>
+              <div class="theme-name">Dark</div>
+              <div class="theme-desc">Easy on the eyes</div>
+            </div>
+            <div class="theme-option" onclick="selectTheme(this)">
+              <div class="theme-preview auto"><i class="fas fa-adjust" style="color: var(--text-secondary);"></i></div>
+              <div class="theme-name">System</div>
+              <div class="theme-desc">Match device settings</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="toggle-list">
+          <div class="toggle-item">
+            <div class="toggle-content">
+              <div class="toggle-icon" style="background: var(--tint-purple); color: var(--secondary);"><i class="fas fa-compress-alt"></i></div>
+              <div class="toggle-text"><h4>Compact Mode</h4><p>Reduce spacing for more content</p></div>
+            </div>
+            <label class="toggle-switch"><input type="checkbox"><span class="toggle-slider"></span></label>
+          </div>
+
+          <div class="toggle-item">
+            <div class="toggle-content">
+              <div class="toggle-icon" style="background: var(--tint-blue); color: var(--primary);"><i class="fas fa-magic"></i></div>
+              <div class="toggle-text"><h4>Animations</h4><p>Enable smooth transitions and effects</p></div>
+            </div>
+            <label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+          </div>
+
+          <div class="toggle-item">
+            <div class="toggle-content">
+              <div class="toggle-icon" style="background: var(--tint-green); color: #059669;"><i class="fas fa-columns"></i></div>
+              <div class="toggle-text"><h4>Sidebar Collapsed</h4><p>Show icons only in sidebar</p></div>
+            </div>
+            <label class="toggle-switch"><input type="checkbox"><span class="toggle-slider"></span></label>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <button type="button" class="btn btn-secondary">Reset to Default</button>
+          <button type="button" class="btn btn-primary" onclick="showToast()"><i class="fas fa-check"></i> Save Appearance</button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  <i class="fas fa-check-circle"></i>
+  <span id="toastMessage">Settings saved successfully!</span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js" crossorigin="anonymous"></script>
+<script>
+
+/* ============================================================
+   SIDEBAR (mobile)
+   ============================================================ */
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('open');
+}
+
+/* ============================================================
+   TOP TABS — show only one settings panel at a time
+   ============================================================ */
+function initTabs() {
+  const tabs = document.querySelectorAll('.settings-tab');
+  const panels = document.querySelectorAll('.settings-card');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.getAttribute('data-section');
+
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      panels.forEach(panel => {
+        panel.classList.toggle('active', panel.id === target);
+      });
+
+      // Close mobile sidebar if open, scroll panel into view
+      document.querySelector('.settings-tabs-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+}
+
+/* ============================================================
+   AVATAR UPLOAD / PREVIEW / REMOVE
+   ============================================================ */
+function handleAvatarUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  if (!file.type.startsWith('image/')) {
+    showToast('Please select a valid image file.');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    const preview = document.getElementById('avatarPreview');
+    preview.innerHTML = `<img src="${e.target.result}" alt="Profile photo preview">`;
+  };
+  reader.readAsDataURL(file);
+}
+
+function removeAvatar() {
+  const preview = document.getElementById('avatarPreview');
+  preview.innerHTML = `<span id="avatarInitials">JD</span>`;
+  document.getElementById('avatarInput').value = '';
+}
+
+/* ============================================================
+   PASSWORD STRENGTH METER + REQUIREMENTS
+   ============================================================ */
+function checkPasswordStrength() {
+  const pwd = document.getElementById('newPassword').value;
+  const confirm = document.getElementById('confirmPassword').value;
+
+  const checks = {
+    length: pwd.length >= 8,
+    upper: /[A-Z]/.test(pwd),
+    lower: /[a-z]/.test(pwd),
+    number: /[0-9]/.test(pwd),
+    special: /[^A-Za-z0-9]/.test(pwd),
+    match: pwd.length > 0 && pwd === confirm
+  };
+
+  Object.keys(checks).forEach(key => {
+    const el = document.getElementById('req-' + key);
+    if (el) el.classList.toggle('met', checks[key]);
+  });
+
+  const metCount = Object.values(checks).filter(Boolean).length - (checks.match ? 1 : 0); // strength based on 5 core rules
+  const totalRules = 5;
+  const percent = pwd.length === 0 ? 0 : Math.max(12, (metCount / totalRules) * 100);
+
+  const fill = document.getElementById('strengthFill');
+  const text = document.getElementById('strengthText');
+
+  fill.style.width = percent + '%';
+
+  if (pwd.length === 0) {
+    fill.style.background = '#E2E8F0';
+    text.textContent = 'Enter a password';
+  } else if (metCount <= 1) {
+    fill.style.background = '#EF4444';
+    text.textContent = 'Weak';
+  } else if (metCount <= 3) {
+    fill.style.background = '#F59E0B';
+    text.textContent = 'Fair';
+  } else if (metCount === 4) {
+    fill.style.background = '#3B82F6';
+    text.textContent = 'Good';
+  } else {
+    fill.style.background = '#16A34A';
+    text.textContent = 'Strong';
+  }
+}
+
+/* ============================================================
+   THEME OPTION SELECTION (Appearance)
+   ============================================================ */
+function selectTheme(el) {
+  document.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('active'));
+  el.classList.add('active');
+}
+
+/* ============================================================
+   TOAST NOTIFICATION
+   ============================================================ */
+let toastTimer;
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  const msgEl = document.getElementById('toastMessage');
+  msgEl.textContent = message || 'Settings saved successfully!';
+
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+document.addEventListener('DOMContentLoaded', () => {
+  initTabs();
+});
+/* =========================
+UPGRADE BUTTON
+========================= */
+
+document.querySelectorAll(".upgrade-btn").forEach(btn => {
+
+  btn.addEventListener("click", () => {
+
+    alert(
+      "🚀 Premium Features\n\n" +
+      "• Advanced Analytics\n" +
+      "• AI Fraud Detection\n" +
+      "• Unlimited Transactions\n" +
+      "• Priority Support\n\n" +
+      "Coming Soon!"
+    );
+
+  });
+
+});
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="FinPay Terms of Service — the agreement between you and FinPay governing use of our payment platform." />
+  <title>Terms of Service — FinPay</title>
+  <link rel="canonical" href="https://finpay.io/terms.html" />
+
+<style>
+/* ─────────────────────────────────────────────
+   DESIGN TOKENS
+───────────────────────────────────────────── */
+:root {
+  --blue:        #1A73E8;
+  --blue-dark:   #1558C0;
+  --blue-light:  #E8F0FE;
+  --purple:      #6B4FE0;
+  --green:       #0EA66B;
+  --amber:       #D97706;
+  --amber-light: #FEF3C7;
+  --red:         #DC2626;
+  --red-light:   #FEF2F2;
+  --surface:     #FFFFFF;
+  --bg:          #F8FAFF;
+  --text:        #0D1B2A;
+  --muted:       #5F6B7A;
+  --border:      #E2E8F2;
+  --radius:      16px;
+  --radius-pill: 999px;
+  --shadow:      0 2px 16px rgba(0,0,0,.06);
+  --shadow-lift: 0 8px 32px rgba(0,0,0,.12);
+  --ease:        200ms ease;
+  --container:   1200px;
+}
+
+/* ─────────────────────────────────────────────
+   RESET & BASE
+───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+ul { list-style: none; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* ─────────────────────────────────────────────
+   NAVBAR
+───────────────────────────────────────────── */
+#site-header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(248,250,255,.88);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border-bottom: 1px solid rgba(26,115,232,.1);
+  transition: box-shadow var(--ease);
+}
+#site-header.scrolled { box-shadow: 0 4px 24px rgba(0,0,0,.08); }
+.nav-inner {
+  max-width: var(--container); margin: 0 auto;
+  padding: 0 32px; height: 68px;
+  display: flex; align-items: center;
+  justify-content: space-between; gap: 24px;
+}
+.nav-logo a {
+  font-size: 1.375rem; font-weight: 800;
+  letter-spacing: -.025em; color: var(--text);
+  text-decoration: none; display: flex;
+  align-items: center; gap: 8px;
+}
+.nav-logo span { color: var(--blue); }
+.nav-links { display: flex; align-items: center; gap: 32px; }
+.nav-links a {
+  font-size: .9375rem; font-weight: 500; color: var(--muted);
+  text-decoration: none; position: relative;
+  padding-bottom: 2px; transition: color var(--ease);
+}
+.nav-links a::after {
+  content: ''; position: absolute;
+  bottom: -2px; left: 0; right: 0; height: 2px;
+  background: var(--blue); transform: scaleX(0);
+  transform-origin: left; transition: transform var(--ease);
+}
+.nav-links a:hover { color: var(--blue); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-actions { display: flex; gap: 12px; align-items: center; }
+.btn-ghost {
+  padding: 9px 20px; font-size: .9375rem; font-weight: 600;
+  color: var(--text); background: transparent;
+  border: 1.5px solid var(--border); border-radius: var(--radius-pill);
+  cursor: pointer; text-decoration: none;
+  transition: border-color var(--ease), color var(--ease), background var(--ease);
+}
+.btn-ghost:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+.btn-primary {
+  padding: 9px 22px; font-size: .9375rem; font-weight: 700;
+  color: #fff; background: var(--blue);
+  border: 2px solid var(--blue); border-radius: var(--radius-pill);
+  cursor: pointer; text-decoration: none;
+  transition: background var(--ease), transform var(--ease), box-shadow var(--ease);
+  box-shadow: 0 4px 14px rgba(26,115,232,.25);
+}
+.btn-primary:hover {
+  background: var(--blue-dark); transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(26,115,232,.35);
+}
+.btn-primary:focus-visible,
+.btn-ghost:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+.nav__mobile-toggle {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 6px;
+}
+.nav__hamburger-bar {
+  width: 24px; height: 2px; background: var(--text);
+  border-radius: 2px; display: block;
+  transition: transform var(--ease), opacity var(--ease);
+}
+
+/* ─────────────────────────────────────────────
+   PAGE BACKGROUND
+───────────────────────────────────────────── */
+.legal-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse 65% 45% at 95% 5%,  rgba(26,115,232,.07) 0%, transparent 60%),
+    radial-gradient(ellipse 55% 40% at 0%  85%,  rgba(107,79,224,.06) 0%, transparent 55%),
+    var(--bg);
+}
+
+/* ─────────────────────────────────────────────
+   HERO
+───────────────────────────────────────────── */
+.legal-hero {
+  padding: 96px 32px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.legal-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(232,240,254,.55) 0%, transparent 100%);
+  pointer-events: none;
+}
+.legal-hero-inner { position: relative; max-width: 680px; margin: 0 auto; }
+.legal-breadcrumb {
+  display: flex; align-items: center; justify-content: center;
+  gap: 6px; font-size: .8125rem; color: var(--muted); margin-bottom: 20px;
+}
+.legal-breadcrumb a { color: var(--muted); }
+.legal-breadcrumb a:hover { color: var(--blue); }
+.legal-eyebrow {
+  display: inline-block; font-size: .75rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--blue); background: rgba(26,115,232,.08);
+  border-radius: var(--radius-pill); padding: 5px 14px; margin-bottom: 20px;
+}
+.legal-hero h1 {
+  font-size: clamp(2.25rem, 5vw, 3.5rem); font-weight: 800;
+  letter-spacing: -.04em; color: var(--text);
+  line-height: 1.1; margin-bottom: 18px;
+}
+.legal-hero p { font-size: 1.125rem; color: var(--muted); line-height: 1.7; margin-bottom: 28px; }
+.legal-meta {
+  display: flex; align-items: center; justify-content: center;
+  gap: 20px; flex-wrap: wrap; font-size: .875rem; color: var(--muted);
+}
+.legal-meta span { display: flex; align-items: center; gap: 6px; }
+.legal-meta strong { color: var(--text); }
+
+/* ─────────────────────────────────────────────
+   QUICK SUMMARY BAND
+───────────────────────────────────────────── */
+.summary-band {
+  max-width: var(--container); margin: 0 auto 0;
+  padding: 0 32px 56px;
+}
+.summary-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.summary-card__header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 20px 28px;
+  background: linear-gradient(135deg, rgba(26,115,232,.06), rgba(107,79,224,.04));
+  border-bottom: 1px solid var(--border);
+}
+.summary-card__header-icon {
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 10px; background: var(--blue-light); font-size: 1rem;
+}
+.summary-card__header h2 {
+  font-size: 1.0625rem; font-weight: 700; color: var(--text);
+}
+.summary-card__header p {
+  font-size: .875rem; color: var(--muted); margin-top: 2px;
+}
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0;
+}
+.summary-item {
+  padding: 20px 24px;
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: flex; gap: 12px; align-items: flex-start;
+}
+.summary-item:last-child { border-right: none; }
+.summary-item__dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  flex-shrink: 0; margin-top: 6px;
+}
+.summary-item__dot--green  { background: var(--green); }
+.summary-item__dot--blue   { background: var(--blue); }
+.summary-item__dot--amber  { background: var(--amber); }
+.summary-item__dot--red    { background: var(--red); }
+.summary-item__dot--purple { background: var(--purple); }
+.summary-item__dot--gray   { background: var(--muted); }
+.summary-item p { font-size: .9rem; color: var(--muted); line-height: 1.55; margin: 0; }
+.summary-item strong { color: var(--text); display: block; margin-bottom: 3px; font-size: .9375rem; }
+
+/* ─────────────────────────────────────────────
+   CONTENT LAYOUT: SIDEBAR + MAIN
+───────────────────────────────────────────── */
+.legal-body {
+  max-width: var(--container); margin: 0 auto;
+  padding: 0 32px 96px;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 48px; align-items: start;
+}
+
+/* Sidebar */
+.legal-sidebar { position: sticky; top: 88px; }
+.sidebar-nav-label {
+  font-size: .75rem; font-weight: 700; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 12px; padding-left: 12px;
+}
+.sidebar-nav { display: flex; flex-direction: column; gap: 2px; }
+.sidebar-nav a {
+  display: block; padding: 9px 12px; font-size: .9rem;
+  font-weight: 500; color: var(--muted); border-radius: 10px;
+  transition: background var(--ease), color var(--ease);
+  text-decoration: none; border-left: 2px solid transparent;
+}
+.sidebar-nav a:hover { background: var(--blue-light); color: var(--blue); }
+.sidebar-nav a.active {
+  background: var(--blue-light); color: var(--blue);
+  font-weight: 700; border-left-color: var(--blue);
+}
+
+/* Main content */
+.legal-content { min-width: 0; }
+.legal-section {
+  margin-bottom: 64px;
+  scroll-margin-top: 96px;
+}
+.legal-section-heading {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
+}
+.legal-section-icon {
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 11px; background: var(--blue-light);
+  font-size: 1.125rem; flex-shrink: 0;
+}
+.legal-section h2 {
+  font-size: 1.5rem; font-weight: 800;
+  letter-spacing: -.025em; color: var(--text);
+}
+
+/* Prose */
+.legal-prose p {
+  font-size: 1rem; color: var(--muted);
+  line-height: 1.8; margin-bottom: 16px;
+}
+.legal-prose p:last-child { margin-bottom: 0; }
+.legal-prose a { font-weight: 600; }
+.legal-prose strong { color: var(--text); }
+
+/* ─────────────────────────────────────────────
+   INFO / WARNING BOXES
+───────────────────────────────────────────── */
+.info-box {
+  display: flex; gap: 14px; padding: 18px 20px;
+  border-radius: 12px; margin: 20px 0; border: 1px solid;
+}
+.info-box--blue   { background: rgba(26,115,232,.05);  border-color: rgba(26,115,232,.2);  }
+.info-box--green  { background: rgba(14,166,107,.05);  border-color: rgba(14,166,107,.2);  }
+.info-box--amber  { background: var(--amber-light);    border-color: rgba(217,119,6,.3);   }
+.info-box--red    { background: var(--red-light);      border-color: rgba(220,38,38,.25);  }
+.info-box__icon   { font-size: 1.25rem; flex-shrink: 0; margin-top: 1px; }
+.info-box__text   { font-size: .9375rem; color: var(--muted); line-height: 1.7; }
+.info-box__text strong { color: var(--text); }
+
+/* ─────────────────────────────────────────────
+   AGREEMENT CARDS (numbered list style)
+───────────────────────────────────────────── */
+.agreement-list {
+  display: flex; flex-direction: column; gap: 12px; margin: 20px 0;
+}
+.agreement-item {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 18px 20px;
+  background: var(--surface); border: 1.5px solid var(--border);
+  border-radius: 12px; box-shadow: var(--shadow);
+  transition: transform var(--ease), border-color var(--ease), box-shadow var(--ease);
+}
+.agreement-item:hover {
+  transform: translateX(4px);
+  border-color: rgba(26,115,232,.22);
+  box-shadow: var(--shadow-lift);
+}
+.agreement-item__num {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--blue-light); color: var(--blue);
+  display: flex; align-items: center; justify-content: center;
+  font-size: .8125rem; font-weight: 800; flex-shrink: 0;
+}
+.agreement-item__body h4 { font-size: .9375rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+.agreement-item__body p  { font-size: .875rem; color: var(--muted); line-height: 1.6; margin: 0; }
+
+/* ─────────────────────────────────────────────
+   FEATURE CARD GRID
+───────────────────────────────────────────── */
+.feature-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px; margin: 24px 0;
+}
+.feature-card {
+  padding: 22px 20px;
+  background: var(--surface); border: 1.5px solid var(--border);
+  border-radius: var(--radius); box-shadow: var(--shadow);
+  transition: transform var(--ease), box-shadow var(--ease), border-color var(--ease);
+}
+.feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lift);
+  border-color: rgba(26,115,232,.2);
+}
+.feature-card__icon {
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 12px; background: var(--blue-light);
+  font-size: 1.25rem; margin-bottom: 14px;
+}
+.feature-card h3 { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.feature-card p  { font-size: .875rem; color: var(--muted); line-height: 1.6; }
+
+/* ─────────────────────────────────────────────
+   RESTRICTION / PROHIBITION LIST
+───────────────────────────────────────────── */
+.restriction-list {
+  display: flex; flex-direction: column; gap: 10px; margin: 20px 0;
+}
+.restriction-item {
+  display: flex; gap: 12px; align-items: flex-start;
+  padding: 14px 18px;
+  background: var(--red-light); border: 1px solid rgba(220,38,38,.18);
+  border-radius: 12px;
+}
+.restriction-item__icon { font-size: 1rem; flex-shrink: 0; margin-top: 2px; color: var(--red); }
+.restriction-item p { font-size: .9rem; color: #7F1D1D; line-height: 1.6; margin: 0; }
+.restriction-item strong { color: var(--red); }
+
+/* ─────────────────────────────────────────────
+   PAYMENT TERMS TABLE
+───────────────────────────────────────────── */
+.legal-table-wrap { overflow-x: auto; border-radius: 12px; box-shadow: var(--shadow); margin: 20px 0; }
+.legal-table {
+  width: 100%; border-collapse: collapse;
+  background: var(--surface); min-width: 480px;
+}
+.legal-table th {
+  padding: 14px 20px; font-size: .8125rem; font-weight: 700;
+  text-align: left; color: var(--muted);
+  background: var(--bg); border-bottom: 1.5px solid var(--border);
+  white-space: nowrap;
+}
+.legal-table td {
+  padding: 14px 20px; font-size: .9375rem; color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  vertical-align: top; line-height: 1.6;
+}
+.legal-table tr:last-child td { border-bottom: none; }
+.legal-table tbody tr:hover td { background: rgba(26,115,232,.03); }
+.badge-pill {
+  display: inline-block; padding: 3px 10px;
+  font-size: .75rem; font-weight: 700;
+  border-radius: var(--radius-pill);
+}
+.badge-pill--green { background: rgba(14,166,107,.1); color: #065F46; }
+.badge-pill--amber { background: var(--amber-light); color: #92400E; }
+.badge-pill--blue  { background: var(--blue-light); color: var(--blue-dark); }
+
+/* ─────────────────────────────────────────────
+   TRUST BADGES
+───────────────────────────────────────────── */
+.trust-badges {
+  display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0;
+}
+.trust-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 7px 16px; font-size: .8125rem; font-weight: 700;
+  color: var(--muted); background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-pill); box-shadow: var(--shadow);
+}
+.trust-badge span { font-size: .9rem; }
+
+/* ─────────────────────────────────────────────
+   CTA
+───────────────────────────────────────────── */
+.legal-cta { padding: 0 32px 96px; }
+.legal-cta-inner { max-width: var(--container); margin: 0 auto; }
+.legal-cta-card {
+  position: relative; padding: 56px 48px;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
+  border-radius: 20px; text-align: center; overflow: hidden;
+  box-shadow: 0 16px 56px rgba(26,115,232,.25);
+}
+.legal-cta-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 70% at 20% 50%, rgba(255,255,255,.08) 0%, transparent 55%);
+}
+.legal-cta-card h2 {
+  position: relative; font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 800; color: #fff;
+  letter-spacing: -.03em; margin-bottom: 12px;
+}
+.legal-cta-card p {
+  position: relative; font-size: 1rem;
+  color: rgba(255,255,255,.8); margin-bottom: 28px;
+  max-width: 480px; margin-inline: auto;
+}
+.cta-btns { position: relative; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.btn-white {
+  padding: 12px 28px; font-size: .9375rem; font-weight: 700;
+  background: #fff; color: var(--blue);
+  border: 2px solid #fff; border-radius: var(--radius-pill);
+  cursor: pointer; text-decoration: none;
+  transition: background var(--ease), box-shadow var(--ease);
+}
+.btn-white:hover { background: rgba(255,255,255,.92); box-shadow: 0 6px 20px rgba(0,0,0,.15); }
+.btn-outline-white {
+  padding: 12px 28px; font-size: .9375rem; font-weight: 700;
+  background: transparent; color: rgba(255,255,255,.9);
+  border: 2px solid rgba(255,255,255,.35); border-radius: var(--radius-pill);
+  cursor: pointer; text-decoration: none;
+  transition: background var(--ease), border-color var(--ease);
+}
+.btn-outline-white:hover { background: rgba(255,255,255,.1); border-color: #fff; }
+
+/* ─────────────────────────────────────────────
+   FOOTER
+───────────────────────────────────────────── */
+#site-footer {
+  background: var(--text); color: rgba(255,255,255,.7);
+  padding: 64px 32px 0;
+}
+.footer-inner {
+  max-width: var(--container); margin: 0 auto;
+  display: grid; grid-template-columns: 280px repeat(4, 1fr);
+  gap: 40px; padding-bottom: 48px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.footer-logo {
+  font-size: 1.375rem; font-weight: 800; color: #fff;
+  letter-spacing: -.025em; text-decoration: none;
+  display: flex; align-items: center; gap: 8px; margin-bottom: 14px;
+}
+.footer-logo span { color: rgba(26,115,232,.9); }
+.footer-tagline { font-size: .875rem; line-height: 1.6; margin-bottom: 20px; }
+.footer-newsletter { display: flex; gap: 0; }
+.footer-newsletter input {
+  flex: 1; padding: 10px 16px; font-size: .875rem;
+  background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.15);
+  border-right: none; border-radius: 8px 0 0 8px; color: #fff; outline: none;
+}
+.footer-newsletter input::placeholder { color: rgba(255,255,255,.35); }
+.footer-newsletter button {
+  padding: 10px 18px; font-size: .875rem; font-weight: 700;
+  color: #fff; background: var(--blue); border: none;
+  border-radius: 0 8px 8px 0; cursor: pointer;
+}
+.footer-col h3 {
+  font-size: .8125rem; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: 16px;
+}
+.footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul a {
+  font-size: .9rem; color: rgba(255,255,255,.65);
+  text-decoration: none; transition: color var(--ease);
+}
+.footer-col ul a:hover { color: #fff; }
+.social-links { display: flex; gap: 10px; margin-top: 16px; }
+.social-links a {
+  width: 34px; height: 34px; display: flex;
+  align-items: center; justify-content: center;
+  border-radius: 8px; background: rgba(255,255,255,.08);
+  color: rgba(255,255,255,.6); font-size: .8rem;
+  font-weight: 700; text-decoration: none;
+  transition: background var(--ease), color var(--ease);
+}
+.social-links a:hover { background: var(--blue); color: #fff; }
+.footer-bottom {
+  max-width: var(--container); margin: 0 auto;
+  padding: 20px 0; display: flex;
+  align-items: center; justify-content: space-between;
+  gap: 16px; flex-wrap: wrap; font-size: .8125rem;
+}
+.footer-bottom-links { display: flex; gap: 20px; flex-wrap: wrap; }
+.footer-bottom-links a {
+  color: rgba(255,255,255,.45); text-decoration: none;
+  transition: color var(--ease);
+}
+.footer-bottom-links a:hover { color: #fff; }
+
+/* ─────────────────────────────────────────────
+   REVEAL ANIMATION
+───────────────────────────────────────────── */
+.reveal {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity 520ms ease, transform 520ms ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .legal-body { grid-template-columns: 200px 1fr; gap: 32px; }
+  .footer-inner { grid-template-columns: 1fr 1fr 1fr; }
+}
+@media (max-width: 860px) {
+  .legal-body { grid-template-columns: 1fr; padding: 0 20px 64px; }
+  .legal-sidebar {
+    position: static; background: var(--surface);
+    border: 1.5px solid var(--border); border-radius: var(--radius);
+    padding: 16px; box-shadow: var(--shadow);
+  }
+  .sidebar-nav { flex-direction: row; flex-wrap: wrap; gap: 6px; }
+  .sidebar-nav a { border-left: none; border-bottom: 2px solid transparent; }
+  .sidebar-nav a.active { border-left: none; border-bottom-color: var(--blue); }
+  .nav-links, .nav-actions { display: none; }
+  .nav__mobile-toggle { display: flex; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+  .legal-hero { padding: 72px 20px 56px; }
+  .summary-band { padding: 0 20px 48px; }
+  .summary-grid { grid-template-columns: 1fr; }
+  .summary-item { border-right: none; }
+  .feature-cards { grid-template-columns: 1fr; }
+  .legal-cta { padding: 0 20px 64px; }
+}
+@media (max-width: 480px) {
+  .footer-inner { grid-template-columns: 1fr; }
+  .legal-cta-card { padding: 40px 24px; }
+  .nav-inner { padding: 0 20px; }
+}
+</style>
+</head>
+
+<body class="legal-page">
+
+<!-- ============================================================
+     NAVBAR
+     ============================================================ -->
+<header role="banner" id="site-header">
+  <nav role="navigation" aria-label="Primary navigation" id="primary-nav">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <a href="index.html" aria-label="FinPay — Go to homepage">
+          <span aria-hidden="true">&#9670;</span> FinPay
+        </a>
+      </div>
+      <ul class="nav-links" id="primary-nav-links" role="list">
+        <li><a href="payments.html">Payments</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="btn-ghost">Login</a>
+        <a href="signup.html" class="btn-primary">Sign Up</a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main id="main-content" tabindex="-1">
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section id="terms-hero" class="legal-hero" aria-labelledby="terms-heading">
+  <div class="legal-hero-inner">
+    <nav class="legal-breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Home</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">Terms of Service</span>
+    </nav>
+    <span class="legal-eyebrow" aria-hidden="true">Legal</span>
+    <h1 id="terms-heading">Terms of Service</h1>
+    <p>A clear, fair agreement between you and FinPay. By using our platform, you agree to these terms. We've written them to be readable — not impenetrable legalese.</p>
+    <div class="legal-meta" role="contentinfo" aria-label="Document metadata">
+      <span><strong>Last updated:</strong> 15 June 2025</span>
+      <span><strong>Effective:</strong> 1 July 2025</span>
+      <span><strong>Version:</strong> 6.1</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     QUICK SUMMARY BAND
+     ============================================================ -->
+<section class="summary-band" aria-labelledby="summary-heading">
+  <div class="summary-card">
+    <div class="summary-card__header">
+      <div class="summary-card__header-icon" aria-hidden="true">&#9889;</div>
+      <div>
+        <h2 id="summary-heading">The Short Version</h2>
+        <p>Here's what these terms mean in plain English.</p>
+      </div>
+    </div>
+    <ul class="summary-grid" role="list">
+      <li class="summary-item">
+        <div class="summary-item__dot summary-item__dot--green" aria-hidden="true"></div>
+        <div>
+          <strong>You control your account</strong>
+          <p>You are responsible for keeping your credentials secure and all activity under your account.</p>
+        </div>
+      </li>
+      <li class="summary-item">
+        <div class="summary-item__dot summary-item__dot--blue" aria-hidden="true"></div>
+        <div>
+          <strong>Pay your fees on time</strong>
+          <p>Fees are clearly stated on our pricing page. Overdue accounts may be suspended after notice.</p>
+        </div>
+      </li>
+      <li class="summary-item">
+        <div class="summary-item__dot summary-item__dot--amber" aria-hidden="true"></div>
+        <div>
+          <strong>Don't abuse the platform</strong>
+          <p>Using FinPay for illegal activity, fraud, or policy violations will result in immediate termination.</p>
+        </div>
+      </li>
+      <li class="summary-item">
+        <div class="summary-item__dot summary-item__dot--purple" aria-hidden="true"></div>
+        <div>
+          <strong>We protect your IP</strong>
+          <p>You own your data and brand. We own our platform and technology. Neither party can use the other's IP without permission.</p>
+        </div>
+      </li>
+      <li class="summary-item">
+        <div class="summary-item__dot summary-item__dot--red" aria-hidden="true"></div>
+        <div>
+          <strong>Our liability is limited</strong>
+          <p>We are not liable for indirect losses. Our total liability is capped at fees paid in the last 3 months.</p>
+        </div>
+      </li>
+      <li class="summary-item">
+        <div class="summary-item__dot summary-item__dot--gray" aria-hidden="true"></div>
+        <div>
+          <strong>Indian law governs</strong>
+          <p>These terms are governed by the laws of India. Disputes are resolved in Bengaluru courts.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================================================
+     BODY: SIDEBAR + CONTENT
+     ============================================================ -->
+<div class="legal-body">
+
+  <!-- SIDEBAR -->
+  <aside class="legal-sidebar" aria-label="Section navigation">
+    <p class="sidebar-nav-label">On this page</p>
+    <nav class="sidebar-nav" aria-label="Terms of service sections">
+      <a href="#acceptance"       class="active">Acceptance of Terms</a>
+      <a href="#responsibilities">User Responsibilities</a>
+      <a href="#payment-terms">Payment Terms</a>
+      <a href="#restrictions">Restrictions</a>
+      <a href="#ip">Intellectual Property</a>
+      <a href="#suspension">Account Suspension</a>
+      <a href="#liability">Liability</a>
+      <a href="#governing-law">Governing Law</a>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <article class="legal-content" aria-label="Terms of service content">
+
+    <!-- ── ACCEPTANCE ── -->
+    <section id="acceptance" class="legal-section reveal" aria-labelledby="acceptance-heading">
+      <div class="legal-section-heading">
+        <div class="legal-section-icon" aria-hidden="true">&#9989;</div>
+        <h2 id="acceptance-heading">Acceptance of Terms</h2>
+      </div>
+      <div class="legal-prose">
+        <p>By creating a FinPay account, accessing our APIs, or using any FinPay service, you confirm that you have read, understood, and agree to be bound by these Terms of Service and our <a href="privacy.html">Privacy Policy</a>. If you are accepting on behalf of a business, you represent that you have the authority to bind that business to these terms.</p>
+        <p>If you do not agree to these terms, you must not use FinPay's services. We may update these terms from time to time. We will notify you of material changes by email at least 30 days before they take effect. Continued use of the service after the effective date constitutes acceptance of the updated terms.</p>
+      </div>
+      <div class="info-box info-box--blue" role="note">
+        <span class="info-box__icon" aria-hidden="true">&#128161;</span>
+        <div class="info-box__text"><strong>Minimum age:</strong> You must be at least 18 years of age and legally capable of entering into contracts in your jurisdiction to use FinPay.</div>
+      </div>
+      <div class="trust-badges" role="list" aria-label="Agreement highlights">
+        <div class="trust-badge" role="listitem"><span>&#128203;</span> Written in plain English</div>
+        <div class="trust-badge" role="listitem"><span>&#128222;</span> 30 days notice for changes</div>
+        <div class="trust-badge" role="listitem"><span>&#127759;</span> Globally applicable</div>
+      </div>
+    </section>
+
+    <!-- ── USER RESPONSIBILITIES ── -->
+    <section id="responsibilities" class="legal-section reveal" aria-labelledby="resp-heading">
+      <div class="legal-section-heading">
+        <div class="legal-section-icon" aria-hidden="true">&#128100;</div>
+        <h2 id="resp-heading">User Responsibilities</h2>
+      </div>
+      <div class="legal-prose">
+        <p>As a FinPay user, you are responsible for maintaining the security of your account and ensuring that all activity under your account complies with applicable laws and these terms.</p>
+      </div>
+      <ul class="agreement-list" role="list" aria-label="User responsibilities">
+        <li class="agreement-item">
+          <div class="agreement-item__num" aria-hidden="true">01</div>
+          <div class="agreement-item__body">
+            <h4>Account Security</h4>
+            <p>Use a strong, unique password and enable two-factor authentication. Never share your credentials. Notify us immediately at security@finpay.io if you suspect unauthorised access.</p>
+          </div>
+        </li>
+        <li class="agreement-item">
+          <div class="agreement-item__num" aria-hidden="true">02</div>
+          <div class="agreement-item__body">
+            <h4>Accurate Information</h4>
+            <p>Provide truthful information during registration and KYC verification. Maintain up-to-date business, banking, and contact details in your account settings.</p>
+          </div>
+        </li>
+        <li class="agreement-item">
+          <div class="agreement-item__num" aria-hidden="true">03</div>
+          <div class="agreement-item__body">
+            <h4>Lawful Use</h4>
+            <p>Use FinPay only for legal transactions in permitted business categories. You are responsible for ensuring your use complies with all applicable local and international laws.</p>
+          </div>
+        </li>
+        <li class="agreement-item">
+          <div class="agreement-item__num" aria-hidden="true">04</div>
+          <div class="agreement-item__body">
+            <h4>Compliance with Card Network Rules</h4>
+            <p>Adhere to Visa, Mastercard, and RuPay operating regulations when accepting card payments. Failure may result in fines passed on to your account.</p>
+          </div>
+        </li>
+        <li class="agreement-item">
+          <div class="agreement-item__num" aria-hidden="true">05</div>
+          <div class="agreement-item__body">
+            <h4>Dispute Resolution</h4>
+            <p>Respond to chargebacks and payment disputes within 7 days. Maintain adequate records to defend legitimate transactions.</p>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ── PAYMENT TERMS ── -->
+    <section id="payment-terms" class="legal-section reveal" aria-labelledby="payment-heading">
+      <div class="legal-section-heading">
+        <div class="legal-section-icon" aria-hidden="true">&#128176;</div>
+        <h2 id="payment-heading">Payment Terms</h2>
+      </div>
+      <div class="legal-prose">
+        <p>FinPay charges transaction fees and, for some plans, a monthly platform fee. All fees are listed on the <a href="pricing.html">Pricing page</a> and in your account dashboard. We reserve the right to change our pricing with 30 days' written notice.</p>
+      </div>
+      <div class="legal-table-wrap" role="region" aria-label="Payment terms table">
+        <table class="legal-table">
+          <thead>
+            <tr>
+              <th scope="col">Item</th>
+              <th scope="col">Details</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Transaction Fees</strong></td>
+              <td>Deducted automatically from each settlement. Rates vary by payment method and plan.</td>
+              <td><span class="badge-pill badge-pill--green">Automatic</span></td>
+            </tr>
+            <tr>
+              <td><strong>Platform Fee</strong></td>
+              <td>Billed monthly on your billing date. Failure to pay within 7 days triggers a reminder.</td>
+              <td><span class="badge-pill badge-pill--blue">Monthly</span></td>
+            </tr>
+            <tr>
+              <td><strong>Chargebacks</strong></td>
+              <td>A ₹500 / $10 dispute fee applies per chargeback, regardless of outcome.</td>
+              <td><span class="badge-pill badge-pill--amber">Per incident</span></td>
+            </tr>
+            <tr>
+              <td><strong>Settlement</strong></td>
+              <td>Standard settlement is T+2 business days. Instant settlement available on Growth and Scale plans.</td>
+              <td><span class="badge-pill badge-pill--green">Automatic</span></td>
+            </tr>
+            <tr>
+              <td><strong>Refunds</strong></td>
+              <td>Transaction fees are non-refundable on issued refunds. FinPay refund fee: ₹0 / $0.</td>
+              <td><span class="badge-pill badge-pill--blue">Merchant-initiated</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="info-box info-box--amber" role="note">
+        <span class="info-box__icon" aria-hidden="true">&#9888;</span>
+        <div class="info-box__text"><strong>Important:</strong> Taxes (GST, VAT, etc.) are charged in addition to our fees where applicable under local law. Your tax invoice is available in the Billing section of your dashboard.</div>
+      </div>
+    </section>
+
+    <!-- ── RESTRICTIONS ── -->
+    <section id="restrictions" class="legal-section reveal" aria-labelledby="restrictions-heading">
+      <div class="legal-section-heading">
+        <div class="legal-section-icon" aria-hidden="true">&#128683;</div>
+        <h2 id="restrictions-heading">Restrictions</h2>
+      </div>
+      <div class="legal-prose">
+        <p>The following activities are strictly prohibited on FinPay's platform. Engaging in any of them may result in immediate account suspension, fund withholding, and referral to law enforcement.</p>
+      </div>
+      <ul class="restriction-list" role="list" aria-label="Prohibited activities">
+        <li class="restriction-item">
+          <span class="restriction-item__icon" aria-hidden="true">&#10060;</span>
+          <p><strong>Illegal goods &amp; services</strong> — Weapons, narcotics, counterfeit items, or anything prohibited by applicable law.</p>
+        </li>
+        <li class="restriction-item">
+          <span class="restriction-item__icon" aria-hidden="true">&#10060;</span>
+          <p><strong>Fraudulent transactions</strong> — Processing payments you know or suspect to be fraudulent, stolen, or unauthorised.</p>
+        </li>
+        <li class="restriction-item">
+          <span class="restriction-item__icon" aria-hidden="true">&#10060;</span>
+          <p><strong>Money laundering &amp; structuring</strong> — Breaking large transactions into smaller amounts to evade reporting thresholds.</p>
+        </li>
+        <li class="restriction-item">
+          <span class="restriction-item__icon" aria-hidden="true">&#10060;</span>
+          <p><strong>Platform abuse</strong> — Reverse engineering, scraping, probing for vulnerabilities, or attempting to disrupt our infrastructure.</p>
+        </li>
+        <li class="restriction-item">
+          <span class="restriction-item__icon" aria-hidden="true">&#10060;</span>
+          <p><strong>Misrepresentation</strong> — Creating multiple accounts to circumvent limits, using false business information, or impersonating another business.</p>
+        </li>
+        <li class="restriction-item">
+          <span class="restriction-item__icon" aria-hidden="true">&#10060;</span>
+          <p><strong>Prohibited business types</strong> — Gambling without a valid licence, adult content, pyramid schemes, and other categories listed in our <a href="compliance.html" style="color:var(--red);">Prohibited Business Policy</a>.</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ── INTELLECTUAL PROPERTY ── -->
+    <section id="ip" class="legal-section reveal" aria-labelledby="ip-heading">
+      <div class="legal-section-heading">
+        <div class="legal-section-icon" aria-hidden="true">&#127991;</div>
+        <h2 id="ip-heading">Intellectual Property</h2>
+      </div>
+      <div class="legal-prose">
+        <p>The FinPay platform, including its software, APIs, documentation, design, trademarks, and brand assets, is the exclusive property of FinPay Technologies Pvt. Ltd. and protected under applicable intellectual property laws.</p>
+        <p><strong>Your data is yours.</strong> You retain full ownership of your business data, customer data, and transaction records. By using FinPay, you grant us a limited, non-exclusive licence to process this data solely to deliver the service.</p>
+        <p><strong>Our platform is ours.</strong> You receive a limited, revocable, non-transferable licence to access and use the FinPay platform for your lawful business purposes. You may not sublicence, sell, or transfer this access.</p>
+      </div>
+      <div class="feature-cards">
+        <div class="feature-card">
+          <div class="feature-card__icon" aria-hidden="true">&#128193;</div>
+          <h3>Your Data</h3>
+          <p>You own your business data. You can export it at any time from your dashboard in standard formats.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon" aria-hidden="true">&#128736;</div>
+          <h3>Our Technology</h3>
+          <p>FinPay's platform, APIs, and SDKs are licensed to you for use — not transferred. All rights reserved.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon" aria-hidden="true">&#127917;</div>
+          <h3>Your Brand</h3>
+          <p>We will not use your company name or logo without prior written consent, except as needed to process payments.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── ACCOUNT SUSPENSION ── -->
+    <section id="suspension" class="legal-section reveal" aria-labelledby="suspension-heading">
+      <div class="legal-section-heading">
+        <div class="legal-section-icon" aria-hidden="true">&#9940;</div>
+        <h2 id="suspension-heading">Account Suspension</h2>
+      </div>
+      <div class="legal-prose">
+        <p>We may suspend or terminate your account with or without notice in the following circumstances:</p>
+      </div>
+      <ul class="agreement-list" role="list">
+        <li class="agreement-item">
+          <div class="agreement-item__num" aria-hidden="true">&#9888;</div>
+          <div class="agreement-item__body">
+            <h4>Violation of Terms</h4>
+            <p>Any breach of these Terms of Service, including the restrictions listed above, may result in immediate suspension pending investigation.</p>
+          </div>
+        </li>
+        <li class="agreement-item">
+          <div class="agreement-item__num" aria-hidden="true">&#9888;</div>
+          <div class="agreement-item__body">
+            <h4>Regulatory Requirement</h4>
+            <p>We may be required by law, card networks, or banking partners to suspend accounts involved in investigations or flagged by compliance teams.</p>
+          </div>
+        </li>
+        <li class="agreement-item">
+          <div class="agreement-item__num" aria-hidden="true">&#9888;</div>
+          <div class="agreement-item__body">
+            <h4>Non-Payment</h4>
+            <p>Accounts with overdue balances receive a 7-day notice period. Processing is suspended and resumed once payment is received.</p>
+          </div>
+        </li>
+        <li class="agreement-item">
+          <div class="agreement-item__num" aria-hidden="true">&#9888;</div>
+          <div class="agreement-item__body">
+            <h4>High Risk Activity</h4>
+            <p>Elevated chargeback rates (above 1%), suspicious transaction patterns, or sudden volume spikes may trigger a temporary hold while our risk team reviews.</p>
+          </div>
+        </li>
+      </ul>
+      <div class="info-box info-box--green" role="note">
+        <span class="info-box__icon" aria-hidden="true">&#9989;</span>
+        <div class="info-box__text"><strong>Appeals:</strong> If you believe your account has been suspended in error, contact our compliance team at compliance@finpay.io within 14 days. We aim to resolve appeals within 5 business days.</div>
+      </div>
+    </section>
+
+    <!-- ── LIABILITY ── -->
+    <section id="liability" class="legal-section reveal" aria-labelledby="liability-heading">
+      <div class="legal-section-heading">
+        <div class="legal-section-icon" aria-hidden="true">&#9878;</div>
+        <h2 id="liability-heading">Liability</h2>
+      </div>
+      <div class="legal-prose">
+        <p>FinPay provides the service "as is" and, to the maximum extent permitted by law, disclaims all warranties, express or implied, including warranties of merchantability, fitness for a particular purpose, and non-infringement.</p>
+        <p>FinPay's total liability to you for any claim arising out of or relating to these terms or your use of the service shall not exceed the total fees paid by you to FinPay in the three (3) months immediately preceding the event giving rise to the claim.</p>
+      </div>
+      <div class="info-box info-box--red" role="alert">
+        <span class="info-box__icon" aria-hidden="true">&#9888;</span>
+        <div class="info-box__text"><strong>Exclusion of consequential damages:</strong> In no event shall FinPay be liable for any indirect, incidental, special, exemplary, punitive, or consequential damages, including loss of profits, revenue, data, or business opportunities, even if FinPay has been advised of the possibility of such damages.</div>
+      </div>
+    </section>
+
+    <!-- ── GOVERNING LAW ── -->
+    <section id="governing-law" class="legal-section reveal" aria-labelledby="law-heading">
+      <div class="legal-section-heading">
+        <div class="legal-section-icon" aria-hidden="true">&#9878;</div>
+        <h2 id="law-heading">Governing Law</h2>
+      </div>
+      <div class="legal-prose">
+        <p>These Terms of Service are governed by and construed in accordance with the laws of India, without regard to its conflict of law provisions. The Information Technology Act, 2000 and the Payment and Settlement Systems Act, 2007 apply where relevant.</p>
+        <p>Any dispute arising out of or in connection with these terms shall be subject to the exclusive jurisdiction of the courts of Bengaluru, Karnataka, India. Before initiating legal proceedings, both parties agree to attempt good-faith resolution through senior-level mediation for a period of 30 days.</p>
+        <p>If any provision of these terms is found to be unenforceable, the remaining provisions shall continue in full force and effect. These terms constitute the entire agreement between you and FinPay with respect to the subject matter hereof and supersede all prior agreements.</p>
+      </div>
+      <div class="trust-badges" role="list" aria-label="Regulatory framework">
+        <div class="trust-badge" role="listitem"><span>&#127470;&#127475;</span> Indian Law</div>
+        <div class="trust-badge" role="listitem"><span>&#127981;</span> IT Act 2000</div>
+        <div class="trust-badge" role="listitem"><span>&#128179;</span> PSS Act 2007</div>
+        <div class="trust-badge" role="listitem"><span>&#128101;</span> RBI Guidelines</div>
+      </div>
+    </section>
+
+  </article>
+</div>
+
+<!-- CTA -->
+<section aria-label="Terms questions CTA" class="legal-cta">
+  <div class="legal-cta-inner">
+    <div class="legal-cta-card">
+      <h2>Questions about our terms?</h2>
+      <p>Our legal team is happy to clarify any section. Enterprise customers can request a custom agreement review.</p>
+      <div class="cta-btns">
+        <a href="contact.html" class="btn-white">Talk to Legal</a>
+        <a href="signup.html" class="btn-outline-white">Create Account</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer role="contentinfo" id="site-footer" aria-label="Site footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo" aria-label="FinPay homepage">
+        <span aria-hidden="true">&#9670;</span> FinPay
+      </a>
+      <p class="footer-tagline">The global payment platform built for growth.</p>
+      <form class="footer-newsletter" action="/newsletter" method="post" aria-label="Newsletter signup">
+        <label for="footer-email" class="sr-only">Your email address</label>
+        <input type="email" id="footer-email" name="email" placeholder="Enter your email" autocomplete="email" />
+        <button type="submit" aria-label="Subscribe">Subscribe</button>
+      </form>
+      <nav aria-label="Social media links" class="social-links">
+        <a href="#" aria-label="FinPay on Twitter">&#120143;</a>
+        <a href="#" aria-label="FinPay on LinkedIn">in</a>
+        <a href="#" aria-label="FinPay on GitHub">GH</a>
+      </nav>
+    </div>
+    <nav aria-label="Products links" class="footer-col">
+      <h3>Products</h3>
+      <ul role="list">
+        <li><a href="payments.html">Payment Gateway</a></li>
+        <li><a href="payments.html">Payment Links</a></li>
+        <li><a href="payments.html">Subscriptions</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Resources links" class="footer-col">
+      <h3>Resources</h3>
+      <ul role="list">
+        <li><a href="resources.html">Documentation</a></li>
+        <li><a href="resources.html">API Reference</a></li>
+        <li><a href="resources.html">Blog</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Company links" class="footer-col">
+      <h3>Company</h3>
+      <ul role="list">
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="about.html">Careers</a></li>
+      </ul>
+    </nav>
+    <nav aria-label="Legal links" class="footer-col">
+      <h3>Legal</h3>
+      <ul role="list">
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html" aria-current="page">Terms of Service</a></li>
+        <li><a href="cookies.html">Cookie Policy</a></li>
+        <li><a href="security.html">Security</a></li>
+        <li><a href="compliance.html">Compliance</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="footer-bottom">
+    <p><small>&copy; 2025 FinPay Technologies Pvt. Ltd. All rights reserved.</small></p>
+    <nav class="footer-bottom-links" aria-label="Footer legal links">
+      <a href="sitemap.html">Sitemap</a>
+      <a href="accessibility.html">Accessibility</a>
+      <a href="security.html">Security</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+'use strict';
+
+/* ── Sticky header shadow ── */
+const header = document.getElementById('site-header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 10);
+}, { passive: true });
+
+/* ── Active sidebar link on scroll ── */
+const sections  = document.querySelectorAll('.legal-section[id]');
+const sideLinks = document.querySelectorAll('.sidebar-nav a');
+
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      sideLinks.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector(`.sidebar-nav a[href="#${entry.target.id}"]`);
+      if (active) active.classList.add('active');
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+
+sections.forEach(s => sectionObserver.observe(s));
+
+/* ── Scroll reveal ── */
+const reveals = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08 });
+reveals.forEach(r => revealObs.observe(r));
+
+/* ── Mobile menu toggle ── */
+const nav      = document.getElementById('primary-nav');
+const navInner = document.querySelector('.nav-inner');
+
+const toggle = document.createElement('button');
+toggle.className = 'nav__mobile-toggle';
+toggle.setAttribute('aria-expanded', 'false');
+toggle.setAttribute('aria-controls', 'primary-nav-links');
+toggle.setAttribute('aria-label', 'Open navigation menu');
+toggle.innerHTML = `
+  <span class="nav__hamburger-bar" aria-hidden="true"></span>
+  <span class="nav__hamburger-bar" aria-hidden="true"></span>
+  <span class="nav__hamburger-bar" aria-hidden="true"></span>
+  <span class="sr-only">Menu</span>
+`;
+navInner.appendChild(toggle);
+
+const mobileStyle = document.createElement('style');
+mobileStyle.textContent = `
+  @media (max-width: 860px) {
+    .nav--menu-open #primary-nav-links {
+      display: flex !important;
+      flex-direction: column;
+      position: absolute;
+      top: 68px; left: 0; right: 0;
+      background: rgba(248,250,255,.97);
+      backdrop-filter: blur(18px);
+      padding: 20px 24px 28px;
+      border-bottom: 1px solid rgba(26,115,232,.1);
+      gap: 6px; z-index: 99;
+    }
+    .nav--menu-open .nav-actions {
+      display: flex !important;
+      flex-direction: row;
+      position: absolute;
+      top: 68px; left: 0; right: 0;
+      padding: 8px 24px 20px;
+      background: rgba(248,250,255,.97);
+      backdrop-filter: blur(18px);
+      top: calc(68px + 220px);
+      z-index: 99;
+      border-bottom: 1px solid rgba(26,115,232,.1);
+    }
+  }
+`;
+document.head.appendChild(mobileStyle);
+
+toggle.addEventListener('click', () => {
+  const isOpen = nav.classList.toggle('nav--menu-open');
+  toggle.setAttribute('aria-expanded', String(isOpen));
+  toggle.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && nav.classList.contains('nav--menu-open')) {
+    nav.classList.remove('nav--menu-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.focus();
+  }
+});
+
+document.addEventListener('click', e => {
+  if (!nav.contains(e.target)) nav.classList.remove('nav--menu-open');
+});
+
+/* ── Smooth scroll for sidebar anchor links ── */
+document.querySelectorAll('.sidebar-nav a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(link.getAttribute('href'));
+    if (!target) return;
+    const offset = header.offsetHeight + 16;
+    window.scrollTo({
+      top: target.getBoundingClientRect().top + window.scrollY - offset,
+      behavior: 'smooth'
+    });
+  });
+});
+</script>
+
+</body>
+</html>

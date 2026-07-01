@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Contact FinPay — reach our sales, support, and partnership teams. Find our global office locations, support channels, and business hours." />
+  <title>Contact Us — FinPay</title>
+  <link rel="canonical" href="https://finpay.io/contact.html" />
+  <link rel="stylesheet" href="contact.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       GLOBAL HEADER & NAVIGATION
+       ============================================================ -->
+  <header role="banner" id="site-header">
+    <nav role="navigation" aria-label="Primary navigation" id="primary-nav">
+      <div class="nav-inner">
+
+        <!-- Logo -->
+        <div class="nav-logo">
+          
+            <span aria-hidden="true">&#9670;</span> FinPay
+          </a>
+        </div>
+
+        <!-- Primary Links -->
+        <ul class="nav-links" role="list">
+          <li><a href="payments.html">Payments</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html" aria-current="page">Contact</a></li>
+        </ul>
+
+        <!-- Auth Actions -->
+        <div class="nav-actions">
+          <a href="login.html" class="btn-ghost">Login</a>
+          <a href="signup.html" class="btn-primary">Sign Up</a>
+        </div>
+
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" tabindex="-1">
+
+    <!-- ============================================================
+         SECTION 01 — HERO
+         ============================================================ -->
+    <section id="contact-hero" aria-labelledby="contact-hero-heading">
+      <div class="section-inner">
+        <span class="eyebrow" aria-hidden="true">Get in Touch</span>
+        <h1 id="contact-hero-heading">We'd love to hear from you</h1>
+        <p class="hero-subtext">
+          Whether you're ready to get started, need help with your account, or want to explore a partnership — our team is here for you.
+        </p>
+        <ul class="hero-contact-strip" role="list" aria-label="Quick contact options">
+          <li>
+            <a href="mailto:support@finpay.io" aria-label="Email our support team">
+              <span aria-hidden="true">&#9993;</span> support@finpay.io
+            </a>
+          </li>
+          <li>
+            <a href="tel:+18005551234" aria-label="Call our support line">
+              <span aria-hidden="true">&#128222;</span> +1 800 555 1234
+            </a>
+          </li>
+          <li>
+            <span aria-hidden="true">&#128344;</span>
+            <span>Mon – Fri, 9 AM – 6 PM IST</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 02 — CONTACT FORM + SIDEBAR
+         ============================================================ -->
+    <section id="contact-form-section" aria-labelledby="contact-form-heading">
+      <div class="section-inner two-col-layout">
+
+        <!-- Contact Form -->
+        <div class="contact-form-wrap">
+          <h2 id="contact-form-heading">Send us a message</h2>
+          <p class="section-subtext">Tell us what you need and the right team will get back to you within one business day.</p>
+
+          <form
+            id="contact-form"
+            method="post"
+            action="/contact-submit"
+            novalidate
+            aria-label="Contact form"
+          >
+
+            <!-- Enquiry Type -->
+            <div class="form-group">
+              <label for="enquiry-type">Enquiry Type <span aria-hidden="true" class="required-star">*</span><span class="sr-only">(required)</span></label>
+              <select id="enquiry-type" name="enquiry_type" required aria-required="true">
+                <option value="" disabled selected>Select an enquiry type</option>
+                <option value="sales">Sales &amp; Pricing</option>
+                <option value="support">Technical Support</option>
+                <option value="billing">Billing</option>
+                <option value="partnership">Partnership</option>
+                <option value="press">Press &amp; Media</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+
+            <!-- Full Name -->
+            <div class="form-group">
+              <label for="contact-name">Full Name <span aria-hidden="true" class="required-star">*</span><span class="sr-only">(required)</span></label>
+              <input
+                type="text"
+                id="contact-name"
+                name="full_name"
+                autocomplete="name"
+                placeholder="Jane Doe"
+                required
+                aria-required="true"
+              />
+            </div>
+
+            <!-- Business Name -->
+            <div class="form-group">
+              <label for="contact-business">Business / Organisation Name</label>
+              <input
+                type="text"
+                id="contact-business"
+                name="business_name"
+                autocomplete="organization"
+                placeholder="Acme Inc."
+              />
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+              <label for="contact-email">Work Email <span aria-hidden="true" class="required-star">*</span><span class="sr-only">(required)</span></label>
+              <input
+                type="email"
+                id="contact-email"
+                name="email"
+                autocomplete="email"
+                placeholder="jane@company.com"
+                required
+                aria-required="true"
+              />
+            </div>
+
+            <!-- Phone -->
+            <div class="form-group">
+              <label for="contact-phone">Phone Number</label>
+              <input
+                type="tel"
+                id="contact-phone"
+                name="phone"
+                autocomplete="tel"
+                placeholder="+1 555 000 1111"
+              />
+            </div>
+
+            <!-- Message -->
+            <div class="form-group">
+              <label for="contact-message">Your Message <span aria-hidden="true" class="required-star">*</span><span class="sr-only">(required)</span></label>
+              <textarea
+                id="contact-message"
+                name="message"
+                rows="5"
+                placeholder="Tell us about your business and what you're looking for…"
+                required
+                aria-required="true"
+              ></textarea>
+            </div>
+
+            <!-- Monthly Volume -->
+            <div class="form-group">
+              <label for="monthly-volume">Estimated Monthly Transaction Volume</label>
+              <select id="monthly-volume" name="monthly_volume">
+                <option value="" disabled selected>Select range (optional)</option>
+                <option value="under-10k">Under $10,000</option>
+                <option value="10k-100k">$10,000 – $100,000</option>
+                <option value="100k-1m">$100,000 – $1,000,000</option>
+                <option value="1m-10m">$1M – $10M</option>
+                <option value="over-10m">Over $10M</option>
+              </select>
+            </div>
+
+            <!-- Privacy Consent -->
+            <div class="form-group form-group--checkbox">
+              <input
+                type="checkbox"
+                id="contact-privacy"
+                name="privacy_consent"
+                required
+                aria-required="true"
+              />
+              <label for="contact-privacy">
+                I agree to FinPay's <a href="privacy.html">Privacy Policy</a> and consent to being contacted about my enquiry. <span aria-hidden="true" class="required-star">*</span><span class="sr-only">(required)</span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn-submit" aria-label="Submit contact form">
+              Send Message
+            </button>
+
+          </form>
+        </div>
+
+        <!-- Sidebar: Support Channels -->
+        <aside class="contact-sidebar" aria-label="Support channels and office info">
+          <h2 class="sidebar-heading">How we can help</h2>
+
+          <!-- Sales -->
+          <div class="support-channel" aria-labelledby="channel-sales">
+            <h3 id="channel-sales">
+              <span aria-hidden="true">&#128200;</span> Sales &amp; Partnerships
+            </h3>
+            <p>Interested in custom pricing, volume deals, or enterprise contracts? Our sales team will walk you through the options.</p>
+            <a href="mailto:sales@finpay.io" aria-label="Email our sales team">sales@finpay.io</a>
+          </div>
+
+          <!-- Support -->
+          <div class="support-channel" aria-labelledby="channel-support">
+            <h3 id="channel-support">
+              <span aria-hidden="true">&#128736;</span> Technical Support
+            </h3>
+            <p>Integration issues, API errors, or webhook troubles? Our engineering support team responds within 4 business hours.</p>
+            <a href="mailto:techsupport@finpay.io" aria-label="Email technical support">techsupport@finpay.io</a>
+          </div>
+
+          <!-- Live Chat -->
+          <div class="support-channel" aria-labelledby="channel-chat">
+            <h3 id="channel-chat">
+              <span aria-hidden="true">&#128172;</span> Live Chat
+            </h3>
+            <p>Chat with a support agent directly from your FinPay dashboard. Available during business hours.</p>
+            <a href="login.html" aria-label="Log in to access live chat">Open Dashboard to Chat</a>
+          </div>
+
+          <!-- Business Hours -->
+          <div class="support-channel" aria-labelledby="channel-hours">
+            <h3 id="channel-hours">
+              <span aria-hidden="true">&#128336;</span> Business Hours
+            </h3>
+            <dl class="hours-list">
+              <div class="hours-row">
+                <dt>Monday – Friday</dt>
+                <dd>9:00 AM – 6:00 PM IST</dd>
+              </div>
+              <div class="hours-row">
+                <dt>Saturday</dt>
+                <dd>10:00 AM – 2:00 PM IST</dd>
+              </div>
+              <div class="hours-row">
+                <dt>Sunday</dt>
+                <dd>Closed</dd>
+              </div>
+            </dl>
+          </div>
+
+        </aside>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 03 — OFFICE LOCATIONS
+         ============================================================ -->
+    <section id="office-locations" aria-labelledby="offices-heading">
+      <div class="section-inner">
+        <h2 id="offices-heading">Our Global Offices</h2>
+        <p class="section-subtext">FinPay operates across three continents to serve businesses worldwide.</p>
+
+        <ul class="offices-grid" role="list">
+
+          <li class="office-card">
+            <h3>Bengaluru, India <span class="office-badge">HQ</span></h3>
+            <address>
+              FinPay Technologies Pvt. Ltd.<br />
+              12th Floor, SJR iPark<br />
+              Whitefield, Bengaluru – 560 066<br />
+              India
+            </address>
+            <p><a href="tel:+918025001234" aria-label="Call Bengaluru office">+91 80 2500 1234</a></p>
+          </li>
+
+          <li class="office-card">
+            <h3>San Francisco, USA</h3>
+            <address>
+              FinPay Inc.<br />
+              535 Mission Street, 14th Floor<br />
+              San Francisco, CA 94105<br />
+              United States
+            </address>
+            <p><a href="tel:+14155550199" aria-label="Call San Francisco office">+1 415 555 0199</a></p>
+          </li>
+
+          <li class="office-card">
+            <h3>London, UK</h3>
+            <address>
+              FinPay Europe Ltd.<br />
+              1 Canada Square, Level 27<br />
+              Canary Wharf, London E14 5AB<br />
+              United Kingdom
+            </address>
+            <p><a href="tel:+442071234567" aria-label="Call London office">+44 20 7123 4567</a></p>
+          </li>
+
+          <li class="office-card">
+            <h3>Singapore</h3>
+            <address>
+              FinPay Asia Pte. Ltd.<br />
+              1 Raffles Quay, North Tower, Level 25<br />
+              Singapore 048583
+            </address>
+            <p><a href="tel:+6563001234" aria-label="Call Singapore office">+65 6300 1234</a></p>
+          </li>
+
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 04 — MAP PLACEHOLDER
+         ============================================================ -->
+    <div class="map-embed-zone">
+
+  <div class="world-map-bg"></div>
+<figcaption> <span aria-hidden="true">&#127758;</span><h3> Interactive map — Bengaluru HQ, San Francisco, London &amp; Singapore offices</h3> </figcaption>
+  <div class="office-pin bengaluru">
+    <span class="pin-dot"></span>
+    <div class="pin-card">
+      <h4>Bengaluru HQ</h4>
+      <p>India Operations Center</p>
+    </div>
+  </div>
+
+  <div class="office-pin london">
+    <span class="pin-dot"></span>
+    <div class="pin-card">
+      <h4>London</h4>
+      <p>European Expansion Hub</p>
+    </div>
+  </div>
+
+  <div class="office-pin singapore">
+    <span class="pin-dot"></span>
+    <div class="pin-card">
+      <h4>Singapore</h4>
+      <p>APAC Business Office</p>
+    </div>
+  </div>
+
+  <div class="office-pin sanfrancisco">
+    <span class="pin-dot"></span>
+    <div class="pin-card">
+      <h4>San Francisco</h4>
+      <p>Global Partnerships</p>
+    </div>
+  </div>
+
+</div>
+
+    <!-- ============================================================
+         SECTION 05 — CONTACT FAQ
+         ============================================================ -->
+    <section id="contact-faq" aria-labelledby="contact-faq-heading">
+      <div class="section-inner">
+        <h2 id="contact-faq-heading">Common Questions</h2>
+
+        <dl class="faq-list">
+
+          <div class="faq-item">
+            <dt>
+              <button
+                type="button"
+                aria-expanded="false"
+                aria-controls="faq-answer-1"
+                id="faq-question-1"
+              >
+                How quickly will I receive a response?
+              </button>
+            </dt>
+            <dd id="faq-answer-1" role="region" aria-labelledby="faq-question-1" hidden>
+              We aim to respond to all enquiries within one business day. Technical support tickets receive a response within 4 business hours during working days.
+            </dd>
+          </div>
+
+          <div class="faq-item">
+            <dt>
+              <button
+                type="button"
+                aria-expanded="false"
+                aria-controls="faq-answer-2"
+                id="faq-question-2"
+              >
+                Can I request a product demo?
+              </button>
+            </dt>
+            <dd id="faq-answer-2" role="region" aria-labelledby="faq-question-2" hidden>
+              Absolutely. Select "Sales &amp; Pricing" in the enquiry type and mention you'd like a demo. Our solutions team will schedule a call at a time that works for you.
+            </dd>
+          </div>
+
+          <div class="faq-item">
+            <dt>
+              <button
+                type="button"
+                aria-expanded="false"
+                aria-controls="faq-answer-3"
+                id="faq-question-3"
+              >
+                I'm an existing customer with a billing issue. Who should I contact?
+              </button>
+            </dt>
+            <dd id="faq-answer-3" role="region" aria-labelledby="faq-question-3" hidden>
+              Existing customers can raise billing disputes directly inside the FinPay dashboard under <strong>Settings → Billing → Raise a Dispute</strong>, or email billing@finpay.io for urgent issues.
+            </dd>
+          </div>
+
+          <div class="faq-item">
+            <dt>
+              <button
+                type="button"
+                aria-expanded="false"
+                aria-controls="faq-answer-4"
+                id="faq-question-4"
+              >
+                Do you have a press or media contact?
+              </button>
+            </dt>
+            <dd id="faq-answer-4" role="region" aria-labelledby="faq-question-4" hidden>
+              Yes. For press enquiries, interview requests, or media resources, please email press@finpay.io. Our communications team will respond within 24 hours.
+            </dd>
+          </div>
+
+        </dl>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       GLOBAL FOOTER
+       ============================================================ -->
+  <footer role="contentinfo" id="site-footer" aria-label="Site footer">
+    <div class="footer-inner">
+
+      <!-- Footer Brand -->
+      <div class="footer-brand">
+        
+          <span aria-hidden="true">&#9670;</span> FinPay
+        </a>
+        <p class="footer-tagline">The global payment platform built for growth.</p>
+
+        <!-- Newsletter -->
+        <form class="footer-newsletter" action="/newsletter" method="post" aria-label="Newsletter signup">
+          <label for="footer-email" class="sr-only">Your email address</label>
+          <input
+            type="email"
+            id="footer-email"
+            name="email"
+            placeholder="Enter your email"
+            aria-label="Email for newsletter"
+            autocomplete="email"
+          />
+          <button type="submit" aria-label="Subscribe to newsletter">Subscribe</button>
+        </form>
+
+        <!-- Social Icons -->
+        <nav aria-label="Social media links" class="social-links">
+          <ul role="list">
+            <li><a href="https://twitter.com/finpay" aria-label="FinPay on Twitter" rel="noopener noreferrer" target="_blank">&#120143;</a></li>
+            <li><a href="https://linkedin.com/company/finpay" aria-label="FinPay on LinkedIn" rel="noopener noreferrer" target="_blank">in</a></li>
+            <li><a href="https://github.com/finpay" aria-label="FinPay on GitHub" rel="noopener noreferrer" target="_blank">GH</a></li>
+            <li><a href="https://youtube.com/finpay" aria-label="FinPay on YouTube" rel="noopener noreferrer" target="_blank">&#9654;</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Footer Columns -->
+      <nav aria-label="Products links" class="footer-col">
+        <h3>Products</h3>
+        <ul role="list">
+          <li><a href="payments.html">Payment Gateway</a></li>
+          <li><a href="payments.html#payment-links">Payment Links</a></li>
+          <li><a href="payments.html#payment-pages">Payment Pages</a></li>
+          <li><a href="payments.html#subscriptions">Subscriptions</a></li>
+          <li><a href="payments.html#international">International Payments</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="Resources links" class="footer-col">
+        <h3>Resources</h3>
+        <ul role="list">
+          <li><a href="resources.html">Documentation</a></li>
+          <li><a href="resources.html#api">API Reference</a></li>
+          <li><a href="resources.html#guides">Developer Guides</a></li>
+          <li><a href="resources.html#blog">Blog</a></li>
+          <li><a href="resources.html#help">Help Centre</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="Company links" class="footer-col">
+        <h3>Company</h3>
+        <ul role="list">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="about.html#leadership">Leadership</a></li>
+          <li><a href="about.html#careers">Careers</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="about.html#press">Press</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="Legal links" class="footer-col">
+        <h3>Legal</h3>
+        <ul role="list">
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="cookies.html">Cookie Policy</a></li>
+          <li><a href="security.html">Security</a></li>
+          <li><a href="compliance.html">Compliance</a></li>
+        </ul>
+      </nav>
+
+    </div>
+
+    <!-- Footer Bottom Bar -->
+    <div class="footer-bottom">
+      <p>
+        <small>&copy; 2025 FinPay Technologies Pvt. Ltd. All rights reserved. FinPay is not a bank. Payment services are provided by licensed partners.</small>
+      </p>
+      <ul class="footer-bottom-links" role="list">
+        <li><a href="sitemap.html">Sitemap</a></li>
+        <li><a href="accessibility.html">Accessibility</a></li>
+        <li><a href="security.html">Security</a></li>
+      </ul>
+    </div>
+  </footer>
+<script type="module" src="Main.js"></script>
+<script src="Navigation.js"></script>
+<script src="Forms.js"></script>
+<script src="Faq.js"></script>
+</body>
+</html>

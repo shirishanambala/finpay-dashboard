@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Log in to your FinPay account to manage payments, view analytics, and access your dashboard." />
+  <title>Login — FinPay</title>
+  <link rel="canonical" href="https://finpay.io/login.html" />
+  <!-- Prevent search engines from indexing auth pages -->
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="Auth.css">
+  <!-- Firebase SDKs (compat version — works without bundler) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+</head>
+<body class="auth-page">
+
+  <!-- ============================================================
+       MINIMAL HEADER — Auth pages use simplified nav
+       ============================================================ -->
+  <header role="banner" id="site-header" class="auth-header">
+    <div class="auth-header-inner">
+
+      <!-- Logo -->
+      <a href="dashboard.html" class="auth-logo" aria-label="FinPay — Go to homepage">
+        <span aria-hidden="true">&#9670;</span> FinPay
+      </a>
+
+      <!-- Minimal nav for auth context -->
+      <nav role="navigation" aria-label="Auth navigation" class="auth-nav">
+        <span class="auth-nav-prompt">Don't have an account?</span>
+        <a href="signup.html" class="btn-primary">Create Account</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <main id="main-content" tabindex="-1" class="auth-main">
+
+    <!-- ============================================================
+         SECTION 01 — LOGIN CARD
+         ============================================================ -->
+    <section id="login-section" aria-labelledby="login-heading" class="auth-section">
+      <div class="auth-card">
+
+        <!-- Card Header -->
+        <header class="auth-card-header">
+          <h1 id="login-heading">Welcome back</h1>
+          <p class="auth-card-subtext">Sign in to your FinPay dashboard</p>
+        </header>
+
+        <!-- ============================================================
+             SOCIAL LOGIN PLACEHOLDER
+             ============================================================ -->
+        <div class="social-login-wrap" aria-label="Sign in with a third-party provider">
+          <button type="button" class="btn-social-google" aria-label="Continue with Google account">
+            <img
+              src="assets/icons/google-logo.svg"
+              alt=""
+              aria-hidden="true"
+              width="20"
+              height="20"
+            />
+            Continue with Google
+          </button>
+        </div>
+
+        <!-- Divider -->
+        <div class="auth-divider" role="separator" aria-label="Or sign in with email">
+          <span>or sign in with email</span>
+        </div>
+
+        <!-- ============================================================
+             LOGIN FORM
+             ============================================================ -->
+       <form
+  id="login-form"
+  novalidate
+  aria-label="Login"
+  onsubmit="return false;"
+>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label for="login-email">Email Address</label>
+            <input
+              type="email"
+              id="login-email"
+              name="email"
+              autocomplete="email"
+              placeholder="jane@company.com"
+              required
+              aria-required="true"
+              aria-describedby="login-email-hint"
+            />
+            <span id="login-email-hint" class="form-hint">Use the email associated with your FinPay account</span>
+          </div>
+
+          <!-- Password -->
+          <div class="form-group">
+            <div class="label-row">
+              <label for="login-password">Password</label>
+              <a href="forgot-password.html" class="form-inline-link" aria-label="Forgot your password?">Forgot password?</a>
+            </div>
+            <input
+              type="password"
+              id="login-password"
+              name="password"
+              autocomplete="current-password"
+              placeholder="Enter your password"
+              required
+              aria-required="true"
+              minlength="8"
+            />
+            <button
+              type="button"
+              class="password-toggle"
+              aria-label="Show password"
+              aria-pressed="false"
+              aria-controls="login-password"
+            >
+              Show
+            </button>
+          </div>
+
+          <!-- Remember Me -->
+          <div class="form-group form-group--checkbox">
+            <input
+              type="checkbox"
+              id="login-remember"
+              name="remember_me"
+            />
+            <label for="login-remember">Keep me signed in for 30 days</label>
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" class="btn-submit btn-submit--full" aria-label="Sign in to FinPay">
+            Sign In
+          </button>
+
+          <!-- Hidden CSRF token placeholder -->
+          <input type="hidden" name="_csrf" value="" aria-hidden="true" />
+
+        </form>
+
+        <!-- Card Footer -->
+        <footer class="auth-card-footer">
+          <p>
+            New to FinPay?
+            <a href="signup.html" aria-label="Create a new FinPay account">Create a free account</a>
+          </p>
+        </footer>
+
+      </div>
+
+      <!-- ============================================================
+           TRUST SIGNALS — Below card
+           ============================================================ -->
+      <aside class="auth-trust" aria-label="Security and trust information">
+        <ul role="list" class="trust-list">
+          <li>
+            <span aria-hidden="true">&#128274;</span>
+            <span>256-bit SSL encryption</span>
+          </li>
+          <li>
+            <span aria-hidden="true">&#9989;</span>
+            <span>PCI DSS Level 1 certified</span>
+          </li>
+          <li>
+            <span aria-hidden="true">&#128737;</span>
+            <span>Two-factor authentication available</span>
+          </li>
+        </ul>
+      </aside>
+
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       MINIMAL FOOTER — Auth pages
+       ============================================================ -->
+  <footer role="contentinfo" id="site-footer" class="auth-footer" aria-label="Footer">
+    <div class="auth-footer-inner">
+      <p>
+        <small>&copy; 2025 FinPay Technologies Pvt. Ltd. All rights reserved.</small>
+      </p>
+      <nav aria-label="Legal links">
+        <ul role="list" class="auth-footer-links">
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="security.html">Security</a></li>
+          <li><a href="contact.html">Help</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+<script src="Forms.js"></script>
+<script>
+  /* ============================================================
+     FIREBASE GOOGLE AUTH
+     ▸ Replace the 6 placeholder values below with your actual
+       Firebase project keys from:
+       Firebase Console → Project Settings → Your apps → Config
+     ============================================================ */
+const firebaseConfig = {
+  apiKey: "AIzaSyAvUTD9GsgUmxIkTmiHaSu-BtK2sBErGPs",
+  authDomain: "finp-f52ed.firebaseapp.com",
+  projectId: "finp-f52ed",
+  storageBucket: "finp-f52ed.firebasestorage.app",
+  messagingSenderId: "324532577400",
+  appId: "1:324532577400:web:2e4436e22a8e472893798d",
+  measurementId: "G-G86EJFW5K1"
+};
+  /* Initialise Firebase (safe — won't double-init if called twice) */
+  if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+
+  const auth     = firebase.auth();
+  const provider = new firebase.auth.GoogleAuthProvider();
+
+  /* ── Wire up the button ── */
+  const googleBtn = document.querySelector('.btn-social-google');
+
+  if (googleBtn) {
+    googleBtn.addEventListener('click', async function () {
+      googleBtn.disabled    = true;
+      googleBtn.textContent = 'Signing in…';
+
+      try {
+        const result = await auth.signInWithPopup(provider);
+        const user   = result.user;
+
+        /* Store user data in sessionStorage */
+        sessionStorage.setItem('pl_user', JSON.stringify({
+          uid:         user.uid,
+          name:        user.displayName,
+          email:       user.email,
+          photo:       user.photoURL,
+          accessToken: result._tokenResponse?.oauthAccessToken || ''
+        }));
+
+        /* ── Redirect after login ──────────────────────────────────
+             Change the path below to wherever your dashboard lives.
+             Common values:
+               'dashboard.html'   — if dashboard is a separate file
+               '/dashboard'       — if you use a router
+               'index.html'       — if this IS the login page
+           ─────────────────────────────────────────────────────── */
+        window.location.href = 'dashboard.html';
+
+      } catch (err) {
+        /* Silently restore button on cancel or error */
+        if (err.code !== 'auth/popup-closed-by-user') {
+          console.error('Google sign-in error:', err.message);
+          alert('Sign-in failed: ' + err.message);
+        }
+        googleBtn.disabled    = false;
+        googleBtn.innerHTML   =
+          '<img src="assets/icons/google-logo.svg" alt="" width="20" height="20"/> Continue with Google';
+      }
+    });
+  }
+  document.addEventListener("DOMContentLoaded", function () {
+
+  const loginForm = document.getElementById("login-form");
+
+  loginForm.addEventListener("submit", function(e) {
+
+    // IMPORTANT
+    e.preventDefault();
+
+    // GET VALUES
+    const email = document.getElementById("login-email").value.trim();
+    const password = document.getElementById("login-password").value.trim();
+
+    // SIMPLE VALIDATION
+    if(email === "" || password === "") {
+      alert("Please fill all fields");
+      return;
+    }
+
+    // SUCCESS
+    alert("Login Successful!");
+
+    // REDIRECT
+    window.location.href = "dashboard.html";
+
+  });
+
+});
+</script>
+</body>
+</html>

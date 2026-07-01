@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Page not found — the page you were looking for doesn't exist or has been moved. Return to FinPay." />
+  <title>404 — Page Not Found | FinPay</title>
+  <!-- Prevent search engines from indexing error pages -->
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="404.css">
+</head>
+<body class="error-page">
+
+  <!-- ============================================================
+       GLOBAL HEADER & NAVIGATION
+       ============================================================ -->
+  <header role="banner" id="site-header">
+    <nav role="navigation" aria-label="Primary navigation" id="primary-nav">
+      <div class="nav-inner">
+
+        <!-- Logo -->
+        <div class="nav-logo">
+          <a href="index.html" aria-label="FinPay — Go to homepage">
+            <span aria-hidden="true">&#9670;</span> FinPay
+          </a>
+        </div>
+
+        <!-- Primary Links -->
+        <ul class="nav-links" role="list">
+          <li><a href="payments.html">Payments</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+
+        <!-- Auth Actions -->
+        <div class="nav-actions">
+          <a href="login.html" class="btn-ghost">Login</a>
+          <a href="signup.html" class="btn-primary">Sign Up</a>
+        </div>
+
+      </div>
+    </nav>
+  </header>
+
+  <main id="main-content" tabindex="-1" class="error-main">
+
+    <!-- ============================================================
+         SECTION 01 — 404 HERO
+         ============================================================ -->
+    <section id="error-hero" aria-labelledby="error-heading" class="error-section">
+      <div class="error-inner">
+
+        <!-- Visual Error Code -->
+        <div class="error-code-display" aria-hidden="true">
+          <span class="error-digit">4</span>
+          <span class="error-icon-center" role="img" aria-label="Globe icon representing a lost page">&#127758;</span>
+          <span class="error-digit">4</span>
+        </div>
+
+        <!-- Heading -->
+        <h1 id="error-heading">This page has gone off the map</h1>
+
+        <p class="error-subtext">
+          The page you're looking for doesn't exist, has been moved, or the URL might have a typo.
+          Let's get you back on track.
+        </p>
+
+        <!-- Primary Actions -->
+        <div class="error-actions" role="group" aria-label="Recovery options">
+          <a href="index.html" class="btn-primary" aria-label="Return to FinPay homepage">
+            Back to Homepage
+          </a>
+          <a href="contact.html" class="btn-ghost" aria-label="Contact FinPay support">
+            Contact Support
+          </a>
+        </div>
+
+        <!-- Search Hint -->
+        <div class="error-search-hint">
+          <p>Or try searching for what you need:</p>
+          <form
+            id="error-search-form"
+            method="get"
+            action="/search"
+            role="search"
+            aria-label="Search FinPay"
+          >
+            <label for="error-search-input" class="sr-only">Search FinPay</label>
+            <input
+              type="search"
+              id="error-search-input"
+              name="q"
+              placeholder="e.g. payment gateway, API docs, pricing…"
+              autocomplete="off"
+              aria-label="Search FinPay for help or documentation"
+            />
+            <button type="submit" aria-label="Submit search">
+              Search
+            </button>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 02 — HELPFUL LINKS
+         ============================================================ -->
+    <section id="error-helpful-links" aria-labelledby="helpful-links-heading">
+      <div class="section-inner">
+
+        <h2 id="helpful-links-heading">You might be looking for</h2>
+
+        <ul class="helpful-links-grid" role="list">
+
+          <li class="helpful-link-card">
+            <a href="index.html" aria-label="FinPay homepage">
+              <span class="link-card-icon" aria-hidden="true">&#127968;</span>
+              <span class="link-card-label">Homepage</span>
+              <span class="link-card-desc">Start from the top and explore everything FinPay offers.</span>
+            </a>
+          </li>
+
+          <li class="helpful-link-card">
+            <a href="payments.html" aria-label="Payments and products page">
+              <span class="link-card-icon" aria-hidden="true">&#128179;</span>
+              <span class="link-card-label">Payments</span>
+              <span class="link-card-desc">Payment gateway, links, pages, subscriptions, and international payments.</span>
+            </a>
+          </li>
+
+          <li class="helpful-link-card">
+            <a href="pricing.html" aria-label="Pricing plans">
+              <span class="link-card-icon" aria-hidden="true">&#128176;</span>
+              <span class="link-card-label">Pricing</span>
+              <span class="link-card-desc">Transparent plans with no hidden fees. Find the right tier for your business.</span>
+            </a>
+          </li>
+
+          <li class="helpful-link-card">
+            <a href="resources.html" aria-label="Developer resources and documentation">
+              <span class="link-card-icon" aria-hidden="true">&#128196;</span>
+              <span class="link-card-label">Documentation</span>
+              <span class="link-card-desc">API reference, integration guides, SDKs, and developer resources.</span>
+            </a>
+          </li>
+
+          <li class="helpful-link-card">
+            <a href="resources.html#blog" aria-label="FinPay blog">
+              <span class="link-card-icon" aria-hidden="true">&#9997;</span>
+              <span class="link-card-label">Blog</span>
+              <span class="link-card-desc">Insights on payments, fintech trends, and product updates.</span>
+            </a>
+          </li>
+
+          <li class="helpful-link-card">
+            <a href="contact.html" aria-label="Contact FinPay support">
+              <span class="link-card-icon" aria-hidden="true">&#128172;</span>
+              <span class="link-card-label">Support</span>
+              <span class="link-card-desc">Can't find what you need? Our support team is happy to help.</span>
+            </a>
+          </li>
+
+          <li class="helpful-link-card">
+            <a href="signup.html" aria-label="Create a FinPay account">
+              <span class="link-card-icon" aria-hidden="true">&#128640;</span>
+              <span class="link-card-label">Get Started</span>
+              <span class="link-card-desc">Create a free FinPay account and start accepting payments today.</span>
+            </a>
+          </li>
+
+          <li class="helpful-link-card">
+            <a href="login.html" aria-label="Log in to your FinPay dashboard">
+              <span class="link-card-icon" aria-hidden="true">&#128272;</span>
+              <span class="link-card-label">Dashboard Login</span>
+              <span class="link-card-desc">Already a customer? Sign in to manage your account.</span>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 03 — STATUS & REPORTING
+         ============================================================ -->
+    <section id="error-status" aria-labelledby="error-status-heading">
+      <div class="section-inner error-status-inner">
+
+        <h2 id="error-status-heading" class="sr-only">System status and reporting</h2>
+
+        <div class="status-card">
+          <span class="status-indicator status-indicator--ok" aria-hidden="true">&#9679;</span>
+          <div>
+            <p class="status-label">All FinPay systems operational</p>
+            <a
+              href="https://status.finpay.io"
+              class="status-link"
+              aria-label="View real-time FinPay system status"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              View live status page &#8594;
+            </a>
+          </div>
+        </div>
+
+        <div class="report-card">
+          <p>
+            Think this is a broken link on our end?
+            <a
+              href="mailto:webmaster@finpay.io?subject=Broken+Link+Report&body=I+found+a+broken+link+on+FinPay.+The+URL+I+tried+to+visit+was%3A+"
+              aria-label="Report a broken link to the FinPay web team"
+            >
+              Report it to our team
+            </a>
+            and we'll fix it promptly.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================================================
+       GLOBAL FOOTER
+       ============================================================ -->
+  <footer role="contentinfo" id="site-footer" aria-label="Site footer">
+    <div class="footer-inner">
+
+      <!-- Footer Brand -->
+      <div class="footer-brand">
+        <a href="index.html" class="footer-logo" aria-label="FinPay homepage">
+          <span aria-hidden="true">&#9670;</span> FinPay
+        </a>
+        <p class="footer-tagline">The global payment platform built for growth.</p>
+
+        <!-- Newsletter -->
+        <form class="footer-newsletter" action="/newsletter" method="post" aria-label="Newsletter signup">
+          <label for="footer-email" class="sr-only">Your email address</label>
+          <input
+            type="email"
+            id="footer-email"
+            name="email"
+            placeholder="Enter your email"
+            aria-label="Email for newsletter"
+            autocomplete="email"
+          />
+          <button type="submit" aria-label="Subscribe to newsletter">Subscribe</button>
+        </form>
+
+        <!-- Social Icons -->
+        <nav aria-label="Social media links" class="social-links">
+          <ul role="list">
+            <li><a href="https://twitter.com/finpay" aria-label="FinPay on Twitter" rel="noopener noreferrer" target="_blank">&#120143;</a></li>
+            <li><a href="https://linkedin.com/company/finpay" aria-label="FinPay on LinkedIn" rel="noopener noreferrer" target="_blank">in</a></li>
+            <li><a href="https://github.com/finpay" aria-label="FinPay on GitHub" rel="noopener noreferrer" target="_blank">GH</a></li>
+            <li><a href="https://youtube.com/finpay" aria-label="FinPay on YouTube" rel="noopener noreferrer" target="_blank">&#9654;</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Footer Columns -->
+      <nav aria-label="Products links" class="footer-col">
+        <h3>Products</h3>
+        <ul role="list">
+          <li><a href="payments.html">Payment Gateway</a></li>
+          <li><a href="payments.html#payment-links">Payment Links</a></li>
+          <li><a href="payments.html#payment-pages">Payment Pages</a></li>
+          <li><a href="payments.html#subscriptions">Subscriptions</a></li>
+          <li><a href="payments.html#international">International Payments</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="Resources links" class="footer-col">
+        <h3>Resources</h3>
+        <ul role="list">
+          <li><a href="resources.html">Documentation</a></li>
+          <li><a href="resources.html#api">API Reference</a></li>
+          <li><a href="resources.html#guides">Developer Guides</a></li>
+          <li><a href="resources.html#blog">Blog</a></li>
+          <li><a href="resources.html#help">Help Centre</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="Company links" class="footer-col">
+        <h3>Company</h3>
+        <ul role="list">
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="about.html#leadership">Leadership</a></li>
+          <li><a href="about.html#careers">Careers</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="about.html#press">Press</a></li>
+        </ul>
+      </nav>
+
+      <nav aria-label="Legal links" class="footer-col">
+        <h3>Legal</h3>
+        <ul role="list">
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="cookies.html">Cookie Policy</a></li>
+          <li><a href="security.html">Security</a></li>
+          <li><a href="compliance.html">Compliance</a></li>
+        </ul>
+      </nav>
+
+    </div>
+
+    <!-- Footer Bottom Bar -->
+    <div class="footer-bottom">
+      <p>
+        <small>&copy; 2025 FinPay Technologies Pvt. Ltd. All rights reserved. FinPay is not a bank. Payment services are provided by licensed partners.</small>
+      </p>
+      <ul class="footer-bottom-links" role="list">
+        <li><a href="sitemap.html">Sitemap</a></li>
+        <li><a href="accessibility.html">Accessibility</a></li>
+        <li><a href="security.html">Security</a></li>
+      </ul>
+    </div>
+  </footer>
+<script src="Animations.js"></script>
+</body>
+</html>

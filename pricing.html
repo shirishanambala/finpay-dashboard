@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="FinPay Pricing — Simple, transparent pricing for businesses of every size. No hidden fees, no surprises." />
+  <meta name="keywords" content="FinPay pricing, payment gateway pricing, transaction fees, enterprise payments" />
+  <meta name="author" content="FinPay" />
+  <meta property="og:title" content="Pricing — FinPay" />
+  <meta property="og:description" content="Simple, transparent pricing for businesses of every size." />
+  <meta property="og:type" content="website" />
+  <title>Pricing — FinPay | Global Payment Platform</title>
+  
+<link rel="stylesheet" href="Pricing.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       GLOBAL HEADER & NAVIGATION
+  ============================================================ -->
+  <header id="site-header" role="banner">
+    <nav id="main-nav" role="navigation" aria-label="Main site navigation">
+
+      <!-- Logo -->
+     <div class="brand">
+  <div class="logo-mark">◈</div>
+  <div class="logo-text">FinPay</div>
+</div>
+
+      <!-- Primary Navigation Links -->
+      <ul class="nav-links" role="list">
+        <li>
+          <a href="payments.html" aria-label="Payments — Products and features">Payments</a>
+        </li>
+        <li>
+          <a href="pricing.html" aria-current="page" aria-label="Pricing — Current page">Pricing</a>
+        </li>
+        <li>
+          <a href="resources.html" aria-label="Resources — Documentation and guides">Resources</a>
+        </li>
+        <li>
+          <a href="about.html" aria-label="About — Our company and mission">About</a>
+        </li>
+        <li>
+          <a href="contact.html" aria-label="Contact — Get in touch with us">Contact</a>
+        </li>
+      </ul>
+
+      <!-- Navigation CTAs -->
+      <div class="nav-cta" role="group" aria-label="Account actions">
+        <a href="login.html" class="btn-nav-login" aria-label="Log in to your FinPay account">Login</a>
+        <a href="signup.html" class="btn-nav-signup" aria-label="Create a new FinPay account">Sign Up</a>
+      </div>
+
+      <!-- Mobile menu toggle (semantic-only, JS-powered) -->
+      <button
+        type="button"
+        class="nav-mobile-toggle"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Open navigation menu"
+      >
+        <span class="hamburger-bar" aria-hidden="true"></span>
+        <span class="hamburger-bar" aria-hidden="true"></span>
+        <span class="hamburger-bar" aria-hidden="true"></span>
+      </button>
+
+    </nav>
+  </header>
+
+
+  <!-- ============================================================
+       MAIN CONTENT
+  ============================================================ -->
+  <main id="main-content" role="main">
+
+
+    <!-- ============================================================
+         SECTION 01 — HERO
+    ============================================================ -->
+    <section
+      id="pricing-hero"
+      class="section section--hero section--dark"
+      aria-labelledby="pricing-hero-heading"
+    >
+      <div class="container">
+
+        <div class="hero-eyebrow" aria-hidden="true">Pricing</div>
+
+        <h1 id="pricing-hero-heading" class="hero-title">
+          One rate.<br />No surprises.
+        </h1>
+
+        <p class="hero-subtitle">
+          FinPay charges a single, flat transaction fee on every payment you collect.
+          No monthly platform fees on our standard plan, no setup costs,
+          no hidden charges — only pay when you earn.
+        </p>
+
+        <div class="hero-actions" role="group" aria-label="Pricing page primary actions">
+          <a href="#pricing-plans" class="btn btn--primary" aria-label="View all pricing plans">
+            See Plans
+          </a>
+          <a href="contact.html" class="btn btn--ghost" aria-label="Talk to our sales team">
+            Talk to Sales
+          </a>
+        </div>
+
+        <!-- Quick Trust Signal -->
+        <ul class="hero-trust-list" role="list" aria-label="Pricing trust signals">
+          <li>
+            <span class="trust-icon" aria-hidden="true">✓</span>
+            No monthly fees on Starter
+          </li>
+          <li>
+            <span class="trust-icon" aria-hidden="true">✓</span>
+            Same rate for cards, UPI &amp; wallets
+          </li>
+          <li>
+            <span class="trust-icon" aria-hidden="true">✓</span>
+            Cancel or upgrade anytime
+          </li>
+        </ul>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 02 — PRICING PLANS
+    ============================================================ -->
+    <section
+      id="pricing-plans"
+      class="section section--pricing-plans"
+      aria-labelledby="pricing-plans-heading"
+    >
+      <div class="container">
+
+        <header class="section-header section-header--centered">
+          <h2 id="pricing-plans-heading" class="section-title">
+            Choose your plan
+          </h2>
+          <p class="section-subtitle">
+            Start free and grow into the plan that fits your business.
+            All plans include our full payments infrastructure.
+          </p>
+        </header>
+
+        <!-- Toggle: Monthly / Annual -->
+        <div class="billing-toggle" role="group" aria-label="Billing cycle selection">
+          <button
+            type="button"
+            class="billing-toggle__option billing-toggle__option--active"
+            aria-pressed="true"
+            aria-label="Switch to monthly billing"
+          >
+            Monthly
+          </button>
+          <button
+            type="button"
+            class="billing-toggle__option"
+            aria-pressed="false"
+            aria-label="Switch to annual billing — save up to 20%"
+          >
+            Annual
+            <span class="billing-toggle__badge" aria-label="Save up to 20 percent">Save 20%</span>
+          </button>
+        </div>
+
+        <!-- Pricing Cards Grid -->
+        <div
+          class="pricing-grid"
+          role="list"
+          aria-label="Pricing plans"
+        >
+
+          <!-- Plan: Starter -->
+          <article
+            class="pricing-card"
+            role="listitem"
+            aria-labelledby="plan-starter-name"
+          >
+            <header class="pricing-card__header">
+              <div class="pricing-card__plan-name" id="plan-starter-name">Starter</div>
+              <p class="pricing-card__tagline">For individuals and early-stage businesses.</p>
+            </header>
+
+            <div class="pricing-card__price-block">
+              <span class="pricing-card__currency" aria-hidden="true">₹</span>
+              <span class="pricing-card__amount" aria-label="Zero rupees per month">0</span>
+              <span class="pricing-card__period" aria-hidden="true">/ mo</span>
+            </div>
+            <p class="pricing-card__price-note">
+              + <strong>2% per transaction</strong> (domestic)
+            </p>
+
+            <a
+              href="signup.html"
+              class="btn btn--outline btn--full"
+              aria-label="Get started with the Starter plan — free"
+            >
+              Get Started Free
+            </a>
+
+            <ul class="pricing-card__features" role="list" aria-label="Starter plan features">
+              <li>
+                <span class="feature-check" aria-hidden="true">✓</span>
+                Payment gateway integration
+              </li>
+              <li>
+                <span class="feature-check" aria-hidden="true">✓</span>
+                Up to ₹5 lakh/month GMV
+              </li>
+              <li>
+                <span class="feature-check" aria-hidden="true">✓</span>
+                Payment links
+              </li>
+              <li>
+                <span class="feature-check" aria-hidden="true">✓</span>
+                Standard checkout
+              </li>
+              <li>
+                <span class="feature-check" aria-hidden="true">✓</span>
+                Email &amp; chat support
+              </li>
+              <li>
+                <span class="feature-check" aria-hidden="true">✓</span>
+                Basic analytics dashboard
+              </li>
+              <li>
+                <span class="feature-cross" aria-hidden="true">✗</span>
+                <span class="feature-dimmed">Custom checkout branding</span>
+              </li>
+              <li>
+                <span class="feature-cross" aria-hidden="true">✗</span>
+                <span class="feature-dimmed">Priority support</span>
+              </li>
+            </ul>
+          </article>
+
+
+          <!-- Plan: Growth (Featured) -->
+          <article
+            class="pricing-card pricing-card--featured"
+            role="listitem"
+            aria-labelledby="plan-growth-name"
+            aria-label="Most popular plan"
+          >
+            <div class="pricing-card__badge" aria-label="Most popular">Most Popular</div>
+
+            <header class="pricing-card__header">
+              <div class="pricing-card__plan-name" id="plan-growth-name">Growth</div>
+              <p class="pricing-card__tagline">For scaling startups and mid-size businesses.</p>
+            </header>
+
+            <div class="pricing-card__price-block">
+              <span class="pricing-card__currency" aria-hidden="true">₹</span>
+              <span class="pricing-card__amount" aria-label="Two thousand nine hundred rupees per month">2,999</span>
+              <span class="pricing-card__period" aria-hidden="true">/ mo</span>
+            </div>
+            <p class="pricing-card__price-note">
+              + <strong>1.5% per transaction</strong> (domestic)
+            </p>
+
+            <a
+              href="signup.html"
+              class="btn btn--primary btn--full"
+              aria-label="Start your Growth plan — ₹2,999 per month"
+            >
+              Start Growth Plan
+            </a>
+
+            <ul class="pricing-card__features" role="list" aria-label="Growth plan features">
+              <li>
+                <span class="feature-check" aria-hidden="true">✓</span>
+                Everything in Starter
+              </li>
+              <li>
+                <span class="feature-check" aria-hidden="true">✓</span>
+                Up to ₹50 lakh/month GMV
+              </li>
+              <li>
+                <span class="feature-check" aria-hidden="true">✓</span>
+                Custom checkout branding
+              </li>
+              <li>
+                <span class="feature-check" aria-hidden="true">✓</span>
+                Payment pages builder
+              </li>
+              <li>
+                <span class="feature-check" aria-hidden="true">✓</span>
+                Subscription management
+              </li>
+              <li>
+                <span class="feature-check" aria-hidden="true">✓</span>
+                Priority email &amp; chat support
+              </li>
+              <li>
+                <span class="feature-check" aria-hidden="true">✓</span>
+                Advanced analytics &amp; reports
+              </li>
+              <li>
+                <span class="feature-check" aria-hidden="true">✓</span>
+                Webhooks &amp; API access
+              </li>
+            </ul>
+          </article>
+
+
+          <!-- Plan: Scale -->
+          <article
+            class="pricing-card"
+            role="listitem"
+            aria-labelledby="plan-scale-name"
+          >
+            <header class="pricing-card__header">
+              <div class="pricing-card__plan-name" id="plan-scale-name">Scale</div>
+              <p class="pricing-card__tagline">For high-volume businesses with complex needs.</p>
+            </header>
+
+            <div class="pricing-card__price-block">
+              <span class="pricing-card__currency" aria-hidden="true">₹</span>
+              <span class="pricing-card__amount" aria-label="Nine thousand nine hundred rupees per month">9,999</span>
+              <span class="pricing-card__period" aria-hidden="true">/ mo</span>
+            </div>
+            <p class="pricing-card__price-note">
+              + <strong>1.2% per transaction</strong> (domestic)
+            </p>
+
+            <a
+              href="signup.html"
+              class="btn btn--outline btn--full"
+              aria-label="Start your Scale plan — ₹9,999 per month"
+            >
+              Start Scale Plan
+            </a>
+
+            <ul class="pricing-card__features" role="list" aria-label="Scale plan features">
+              <li>
+                <span class="feature-check" aria-hidden="true">✓</span>
+                Everything in Growth
+              </li>
+              <li>
+                <span class="feature-check" aria-hidden="true">✓</span>
+                Unlimited GMV
+              </li>
+              <li>
+                <span class="feature-check" aria-hidden="true">✓</span>
+                International payments (180+ countries)
+              </li>
+              <li>
+                <span class="feature-check" aria-hidden="true">✓</span>
+                Multi-currency settlement
+              </li>
+              <li>
+                <span class="feature-check" aria-hidden="true">✓</span>
+                Dedicated account manager
+              </li>
+              <li>
+                <span class="feature-check" aria-hidden="true">✓</span>
+                Phone &amp; priority support (SLA)
+              </li>
+              <li>
+                <span class="feature-check" aria-hidden="true">✓</span>
+                Custom integrations
+              </li>
+              <li>
+                <span class="feature-check" aria-hidden="true">✓</span>
+                Smart routing &amp; retry engine
+              </li>
+            </ul>
+          </article>
+
+        </div>
+        <!-- /pricing-grid -->
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 03 — TRANSACTION FEE BREAKDOWN
+    ============================================================ -->
+    <section
+      id="fee-breakdown"
+      class="section section--light"
+      aria-labelledby="fee-breakdown-heading"
+    >
+      <div class="container">
+
+        <header class="section-header section-header--centered">
+          <h2 id="fee-breakdown-heading" class="section-title">
+            Transaction fees, clearly listed
+          </h2>
+          <p class="section-subtitle">
+            Every payment method at a glance. Rates shown for the Growth plan.
+          </p>
+        </header>
+
+        <div class="fee-table-wrapper" role="region" aria-label="Transaction fee table">
+          <table class="fee-table" aria-label="Transaction fees by payment method">
+            <caption class="fee-table__caption">
+              FinPay transaction fees by payment method — Growth plan
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col" class="fee-table__method-col">Payment Method</th>
+                <th scope="col">Domestic Rate</th>
+                <th scope="col">International Rate</th>
+                <th scope="col">Settlement</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Credit / Debit Cards</th>
+                <td>1.5%</td>
+                <td>3.0%</td>
+                <td>T+1 business day</td>
+              </tr>
+              <tr>
+                <th scope="row">UPI</th>
+                <td>0% (up to ₹2,000)</td>
+                <td>—</td>
+                <td>T+1 business day</td>
+              </tr>
+              <tr>
+                <th scope="row">Net Banking</th>
+                <td>1.5%</td>
+                <td>—</td>
+                <td>T+2 business days</td>
+              </tr>
+              <tr>
+                <th scope="row">Wallets</th>
+                <td>1.5%</td>
+                <td>—</td>
+                <td>T+1 business day</td>
+              </tr>
+              <tr>
+                <th scope="row">EMI (Credit Card)</th>
+                <td>1.5% + bank surcharge</td>
+                <td>—</td>
+                <td>T+1 business day</td>
+              </tr>
+              <tr>
+                <th scope="row">Buy Now, Pay Later</th>
+                <td>1.5%</td>
+                <td>—</td>
+                <td>T+2 business days</td>
+              </tr>
+              <tr>
+                <th scope="row">PayPal</th>
+                <td>—</td>
+                <td>3.5%</td>
+                <td>T+3 business days</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="fee-table__footnote">
+          All rates exclude applicable GST. UPI transactions above ₹2,000 are charged at 0.25%.
+          International rates may vary by card network and country.
+          <a href="resources.html" aria-label="Read the full fee documentation">Read full fee documentation →</a>
+        </p>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 04 — FEATURE COMPARISON TABLE
+    ============================================================ -->
+    <section
+      id="feature-comparison"
+      class="section section--comparison"
+      aria-labelledby="comparison-heading"
+    >
+      <div class="container container--wide">
+
+        <header class="section-header section-header--centered">
+          <h2 id="comparison-heading" class="section-title">
+            Compare every feature
+          </h2>
+          <p class="section-subtitle">
+            A complete breakdown of what's included in each plan so you can
+            make the right call for your business.
+          </p>
+        </header>
+
+        <div class="comparison-table-wrapper" role="region" aria-label="Full plan feature comparison">
+          <table class="comparison-table" aria-label="Feature comparison across Starter, Growth, and Scale plans">
+            <caption class="comparison-table__caption">
+              FinPay feature comparison — Starter vs Growth vs Scale
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col" class="comparison-table__feature-col">Feature</th>
+                <th scope="col">
+                  <span class="comparison-table__plan-name">Starter</span>
+                  <span class="comparison-table__plan-price">Free</span>
+                </th>
+                <th scope="col" class="comparison-table__featured-col">
+                  <span class="comparison-table__plan-name">Growth</span>
+                  <span class="comparison-table__plan-price">₹2,999/mo</span>
+                </th>
+                <th scope="col">
+                  <span class="comparison-table__plan-name">Scale</span>
+                  <span class="comparison-table__plan-price">₹9,999/mo</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <!-- Category: Payments -->
+              <tr class="comparison-table__category-row">
+                <td colspan="4" class="comparison-table__category-label" role="rowgroup">
+                  Payments
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Payment gateway</th>
+                <td aria-label="Included in Starter"><span class="check" aria-hidden="true">✓</span></td>
+                <td aria-label="Included in Growth"><span class="check" aria-hidden="true">✓</span></td>
+                <td aria-label="Included in Scale"><span class="check" aria-hidden="true">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Payment links</th>
+                <td aria-label="Included in Starter"><span class="check" aria-hidden="true">✓</span></td>
+                <td aria-label="Included in Growth"><span class="check" aria-hidden="true">✓</span></td>
+                <td aria-label="Included in Scale"><span class="check" aria-hidden="true">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Payment pages</th>
+                <td aria-label="Not included in Starter"><span class="cross" aria-hidden="true">—</span></td>
+                <td aria-label="Included in Growth"><span class="check" aria-hidden="true">✓</span></td>
+                <td aria-label="Included in Scale"><span class="check" aria-hidden="true">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Subscriptions &amp; recurring billing</th>
+                <td aria-label="Not included in Starter"><span class="cross" aria-hidden="true">—</span></td>
+                <td aria-label="Included in Growth"><span class="check" aria-hidden="true">✓</span></td>
+                <td aria-label="Included in Scale"><span class="check" aria-hidden="true">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">International payments</th>
+                <td aria-label="Not included in Starter"><span class="cross" aria-hidden="true">—</span></td>
+                <td aria-label="Not included in Growth"><span class="cross" aria-hidden="true">—</span></td>
+                <td aria-label="Included in Scale"><span class="check" aria-hidden="true">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Smart routing &amp; retry</th>
+                <td aria-label="Not included in Starter"><span class="cross" aria-hidden="true">—</span></td>
+                <td aria-label="Not included in Growth"><span class="cross" aria-hidden="true">—</span></td>
+                <td aria-label="Included in Scale"><span class="check" aria-hidden="true">✓</span></td>
+              </tr>
+
+              <!-- Category: Checkout -->
+              <tr class="comparison-table__category-row">
+                <td colspan="4" class="comparison-table__category-label" role="rowgroup">
+                  Checkout &amp; Branding
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Standard checkout</th>
+                <td aria-label="Included in Starter"><span class="check" aria-hidden="true">✓</span></td>
+                <td aria-label="Included in Growth"><span class="check" aria-hidden="true">✓</span></td>
+                <td aria-label="Included in Scale"><span class="check" aria-hidden="true">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Custom checkout branding</th>
+                <td aria-label="Not included in Starter"><span class="cross" aria-hidden="true">—</span></td>
+                <td aria-label="Included in Growth"><span class="check" aria-hidden="true">✓</span></td>
+                <td aria-label="Included in Scale"><span class="check" aria-hidden="true">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Embedded &amp; hosted checkout</th>
+                <td aria-label="Not included in Starter"><span class="cross" aria-hidden="true">—</span></td>
+                <td aria-label="Included in Growth"><span class="check" aria-hidden="true">✓</span></td>
+                <td aria-label="Included in Scale"><span class="check" aria-hidden="true">✓</span></td>
+              </tr>
+
+              <!-- Category: Developer -->
+              <tr class="comparison-table__category-row">
+                <td colspan="4" class="comparison-table__category-label" role="rowgroup">
+                  Developer &amp; API
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">REST API access</th>
+                <td aria-label="Included in Starter"><span class="check" aria-hidden="true">✓</span></td>
+                <td aria-label="Included in Growth"><span class="check" aria-hidden="true">✓</span></td>
+                <td aria-label="Included in Scale"><span class="check" aria-hidden="true">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Webhooks</th>
+                <td aria-label="Not included in Starter"><span class="cross" aria-hidden="true">—</span></td>
+                <td aria-label="Included in Growth"><span class="check" aria-hidden="true">✓</span></td>
+                <td aria-label="Included in Scale"><span class="check" aria-hidden="true">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Sandbox environment</th>
+                <td aria-label="Included in Starter"><span class="check" aria-hidden="true">✓</span></td>
+                <td aria-label="Included in Growth"><span class="check" aria-hidden="true">✓</span></td>
+                <td aria-label="Included in Scale"><span class="check" aria-hidden="true">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">SDK libraries (JS, iOS, Android)</th>
+                <td aria-label="Not included in Starter"><span class="cross" aria-hidden="true">—</span></td>
+                <td aria-label="Included in Growth"><span class="check" aria-hidden="true">✓</span></td>
+                <td aria-label="Included in Scale"><span class="check" aria-hidden="true">✓</span></td>
+              </tr>
+
+              <!-- Category: Analytics -->
+              <tr class="comparison-table__category-row">
+                <td colspan="4" class="comparison-table__category-label" role="rowgroup">
+                  Analytics &amp; Reporting
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Basic analytics</th>
+                <td aria-label="Included in Starter"><span class="check" aria-hidden="true">✓</span></td>
+                <td aria-label="Included in Growth"><span class="check" aria-hidden="true">✓</span></td>
+                <td aria-label="Included in Scale"><span class="check" aria-hidden="true">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Advanced reports &amp; exports</th>
+                <td aria-label="Not included in Starter"><span class="cross" aria-hidden="true">—</span></td>
+                <td aria-label="Included in Growth"><span class="check" aria-hidden="true">✓</span></td>
+                <td aria-label="Included in Scale"><span class="check" aria-hidden="true">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Revenue intelligence</th>
+                <td aria-label="Not included in Starter"><span class="cross" aria-hidden="true">—</span></td>
+                <td aria-label="Not included in Growth"><span class="cross" aria-hidden="true">—</span></td>
+                <td aria-label="Included in Scale"><span class="check" aria-hidden="true">✓</span></td>
+              </tr>
+
+              <!-- Category: Support -->
+              <tr class="comparison-table__category-row">
+                <td colspan="4" class="comparison-table__category-label" role="rowgroup">
+                  Support
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">Email &amp; chat support</th>
+                <td aria-label="Included in Starter"><span class="check" aria-hidden="true">✓</span></td>
+                <td aria-label="Included in Growth"><span class="check" aria-hidden="true">✓</span></td>
+                <td aria-label="Included in Scale"><span class="check" aria-hidden="true">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Priority support</th>
+                <td aria-label="Not included in Starter"><span class="cross" aria-hidden="true">—</span></td>
+                <td aria-label="Included in Growth"><span class="check" aria-hidden="true">✓</span></td>
+                <td aria-label="Included in Scale"><span class="check" aria-hidden="true">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">Dedicated account manager</th>
+                <td aria-label="Not included in Starter"><span class="cross" aria-hidden="true">—</span></td>
+                <td aria-label="Not included in Growth"><span class="cross" aria-hidden="true">—</span></td>
+                <td aria-label="Included in Scale"><span class="check" aria-hidden="true">✓</span></td>
+              </tr>
+              <tr>
+                <th scope="row">SLA guarantee</th>
+                <td aria-label="Not included in Starter"><span class="cross" aria-hidden="true">—</span></td>
+                <td aria-label="Not included in Growth"><span class="cross" aria-hidden="true">—</span></td>
+                <td aria-label="Included in Scale"><span class="check" aria-hidden="true">✓</span></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 05 — ENTERPRISE
+    ============================================================ -->
+    <section
+      id="enterprise"
+      class="section section--enterprise section--dark"
+      aria-labelledby="enterprise-heading"
+    >
+      <div class="container">
+
+        <div class="enterprise-layout">
+
+          <div class="enterprise-content">
+            <div class="section-eyebrow" aria-hidden="true">Enterprise</div>
+            <h2 id="enterprise-heading" class="section-title section-title--light">
+              Built for businesses moving billions
+            </h2>
+            <p class="section-body section-body--light">
+              When standard plans don't cover your scale, FinPay Enterprise
+              gives you custom pricing, bespoke infrastructure, and a
+              dedicated payments team — all under a single commercial agreement.
+            </p>
+
+            <ul class="enterprise-benefits" role="list" aria-label="Enterprise plan benefits">
+              <li>
+                <span class="enterprise-benefit__icon" aria-hidden="true">◈</span>
+                <div>
+                  <strong>Custom transaction rates</strong>
+                  <p>Volume-based pricing negotiated directly with our commercial team.</p>
+                </div>
+              </li>
+              <li>
+                <span class="enterprise-benefit__icon" aria-hidden="true">◈</span>
+                <div>
+                  <strong>Dedicated infrastructure</strong>
+                  <p>Isolated processing clusters and guaranteed uptime SLAs.</p>
+                </div>
+              </li>
+              <li>
+                <span class="enterprise-benefit__icon" aria-hidden="true">◈</span>
+                <div>
+                  <strong>White-label solutions</strong>
+                  <p>Full checkout and dashboard white-labelling with your brand.</p>
+                </div>
+              </li>
+              <li>
+                <span class="enterprise-benefit__icon" aria-hidden="true">◈</span>
+                <div>
+                  <strong>Advanced compliance</strong>
+                  <p>PCI DSS Level 1, SOC 2 Type II, GDPR and RBI-ready controls.</p>
+                </div>
+              </li>
+            </ul>
+
+            <div class="enterprise-cta" role="group" aria-label="Enterprise contact actions">
+              <a
+                href="contact.html"
+                class="btn btn--primary"
+                aria-label="Contact our enterprise sales team"
+              >
+                Talk to Enterprise Sales
+              </a>
+              <a
+                href="resources.html"
+                class="btn btn--ghost"
+                aria-label="Download enterprise feature overview"
+              >
+                Download Overview
+              </a>
+            </div>
+          </div>
+
+          <aside class="enterprise-stats" aria-label="Enterprise scale statistics">
+            <dl class="enterprise-stat-list">
+              <div class="enterprise-stat-item">
+                <dt class="enterprise-stat__label">Merchants using Enterprise</dt>
+                <dd class="enterprise-stat__value">500+</dd>
+              </div>
+              <div class="enterprise-stat-item">
+                <dt class="enterprise-stat__label">Average uptime SLA</dt>
+                <dd class="enterprise-stat__value">99.99%</dd>
+              </div>
+              <div class="enterprise-stat-item">
+                <dt class="enterprise-stat__label">Countries supported</dt>
+                <dd class="enterprise-stat__value">180+</dd>
+              </div>
+              <div class="enterprise-stat-item">
+                <dt class="enterprise-stat__label">Onboarding time</dt>
+                <dd class="enterprise-stat__value">&lt; 72 hrs</dd>
+              </div>
+            </dl>
+          </aside>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 06 — TRUST SIGNALS / SECURITY
+    ============================================================ -->
+    <section
+      id="security-trust"
+      class="section section--trust"
+      aria-labelledby="security-heading"
+    >
+      <div class="container">
+
+        <header class="section-header section-header--centered">
+          <h2 id="security-heading" class="section-title">
+            Your money. Your data. Protected.
+          </h2>
+          <p class="section-subtitle">
+            Every plan is backed by the same enterprise-grade security and
+            compliance infrastructure — from your first rupee to your billionth.
+          </p>
+        </header>
+
+        <ul class="trust-badges" role="list" aria-label="Security and compliance certifications">
+          <li class="trust-badge" role="listitem">
+            <span class="trust-badge__icon" aria-hidden="true">🔒</span>
+            <strong class="trust-badge__label">PCI DSS Level 1</strong>
+            <span class="trust-badge__desc">Highest payment security standard</span>
+          </li>
+          <li class="trust-badge" role="listitem">
+            <span class="trust-badge__icon" aria-hidden="true">🛡️</span>
+            <strong class="trust-badge__label">SOC 2 Type II</strong>
+            <span class="trust-badge__desc">Independently audited security controls</span>
+          </li>
+          <li class="trust-badge" role="listitem">
+            <span class="trust-badge__icon" aria-hidden="true">🔑</span>
+            <strong class="trust-badge__label">256-bit TLS Encryption</strong>
+            <span class="trust-badge__desc">All data encrypted in transit and at rest</span>
+          </li>
+          <li class="trust-badge" role="listitem">
+            <span class="trust-badge__icon" aria-hidden="true">📋</span>
+            <strong class="trust-badge__label">RBI Compliant</strong>
+            <span class="trust-badge__desc">Fully compliant with RBI guidelines</span>
+          </li>
+          <li class="trust-badge" role="listitem">
+            <span class="trust-badge__icon" aria-hidden="true">🌐</span>
+            <strong class="trust-badge__label">GDPR Ready</strong>
+            <span class="trust-badge__desc">EU data privacy standards met</span>
+          </li>
+          <li class="trust-badge" role="listitem">
+            <span class="trust-badge__icon" aria-hidden="true">⚡</span>
+            <strong class="trust-badge__label">99.99% Uptime</strong>
+            <span class="trust-badge__desc">Redundant global infrastructure</span>
+          </li>
+        </ul>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 07 — FREQUENTLY ASKED QUESTIONS
+    ============================================================ -->
+    <section
+      id="pricing-faq"
+      class="section section--light"
+      aria-labelledby="pricing-faq-heading"
+    >
+      <div class="container container--narrow">
+
+        <header class="section-header section-header--centered">
+          <h2 id="pricing-faq-heading" class="section-title">
+            Frequently asked questions
+          </h2>
+          <p class="section-subtitle">
+            Have a question not answered below?
+            <a href="contact.html" aria-label="Contact our support team">Talk to our team.</a>
+          </p>
+        </header>
+
+        <dl class="faq-list" aria-label="Pricing frequently asked questions">
+
+          <div class="faq-item">
+            <dt class="faq-question" id="faq-q1">
+              Are there any setup or hidden fees?
+            </dt>
+            <dd class="faq-answer" aria-labelledby="faq-q1">
+              No. FinPay charges only the platform fee (if applicable on your plan)
+              and per-transaction fees. There are no setup fees, no monthly
+              minimums on the Starter plan, and no hidden charges. GST is applicable
+              on all fees as per Indian tax regulations.
+            </dd>
+          </div>
+
+          <div class="faq-item">
+            <dt class="faq-question" id="faq-q2">
+              Can I switch plans later?
+            </dt>
+            <dd class="faq-answer" aria-labelledby="faq-q2">
+              Yes. You can upgrade or downgrade your plan at any time from your
+              FinPay dashboard. Upgrades take effect immediately; downgrades apply
+              at the start of your next billing cycle. You'll be credited any
+              unused portion of your current plan when upgrading.
+            </dd>
+          </div>
+
+          <div class="faq-item">
+            <dt class="faq-question" id="faq-q3">
+              How does settlement work?
+            </dt>
+            <dd class="faq-answer" aria-labelledby="faq-q3">
+              Funds collected via FinPay are settled directly to your registered
+              bank account. Standard settlement timelines are T+1 for most methods
+              and T+2 for net banking. Enterprise customers can negotiate same-day
+              settlement as part of their agreement.
+            </dd>
+          </div>
+
+          <div class="faq-item">
+            <dt class="faq-question" id="faq-q4">
+              What is the GMV limit on the Starter plan?
+            </dt>
+            <dd class="faq-answer" aria-labelledby="faq-q4">
+              The Starter plan supports up to ₹5 lakh in Gross Merchandise Value
+              per month. If your volume consistently exceeds this, we'll reach out
+              to help you move to the Growth plan — your payments will never
+              be interrupted.
+            </dd>
+          </div>
+
+          <div class="faq-item">
+            <dt class="faq-question" id="faq-q5">
+              Is GST included in the listed fees?
+            </dt>
+            <dd class="faq-answer" aria-labelledby="faq-q5">
+              No. All stated fees are exclusive of GST. Applicable GST at 18%
+              is added to platform subscription fees and transaction fees.
+              A tax invoice is issued for every billing period.
+            </dd>
+          </div>
+
+          <div class="faq-item">
+            <dt class="faq-question" id="faq-q6">
+              Does FinPay support international payments on all plans?
+            </dt>
+            <dd class="faq-answer" aria-labelledby="faq-q6">
+              International payment acceptance is available on the Scale plan and
+              above. If you're on Growth and need to accept a foreign currency
+              payment, our team can activate international payments as an add-on.
+              Contact us for details.
+            </dd>
+          </div>
+
+          <div class="faq-item">
+            <dt class="faq-question" id="faq-q7">
+              What payment methods do you support?
+            </dt>
+            <dd class="faq-answer" aria-labelledby="faq-q7">
+              FinPay supports 100+ payment methods including Visa, Mastercard,
+              Rupay, UPI (all apps), IMPS/NEFT/RTGS, net banking (60+ banks),
+              popular digital wallets, EMI on credit cards, and Buy Now Pay Later.
+              International plans additionally support PayPal, Alipay, and major
+              foreign card networks.
+            </dd>
+          </div>
+
+          <div class="faq-item">
+            <dt class="faq-question" id="faq-q8">
+              How do I get started?
+            </dt>
+            <dd class="faq-answer" aria-labelledby="faq-q8">
+              Create a free account, complete KYC verification, and integrate
+              FinPay into your website or app using our API or no-code tools.
+              You can begin accepting live payments within one business day of
+              completing verification.
+            </dd>
+          </div>
+
+        </dl>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 08 — CALL TO ACTION
+    ============================================================ -->
+    <section
+      id="pricing-cta"
+      class="section section--cta"
+      aria-labelledby="pricing-cta-heading"
+    >
+      <div class="container">
+
+        <div class="cta-block">
+
+          <h2 id="pricing-cta-heading" class="cta-title">
+            Start accepting payments today
+          </h2>
+          <p class="cta-body">
+            Sign up in minutes. No credit card needed for the Starter plan.
+            Live in under 24 hours.
+          </p>
+
+          <div class="cta-actions" role="group" aria-label="Call to action buttons">
+            <a
+              href="signup.html"
+              class="btn btn--primary btn--large"
+              aria-label="Create your free FinPay account"
+            >
+              Create Free Account
+            </a>
+            <a
+              href="contact.html"
+              class="btn btn--secondary btn--large"
+              aria-label="Speak with our sales team"
+            >
+              Talk to Sales
+            </a>
+          </div>
+
+          <p class="cta-footnote">
+            Questions? Call us at
+            <a href="tel:+918008001234" aria-label="Call FinPay sales at +91 800 800 1234">
+              +91 800 800 1234
+            </a>
+            (Mon – Fri, 9am – 7pm IST)
+          </p>
+
+        </div>
+
+      </div>
+    </section>
+
+
+  </main>
+
+
+  <!-- ============================================================
+       GLOBAL FOOTER
+  ============================================================ -->
+  <footer id="site-footer" role="contentinfo" aria-label="Site footer">
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <!-- Column 1: Brand -->
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo" aria-label="FinPay homepage">
+            <span class="logo-mark" aria-hidden="true">◈</span>
+            <span class="logo-wordmark">FinPay</span>
+          </a>
+          <p class="footer-tagline">
+            The global payment platform built for modern businesses.
+            Accept payments anywhere, grow everywhere.
+          </p>
+
+          <!-- Newsletter Signup -->
+          <div class="footer-newsletter">
+            <p class="footer-newsletter__label" id="newsletter-label">
+              Stay updated with FinPay
+            </p>
+            <form
+              class="footer-newsletter__form"
+              action="#"
+              method="post"
+              aria-labelledby="newsletter-label"
+              novalidate
+            >
+              <div class="footer-newsletter__input-group">
+                <label for="footer-email" class="sr-only">Email address</label>
+                <input
+                  type="email"
+                  id="footer-email"
+                  name="email"
+                  class="footer-newsletter__input"
+                  placeholder="you@company.com"
+                  autocomplete="email"
+                  required
+                  aria-required="true"
+                  aria-describedby="footer-email-hint"
+                />
+                <button
+                  type="submit"
+                  class="footer-newsletter__btn"
+                  aria-label="Subscribe to FinPay newsletter"
+                >
+                  Subscribe
+                </button>
+              </div>
+              <span id="footer-email-hint" class="footer-newsletter__hint">
+                No spam. Unsubscribe at any time.
+              </span>
+            </form>
+          </div>
+        </div>
+
+
+        <!-- Column 2: Products -->
+        <nav class="footer-nav" aria-label="Footer products navigation">
+          <h3 class="footer-nav__heading">Products</h3>
+          <ul class="footer-nav__list" role="list">
+            <li><a href="payments.html">Payment Gateway</a></li>
+            <li><a href="payments.html#payment-links">Payment Links</a></li>
+            <li><a href="payments.html#payment-pages">Payment Pages</a></li>
+            <li><a href="payments.html#subscriptions">Subscriptions</a></li>
+            <li><a href="payments.html#international">International Payments</a></li>
+            <li><a href="payments.html#developer-apis">Developer APIs</a></li>
+          </ul>
+        </nav>
+
+
+        <!-- Column 3: Resources -->
+        <nav class="footer-nav" aria-label="Footer resources navigation">
+          <h3 class="footer-nav__heading">Resources</h3>
+          <ul class="footer-nav__list" role="list">
+            <li><a href="resources.html#documentation">Documentation</a></li>
+            <li><a href="resources.html#api-reference">API Reference</a></li>
+            <li><a href="resources.html#guides">Developer Guides</a></li>
+            <li><a href="resources.html#blog">Blog</a></li>
+            <li><a href="resources.html#help-center">Help Center</a></li>
+            <li><a href="resources.html#changelog">Changelog</a></li>
+          </ul>
+        </nav>
+
+
+        <!-- Column 4: Company -->
+        <nav class="footer-nav" aria-label="Footer company navigation">
+          <h3 class="footer-nav__heading">Company</h3>
+          <ul class="footer-nav__list" role="list">
+            <li><a href="about.html">About FinPay</a></li>
+            <li><a href="about.html#careers">Careers</a></li>
+            <li><a href="about.html#press">Press &amp; Media</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="about.html#partners">Partners</a></li>
+          </ul>
+        </nav>
+
+
+        <!-- Column 5: Legal -->
+        <nav class="footer-nav" aria-label="Footer legal navigation">
+          <h3 class="footer-nav__heading">Legal</h3>
+          <ul class="footer-nav__list" role="list">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">Refund Policy</a></li>
+            <li><a href="#">Grievance Redressal</a></li>
+          </ul>
+        </nav>
+
+      </div>
+
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+
+        <p class="footer-copyright">
+          © <time datetime="2025">2025</time> FinPay Technologies Pvt. Ltd.
+          All rights reserved. CIN: U72900MH2020PTC123456
+        </p>
+
+        <!-- Social Icons -->
+        <ul class="footer-social" role="list" aria-label="FinPay social media links">
+          <li>
+            <a
+              href="https://twitter.com/finpay"
+              class="footer-social__link"
+              rel="noopener noreferrer"
+              target="_blank"
+              aria-label="Follow FinPay on Twitter (opens in new tab)"
+            >
+              <span aria-hidden="true">𝕏</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://linkedin.com/company/finpay"
+              class="footer-social__link"
+              rel="noopener noreferrer"
+              target="_blank"
+              aria-label="Follow FinPay on LinkedIn (opens in new tab)"
+            >
+              <span aria-hidden="true">in</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://github.com/finpay"
+              class="footer-social__link"
+              rel="noopener noreferrer"
+              target="_blank"
+              aria-label="View FinPay open source on GitHub (opens in new tab)"
+            >
+              <span aria-hidden="true">GH</span>
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://youtube.com/finpay"
+              class="footer-social__link"
+              rel="noopener noreferrer"
+              target="_blank"
+              aria-label="Watch FinPay on YouTube (opens in new tab)"
+            >
+              <span aria-hidden="true">▶</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- Regulatory Note -->
+        <p class="footer-regulatory">
+          FinPay is a Payment Aggregator licensed by the Reserve Bank of India.
+          Payments are processed on PCI DSS Level 1 certified infrastructure.
+        </p>
+
+      </div>
+
+    </div>
+  </footer>
+
+<script src="Main.js"></script>
+<script src="Navigation.js"></script>
+<script src="Pricing.js"></script>
+<script src="Animations.js"></script>
+</body>
+</html>

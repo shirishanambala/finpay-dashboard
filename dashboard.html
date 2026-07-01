@@ -1,0 +1,1496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FinPay · Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- FIX 1: Primary CDN + fallback to jsdelivr if cdnjs fails -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<script>if(typeof Chart==='undefined'){document.write('<scr'+'ipt src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"><\/scr'+'ipt>');}</script>
+<style>
+:root{
+  --bg-0:#fdf6fb;
+  --bg-1:#ffffff;
+  --bg-2:#ffffff;
+  --panel: rgba(255,255,255,0.65);
+  --panel-border: rgba(150,110,200,0.14);
+  --panel-border-hi: rgba(150,110,200,0.28);
+  --txt-0:#2b2440;
+  --txt-1:#6e6688;
+  --txt-2:#9b93b3;
+  --accent:#ff6fa5;
+  --accent-2:#36c5f0;
+  --accent-3:#ff9d6c;
+  --danger:#ff5c7a;
+  --warn:#ff9d52;
+  --good:#1fb6c9;
+  --grad-1: linear-gradient(135deg,#ff6fa5 0%, #a35bff 100%);
+  --grad-2: linear-gradient(135deg,#36c5f0 0%, #6fa9ff 100%);
+  --grad-3: linear-gradient(135deg,#ff9d6c 0%, #ff6fa5 100%);
+  --grad-4: linear-gradient(135deg,#ffc15c 0%, #ff9d6c 100%);
+  --radius:16px;
+  --radius-sm:10px;
+  --shadow-card: 0 10px 30px -14px rgba(120,80,180,0.22);
+  --ease: cubic-bezier(.4,0,.2,1);
+}
+
+[data-theme="dark"]{
+  --bg-0:#181425;
+  --bg-1:#1d1830;
+  --bg-2:#221c38;
+  --panel: rgba(255,255,255,0.045);
+  --panel-border: rgba(255,255,255,0.08);
+  --panel-border-hi: rgba(255,255,255,0.16);
+  --txt-0:#f4f1fb;
+  --txt-1:#b7aed1;
+  --txt-2:#7d7398;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  background:
+    radial-gradient(900px 500px at 85% -10%, rgba(255,111,165,0.16), transparent 60%),
+    radial-gradient(700px 500px at -5% 10%, rgba(54,197,240,0.14), transparent 55%),
+    radial-gradient(800px 600px at 50% 100%, rgba(163,91,255,0.08), transparent 60%),
+    var(--bg-0);
+  color:var(--txt-0);
+  min-height:100vh;
+  overflow-x:hidden;
+  transition: background .4s var(--ease), color .4s var(--ease);
+}
+::-webkit-scrollbar{width:8px;height:8px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--panel-border-hi);border-radius:10px;}
+a{color:inherit;text-decoration:none;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+.mono{font-family:'JetBrains Mono',monospace;}
+
+/* ===== Layout shell ===== */
+.app{
+  display:grid;
+  grid-template-columns: 248px 1fr 300px;
+  min-height:100vh;
+}
+
+/* ===== Sidebar ===== */
+.sidebar{
+  position:sticky; top:0; height:100vh;
+  background: var(--bg-1);
+  border-right:1px solid var(--panel-border);
+  display:flex; flex-direction:column;
+  padding:22px 14px;
+  z-index:50;
+  transition: transform .35s var(--ease), background .4s var(--ease);
+}
+.brand{
+  display:flex; align-items:center; gap:10px;
+  padding:6px 10px 26px 10px;
+}
+.brand-mark{
+  width:34px;height:34px;border-radius:10px;
+  background:var(--grad-1);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800; font-size:15px; color:#fff;
+  box-shadow: 0 6px 18px -4px rgba(255,111,165,0.55);
+  flex-shrink:0;
+}
+.brand-name{font-weight:700; font-size:16.5px; letter-spacing:-0.02em;}
+.brand-name span{color:var(--accent);}
+
+.nav-section-label{
+  font-size:10.5px; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--txt-2); font-weight:600;
+  padding:14px 12px 8px;
+}
+.nav-list{list-style:none; display:flex; flex-direction:column; gap:2px;}
+.nav-link{
+  display:flex; align-items:center; gap:12px;
+  padding:10px 12px; border-radius:10px;
+  color:var(--txt-1); font-size:14px; font-weight:500;
+  position:relative;
+  transition: background .2s var(--ease), color .2s var(--ease), transform .2s var(--ease);
+}
+.nav-link svg{width:18px;height:18px; flex-shrink:0; opacity:.85;}
+.nav-link:hover{ background:var(--panel); color:var(--txt-0); transform:translateX(2px); }
+.nav-link.active{
+  color:var(--txt-0);
+  background: linear-gradient(90deg, rgba(108,141,255,0.16), rgba(108,141,255,0.02));
+}
+.nav-link.active::before{
+  content:"";
+  position:absolute; left:-14px; top:50%; transform:translateY(-50%);
+  width:3px; height:18px; border-radius:4px;
+  background:var(--grad-1);
+}
+.nav-link .badge-dot{
+  margin-left:auto; width:7px;height:7px;border-radius:50%;
+  background:var(--accent-2);
+}
+.sidebar-footer{
+  margin-top:auto; padding-top:14px;
+  border-top:1px solid var(--panel-border);
+}
+.upgrade-card{
+  margin-top:10px; padding:14px;
+  border-radius:14px;
+  background: linear-gradient(160deg, rgba(108,141,255,0.14), rgba(155,108,255,0.05));
+  border:1px solid var(--panel-border-hi);
+}
+.upgrade-card h4{font-size:12.5px; font-weight:700; margin-bottom:4px;}
+.upgrade-card p{font-size:11.5px; color:var(--txt-1); line-height:1.4; margin-bottom:10px;}
+.upgrade-btn{
+  font-size:12px; font-weight:600; padding:7px 12px; border-radius:8px;
+  background:var(--grad-1); color:#fff; display:inline-block;
+  transition: filter .2s var(--ease), transform .2s var(--ease);
+}
+.upgrade-btn:hover{filter:brightness(1.12); transform:translateY(-1px);}
+
+/* ===== Topbar ===== */
+.main{ min-width:0; display:flex; flex-direction:column;}
+.topbar{
+  position:sticky; top:0; z-index:40;
+  display:flex; align-items:center; gap:16px;
+  padding:14px 26px;
+  background: rgba(255,255,255,0.7);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border-bottom:1px solid var(--panel-border);
+  transition: background .4s var(--ease), border-color .4s var(--ease);
+}
+[data-theme="dark"] .topbar{ background: rgba(24,20,37,0.72); }
+
+.menu-toggle{
+  display:none; width:36px;height:36px; align-items:center; justify-content:center;
+  border-radius:9px; background:var(--panel); border:1px solid var(--panel-border);
+}
+.search-box{
+  flex:1; max-width:380px;
+  display:flex; align-items:center; gap:9px;
+  background:var(--panel); border:1px solid var(--panel-border);
+  border-radius:10px; padding:9px 13px;
+  transition: border-color .2s var(--ease), background .2s var(--ease);
+}
+.search-box:focus-within{ border-color:var(--panel-border-hi); background:rgba(255,255,255,0.05); }
+.search-box svg{width:16px;height:16px; color:var(--txt-2); flex-shrink:0;}
+.search-box input{
+  background:none; border:none; color:var(--txt-0); font-size:13.5px; width:100%; outline:none;
+}
+.search-box input::placeholder{color:var(--txt-2);}
+.search-kbd{
+  font-size:10.5px; color:var(--txt-2); border:1px solid var(--panel-border-hi);
+  padding:2px 6px; border-radius:5px; flex-shrink:0;
+}
+
+.mode-toggle{
+  display:flex; align-items:center; gap:8px;
+  background:var(--panel); border:1px solid var(--panel-border);
+  padding:5px 6px; border-radius:10px; font-size:12.5px; font-weight:600;
+}
+.mode-toggle .seg{
+  padding:6px 12px; border-radius:7px; color:var(--txt-2);
+  transition: all .25s var(--ease);
+}
+.mode-toggle .seg.active{ background:var(--grad-2); color:#06241a; }
+
+.wallet-pill{
+  display:flex; align-items:center; gap:9px;
+  background:var(--panel); border:1px solid var(--panel-border);
+  padding:8px 14px; border-radius:12px;
+}
+.wallet-pill .wlabel{font-size:10.5px; color:var(--txt-2); font-weight:600; text-transform:uppercase; letter-spacing:.04em;}
+.wallet-pill .wamount{font-size:14px; font-weight:700; font-family:'JetBrains Mono',monospace;}
+
+.topbar-right{display:flex; align-items:center; gap:10px; margin-left:auto;}
+.icon-btn{
+  width:38px;height:38px; border-radius:10px;
+  background:var(--panel); border:1px solid var(--panel-border);
+  display:flex; align-items:center; justify-content:center;
+  position:relative;
+  transition: background .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
+}
+.icon-btn:hover{ background:rgba(255,255,255,0.07); transform:translateY(-1px); }
+.icon-btn svg{width:17px;height:17px; color:var(--txt-1);}
+.notif-dot{
+  position:absolute; top:7px; right:8px; width:7px;height:7px;border-radius:50%;
+  background:var(--danger); box-shadow:0 0 0 2px var(--bg-1);
+}
+
+.profile{
+  display:flex; align-items:center; gap:9px;
+  padding:5px 10px 5px 5px; border-radius:11px;
+  background:var(--panel); border:1px solid var(--panel-border);
+  transition: background .2s var(--ease);
+}
+.profile:hover{ background:rgba(255,255,255,0.07); }
+.avatar{
+  width:30px;height:30px;border-radius:9px; background:var(--grad-3);
+  display:flex;align-items:center;justify-content:center; font-weight:700; font-size:12.5px; color:#2a0c00;
+}
+.profile-meta{display:flex; flex-direction:column; line-height:1.2;}
+.profile-meta .pname{font-size:12.5px; font-weight:600;}
+.profile-meta .prole{font-size:10.5px; color:var(--txt-2);}
+
+/* ===== Content ===== */
+.content{ padding:24px 26px 60px; flex:1; }
+.page-head{
+  display:flex; align-items:flex-end; justify-content:space-between;
+  margin-bottom:22px; flex-wrap:wrap; gap:14px;
+}
+.page-head h1{ font-size:23px; font-weight:800; letter-spacing:-0.02em;}
+.page-head p{ color:var(--txt-1); font-size:13.5px; margin-top:4px;}
+.head-actions{display:flex; gap:10px;}
+.btn{
+  font-size:13px; font-weight:600; padding:9px 16px; border-radius:10px;
+  display:inline-flex; align-items:center; gap:7px;
+  transition: transform .2s var(--ease), filter .2s var(--ease), background .2s var(--ease);
+}
+.btn svg{width:15px;height:15px;}
+.btn-primary{ background:var(--grad-1); color:#fff; box-shadow:0 10px 24px -10px rgba(108,141,255,0.6);}
+.btn-primary:hover{ filter:brightness(1.1); transform:translateY(-1px);}
+.btn-ghost{ background:var(--panel); border:1px solid var(--panel-border); color:var(--txt-0);}
+.btn-ghost:hover{ background:rgba(255,255,255,0.07); }
+
+/* ===== Glass card base ===== */
+.card{
+  background:var(--panel);
+  border:1px solid var(--panel-border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow-card);
+  backdrop-filter: blur(10px);
+  transition: border-color .25s var(--ease), transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+
+/* ===== Stats grid ===== */
+.stats-grid{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:20px;
+  align-items: start;
+}
+.stat-card{ padding:20px; position:relative; overflow:hidden; cursor:default;}
+.stat-card:hover{ transform:translateY(-3px); border-color:var(--panel-border-hi); box-shadow:0 16px 34px -14px rgba(0,0,0,0.6);}
+.stat-top{ display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:14px;}
+.stat-icon{
+  width:38px;height:38px;border-radius:11px;
+  display:flex;align-items:center;justify-content:center;
+}
+.stat-icon svg{width:18px;height:18px;}
+.stat-icon.i1{ background:linear-gradient(160deg, rgba(255,111,165,.22), rgba(255,111,165,.04)); color:#e0488a;}
+.stat-icon.i2{ background:linear-gradient(160deg, rgba(54,197,240,.22), rgba(54,197,240,.04)); color:#1a9ec2;}
+.stat-icon.i3{ background:linear-gradient(160deg, rgba(255,157,82,.22), rgba(255,157,82,.04)); color:#e07a26;}
+.stat-icon.i4{ background:linear-gradient(160deg, rgba(163,91,255,.18), rgba(163,91,255,.04)); color:#8b3df0;}
+.stat-growth{
+  font-size:11.5px; font-weight:700; padding:4px 8px; border-radius:7px;
+  display:flex; align-items:center; gap:3px;
+}
+.stat-growth.up{ color:var(--good); background:rgba(63,224,165,0.12);}
+.stat-growth.down{ color:var(--danger); background:rgba(255,107,107,0.12);}
+.stat-growth svg{width:11px;height:11px;}
+.stat-label{ font-size:12.5px; color:var(--txt-1); font-weight:500; margin-bottom:6px;}
+.stat-value{ font-size:25px; font-weight:800; letter-spacing:-0.02em; font-family:'JetBrains Mono',monospace; margin-bottom:10px;}
+.stat-sparkline{ height:34px !important; max-height:34px; display:block; }
+
+.dash-grid{
+  display:grid; grid-template-columns: 1.65fr 1fr; gap:18px; margin-bottom:18px; align-items:stretch;
+}
+
+.panel{ padding:20px 20px 16px; }
+.panel-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; flex-wrap:wrap; gap:10px;}
+.panel-title{ font-size:15px; font-weight:700; letter-spacing:-0.01em;}
+.panel-sub{ font-size:11.5px; color:var(--txt-2); margin-top:2px; font-weight:500;}
+
+.range-toggle{
+  display:flex; gap:3px; background:var(--panel); border:1px solid var(--panel-border); padding:3px; border-radius:9px;
+}
+.range-toggle button{
+  font-size:11.5px; font-weight:600; color:var(--txt-2); padding:6px 11px; border-radius:6px;
+  transition: all .2s var(--ease);
+}
+.range-toggle button.active{ background:var(--grad-1); color:#fff;}
+
+.chart-wrap{ height:260px; position:relative; }
+
+.pm-list{ display:flex; flex-direction:column; gap:14px; margin-top:4px;}
+.pm-row{ display:flex; align-items:center; gap:12px;}
+.pm-info{flex:1; min-width:0;}
+.pm-top{ display:flex; justify-content:space-between; font-size:12.5px; margin-bottom:6px;}
+.pm-top .pm-name{font-weight:600;}
+.pm-top .pm-pct{color:var(--txt-1); font-family:'JetBrains Mono',monospace; font-weight:600;}
+.pm-bar{ height:6px; border-radius:6px; background:var(--panel-border); overflow:hidden;}
+.pm-bar-fill{ height:100%; border-radius:6px; transition: width 1s var(--ease);}
+
+/* ===== Quick actions ===== */
+.quick-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:18px;}
+.quick-card{
+  padding:18px; display:flex; flex-direction:column; gap:12px; cursor:pointer;
+}
+.quick-card:hover{ transform:translateY(-3px); border-color:var(--panel-border-hi); }
+.quick-icon{
+  width:36px;height:36px;border-radius:10px; background:var(--grad-1);
+  display:flex;align-items:center;justify-content:center; color:#fff;
+}
+.quick-icon svg{width:17px;height:17px;}
+.quick-card:nth-child(2) .quick-icon{ background:var(--grad-2); color:#06241a;}
+.quick-card:nth-child(3) .quick-icon{ background:var(--grad-3); color:#2a0c00;}
+.quick-card:nth-child(4) .quick-icon{ background:var(--grad-4); color:#2a1700;}
+.quick-card h4{ font-size:13.5px; font-weight:700;}
+.quick-card p{ font-size:11.5px; color:var(--txt-2);}
+
+/* ===== Lower grid: table + activity ===== */
+.lower-grid{ display:grid; grid-template-columns:1.65fr 1fr; gap:18px;}
+
+.table-wrap{ overflow-x:auto; }
+table{ width:100%; border-collapse:collapse; min-width:600px;}
+thead th{
+  text-align:left; font-size:10.8px; text-transform:uppercase; letter-spacing:.06em;
+  color:var(--txt-2); font-weight:600; padding:0 14px 12px; border-bottom:1px solid var(--panel-border);
+}
+tbody td{ padding:13px 14px; font-size:13px; border-bottom:1px solid var(--panel-border); }
+tbody tr{ transition: background .2s var(--ease); }
+tbody tr:hover{ background:rgba(255,255,255,0.03); }
+tbody tr:last-child td{ border-bottom:none; }
+.tx-id{ font-family:'JetBrains Mono',monospace; color:var(--txt-1); font-size:12px;}
+.cust-cell{ display:flex; align-items:center; gap:9px;}
+.cust-avatar{
+  width:26px;height:26px;border-radius:7px; background:var(--grad-1);
+  display:flex;align-items:center;justify-content:center; font-size:10.5px; font-weight:700; color:#fff; flex-shrink:0;
+}
+.amount-cell{ font-family:'JetBrains Mono',monospace; font-weight:600;}
+.badge{
+  font-size:11px; font-weight:700; padding:4px 10px; border-radius:20px; display:inline-flex; align-items:center; gap:5px;
+}
+.badge::before{ content:""; width:6px;height:6px;border-radius:50%; }
+.badge.success{ background:rgba(63,224,165,0.12); color:var(--good);}
+.badge.success::before{ background:var(--good);}
+.badge.pending{ background:rgba(255,193,104,0.12); color:var(--warn);}
+.badge.pending::before{ background:var(--warn);}
+.badge.failed{ background:rgba(255,107,107,0.12); color:var(--danger);}
+.badge.failed::before{ background:var(--danger);}
+.pmethod{ display:flex; align-items:center; gap:6px; color:var(--txt-1); font-size:12.5px;}
+
+/* activity feed */
+.activity-list{ display:flex; flex-direction:column;}
+.activity-item{ display:flex; gap:12px; padding:12px 0; border-bottom:1px solid var(--panel-border);}
+.activity-item:last-child{ border-bottom:none; padding-bottom:0;}
+.act-icon{
+  width:32px;height:32px;border-radius:9px; flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.act-icon svg{width:15px;height:15px;}
+.act-icon.a1{ background:rgba(63,224,165,0.14); color:var(--good);}
+.act-icon.a2{ background:rgba(255,193,104,0.14); color:var(--warn);}
+.act-icon.a3{ background:rgba(108,141,255,0.14); color:var(--accent);}
+.act-icon.a4{ background:rgba(224,140,255,0.14); color:#e08cff;}
+.act-body{ flex:1; min-width:0;}
+.act-body p{ font-size:13px; font-weight:500; line-height:1.4;}
+.act-body p b{ font-weight:700; }
+.act-time{ font-size:11px; color:var(--txt-2); margin-top:2px;}
+
+/* ===== Right side panel ===== */
+.right-panel{
+  position:sticky; top:0; height:100vh; overflow-y:auto;
+  border-left:1px solid var(--panel-border);
+  padding:24px 18px; display:flex; flex-direction:column; gap:16px;
+  background:var(--bg-1);
+}
+.rp-card{ padding:18px;}
+.rp-title{ font-size:13px; font-weight:700; margin-bottom:14px; display:flex; align-items:center; justify-content:space-between;}
+.rp-title svg{width:15px;height:15px; color:var(--txt-2);}
+
+.settlement-row{ display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid var(--panel-border);}
+.settlement-row:last-child{ border:none; padding-bottom:0;}
+.settlement-date{ font-size:11.5px; color:var(--txt-2); font-weight:600;}
+.settlement-amt{ font-family:'JetBrains Mono',monospace; font-size:13px; font-weight:700;}
+
+.uptime-row{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;}
+.uptime-row:last-child{margin-bottom:0;}
+.uptime-name{ font-size:12.5px; color:var(--txt-1); display:flex; align-items:center; gap:7px;}
+.status-dot{ width:7px;height:7px;border-radius:50%; background:var(--good); box-shadow:0 0 0 3px rgba(63,224,165,0.18);}
+.uptime-val{ font-size:12px; font-weight:700; font-family:'JetBrains Mono',monospace; color:var(--good);}
+
+.support-status{ display:flex; align-items:center; gap:10px; padding:12px; border-radius:11px; background:rgba(63,224,165,0.08); border:1px solid rgba(63,224,165,0.18);}
+.support-status .pulse{ width:9px;height:9px; border-radius:50%; background:var(--good); position:relative;}
+.support-status .pulse::after{
+  content:""; position:absolute; inset:-4px; border-radius:50%; border:2px solid var(--good);
+  animation:pulse 1.8s var(--ease) infinite;
+}
+@keyframes pulse{ 0%{transform:scale(0.6); opacity:1;} 100%{ transform:scale(1.8); opacity:0;} }
+.support-status p{ font-size:12px; font-weight:600;}
+.support-status span{ display:block; font-size:10.5px; color:var(--txt-2); font-weight:500;}
+
+.mini-summary{ display:flex; flex-direction:column; gap:11px;}
+.ms-row{ display:flex; justify-content:space-between; align-items:center;}
+.ms-label{ font-size:12px; color:var(--txt-1);}
+.ms-val{ font-size:13px; font-weight:700; font-family:'JetBrains Mono',monospace;}
+.ms-val.neg{ color:var(--danger);}
+.ms-val.pos{ color:var(--good);}
+.ms-divider{ height:1px; background:var(--panel-border); margin:2px 0;}
+
+/* ===== Analytics styles (kept exactly as original) ===== */
+.analytics-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+  margin-bottom:20px;
+}
+.mini-stat{
+  padding:18px;
+  border-radius:18px;
+  background:rgba(255,255,255,0.7);
+  border:1px solid rgba(255,255,255,0.6);
+  backdrop-filter:blur(10px);
+}
+.mini-label{ font-size:13px; color:#8b8b95; }
+.mini-stat h3{ margin-top:10px; font-size:28px; font-weight:700; color:#1e1e2f; }
+.mini-growth{ display:inline-block; margin-top:8px; font-size:13px; font-weight:600; }
+.positive{ color:#22c55e; }
+.negative{ color:#ef4444; }
+
+.analytics-chart-wrap{
+  height:260px;
+  padding:20px;
+  border-radius:24px;
+  background:linear-gradient(135deg, rgba(255,255,255,0.95), rgba(245,240,255,0.9));
+  border:1px solid rgba(255,255,255,0.7);
+  margin-bottom:20px;
+  position:relative;
+}
+
+.analytics-bottom{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+.insight-card{
+  padding:18px;
+  border-radius:18px;
+  background:#faf7ff;
+  border:1px solid #eee7ff;
+}
+.insight-top{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:12px;
+  font-size:14px;
+}
+.insight-top span{ color:#7c7c8a; }
+.insight-top strong{ color:#1f1f2e; }
+.insight-bar{ width:100%; height:8px; background:#ece8f8; border-radius:20px; overflow:hidden; }
+.insight-fill{ height:100%; border-radius:20px; }
+.fill1{ width:82%; background:linear-gradient(90deg,#c084fc,#8b5cf6); }
+.fill2{ width:98%; background:linear-gradient(90deg,#34d399,#10b981); }
+.fill3{ width:74%; background:linear-gradient(90deg,#60a5fa,#3b82f6); }
+
+/* ===== FIX 2: Payment Link Modal (minimal, uses existing CSS variables) ===== */
+.pl-modal-overlay{
+  display:none; position:fixed; inset:0; z-index:9999;
+  background:rgba(20,16,40,0.55);
+  backdrop-filter:blur(6px);
+  align-items:center; justify-content:center;
+  padding:20px;
+}
+.pl-modal-overlay.open{ display:flex; }
+.pl-modal{
+  background:var(--bg-1);
+  border:1px solid var(--panel-border-hi);
+  border-radius:20px;
+  width:100%; max-width:440px;
+  box-shadow:0 30px 60px -20px rgba(0,0,0,0.5);
+  animation: plSlideIn .28s var(--ease);
+}
+@keyframes plSlideIn{ from{transform:translateY(16px) scale(.97);opacity:0;} to{transform:none;opacity:1;} }
+.pl-modal-head{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:18px 20px; border-bottom:1px solid var(--panel-border);
+}
+.pl-modal-head h3{ font-size:15px; font-weight:700; }
+.pl-modal-close{
+  width:28px; height:28px; border-radius:8px; cursor:pointer;
+  background:var(--panel); border:1px solid var(--panel-border);
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px; color:var(--txt-1); line-height:1;
+  transition: background .2s var(--ease);
+}
+.pl-modal-close:hover{ background:rgba(255,92,122,0.12); color:var(--danger); }
+.pl-modal-body{ padding:20px; display:flex; flex-direction:column; gap:14px; }
+.pl-field{ display:flex; flex-direction:column; gap:5px; }
+.pl-field label{ font-size:11.5px; font-weight:600; color:var(--txt-2); text-transform:uppercase; letter-spacing:.05em; }
+.pl-field input, .pl-field select, .pl-field textarea{
+  padding:10px 13px; border-radius:10px;
+  background:var(--panel); border:1px solid var(--panel-border);
+  color:var(--txt-0); font-size:13.5px; font-family:'Inter',sans-serif;
+  outline:none; transition: border-color .2s var(--ease);
+  width:100%;
+}
+.pl-field input:focus, .pl-field select:focus, .pl-field textarea:focus{
+  border-color:var(--panel-border-hi);
+}
+.pl-field-row{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.pl-link-box{
+  display:none; align-items:center; gap:8px;
+  background:var(--panel); border:1px solid var(--panel-border);
+  border-radius:10px; padding:10px 12px;
+}
+.pl-link-box.show{ display:flex; }
+.pl-link-box input{
+  flex:1; border:none; background:none; outline:none; font-size:12px;
+  font-family:'JetBrains Mono',monospace; color:var(--txt-1);
+}
+.pl-copy-btn{
+  flex-shrink:0; font-size:12px; font-weight:700; padding:6px 12px; border-radius:7px;
+  background:var(--grad-1); color:#fff; cursor:pointer;
+  transition: filter .2s var(--ease);
+}
+.pl-copy-btn:hover{ filter:brightness(1.1); }
+.pl-modal-foot{
+  display:flex; gap:10px; justify-content:flex-end;
+  padding:16px 20px; border-top:1px solid var(--panel-border);
+}
+
+/* ===== FIX 3: Toast (reuses existing btn styles) ===== */
+.pl-toast{
+  position:fixed; bottom:24px; right:24px; z-index:99999;
+  background:var(--bg-1); border:1px solid var(--panel-border-hi);
+  border-radius:12px; padding:13px 16px;
+  box-shadow:0 20px 40px -14px rgba(0,0,0,0.4);
+  display:flex; align-items:center; gap:10px;
+  font-size:13px; font-weight:600;
+  transform:translateY(80px); opacity:0;
+  transition: transform .35s var(--ease), opacity .3s var(--ease);
+  pointer-events:none;
+}
+.pl-toast.show{ transform:translateY(0); opacity:1; }
+.pl-toast-dot{ width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.pl-toast-dot.green{ background:var(--good); }
+.pl-toast-dot.pink{ background:var(--accent); }
+
+/* ===== Mobile ===== */
+@media (max-width:1180px){
+  .app{ grid-template-columns:248px 1fr; }
+  .right-panel{ display:none; }
+}
+@media (max-width:980px){
+  .stats-grid{ grid-template-columns:repeat(2,1fr);}
+  .dash-grid, .lower-grid{ grid-template-columns:1fr;}
+  .quick-grid{ grid-template-columns:repeat(2,1fr);}
+  .analytics-stats{ grid-template-columns:repeat(3,1fr); }
+  .analytics-bottom{ grid-template-columns:1fr; }
+}
+@media (max-width:760px){
+  .app{ grid-template-columns:1fr; }
+  .sidebar{
+    position:fixed; left:0; top:0; width:248px; transform:translateX(-100%);
+    box-shadow:0 0 40px rgba(0,0,0,0.5);
+  }
+  .sidebar.open{ transform:translateX(0); }
+  .menu-toggle{ display:flex; }
+  .wallet-pill .wlabel{ display:none; }
+  .mode-toggle{ display:none; }
+  .search-box{ max-width:none; }
+  .search-kbd{ display:none; }
+  .stats-grid{ grid-template-columns:1fr 1fr;}
+  .quick-grid{ grid-template-columns:1fr 1fr;}
+  .page-head h1{ font-size:19px;}
+  .analytics-stats{ grid-template-columns:1fr; }
+  .analytics-bottom{ grid-template-columns:1fr; }
+  .analytics-chart-wrap{ height:200px; }
+}
+@media (max-width:500px){
+  .stats-grid, .quick-grid{ grid-template-columns:1fr;}
+  .content{ padding:18px 14px 50px;}
+  .topbar{ padding:12px 14px;}
+  .profile-meta{ display:none; }
+  .pl-field-row{ grid-template-columns:1fr; }
+}
+
+.sidebar-overlay{
+  display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:45;
+}
+.sidebar-overlay.show{ display:block; }
+</style>
+</head>
+<body>
+
+<!-- FIX 2: Payment Link Modal HTML -->
+<div class="pl-modal-overlay" id="plModalOverlay">
+  <div class="pl-modal">
+    <div class="pl-modal-head">
+      <h3>Create Payment Link</h3>
+      <button class="pl-modal-close" id="plModalClose">✕</button>
+    </div>
+    <div class="pl-modal-body">
+      <div class="pl-field">
+        <label>Customer Name</label>
+        <input type="text" id="plCustomerName" placeholder="e.g. Rohan Sharma">
+      </div>
+      <div class="pl-field">
+        <label>Email Address</label>
+        <input type="email" id="plEmail" placeholder="customer@email.com">
+      </div>
+      <div class="pl-field-row">
+        <div class="pl-field">
+          <label>Amount (₹)</label>
+          <input type="number" id="plAmount" placeholder="5000" min="1">
+        </div>
+        <div class="pl-field">
+          <label>Expiry Date</label>
+          <input type="date" id="plExpiry">
+        </div>
+      </div>
+      <div class="pl-field">
+        <label>Payment Purpose</label>
+        <textarea id="plPurpose" rows="2" placeholder="e.g. Invoice #2291 — Web design services"></textarea>
+      </div>
+      <!-- Generated link box (hidden until generated) -->
+      <div class="pl-link-box" id="plLinkBox">
+        <input type="text" id="plLinkValue" readonly>
+        <button class="pl-copy-btn" id="plCopyBtn">Copy</button>
+      </div>
+    </div>
+    <div class="pl-modal-foot">
+      <button class="btn btn-ghost" id="plCancelBtn">Cancel</button>
+      <button class="btn btn-primary" id="plGenerateBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.07 0L4.1 13.83a5 5 0 0 0 7.07 7.07l1.49-1.49"/></svg>
+        Generate Link
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast notification -->
+<div class="pl-toast" id="plToast">
+  <span class="pl-toast-dot green"></span>
+  <span id="plToastMsg">Done!</span>
+</div>
+
+<div class="sidebar-overlay" id="overlay"></div>
+
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-mark">P</div>
+      <div class="brand-name">Pay<span>lane</span></div>
+    </div>
+
+    <div class="nav-section-label">Main</div>
+    <ul class="nav-list">
+  <li>
+    <a href="dashboard.html" class="nav-link active">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="2"/><rect x="14" y="3" width="7" height="5" rx="2"/><rect x="14" y="12" width="7" height="9" rx="2"/><rect x="3" y="16" width="7" height="5" rx="2"/></svg>
+      Home
+    </a>
+  </li>
+
+  <li>
+    <a href="payments-product.html" class="nav-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M2 10h20"/></svg>
+      Payments
+    </a>
+  </li>
+
+  <li>
+    <a href="Transactions.html" class="nav-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>
+      Transactions
+    </a>
+  </li>
+
+  <li>
+    <a href="Customers.html" class="nav-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v2"/><circle cx="18" cy="8" r="3"/></svg>
+      Customers
+    </a>
+  </li>
+
+  <li>
+    <a href="Settlements.html" class="nav-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-1"/><path d="M16 12h6m-3-3v6"/></svg>
+      Settlements
+    </a>
+  </li>
+
+  <li>
+    <a href="payouts.html" class="nav-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+      Payouts
+    </a>
+  </li>
+
+  <li>
+    <a href="analytics.html" class="nav-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg>
+      Analytics
+    </a>
+  </li>
+</ul>
+
+<div class="nav-section-label">Account</div>
+
+<ul class="nav-list">
+  <li>
+    <a href="settings.html" class="nav-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+      Settings
+    </a>
+  </li>
+</ul>
+
+    <div class="sidebar-footer">
+      <div class="upgrade-card">
+        <h4>Go Premium</h4>
+        <p>Unlock advanced analytics and lower transaction fees.</p>
+        <a href="#" class="upgrade-btn">Upgrade plan →</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="main">
+    <header class="topbar">
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" placeholder="Search payments, customers, invoices...">
+        <span class="search-kbd">⌘K</span>
+      </div>
+
+      <div class="mode-toggle">
+        <button class="seg active" data-mode="test">Test</button>
+        <button class="seg" data-mode="live">Live</button>
+      </div>
+
+      <div class="wallet-pill">
+        <span class="wlabel">Balance</span>
+        <span class="wamount mono">₹8,42,150.00</span>
+      </div>
+
+      <div class="topbar-right">
+        <button class="icon-btn" id="themeToggle" aria-label="Toggle theme">
+          <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="icon-btn" aria-label="Notifications">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+          <span class="notif-dot"></span>
+        </button>
+        <div class="profile">
+          <div class="avatar">AK</div>
+          <div class="profile-meta">
+            <span class="pname">Aarav Kapoor</span>
+            <span class="prole">Admin</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+      <div class="page-head">
+        <div>
+          <h1>Welcome back, Aarav 👋</h1>
+          <p>Here's what's happening with your account today.</p>
+        </div>
+        <div class="head-actions">
+          <!-- FIX 3: Added id="exportBtn" so JS can attach listener -->
+          <button class="btn btn-ghost" id="exportBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+            Export
+          </button>
+          <!-- FIX 2: Added id="createPaymentLinkBtn" so JS can attach listener -->
+          <button class="btn btn-primary" id="createPaymentLinkBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            Create Payment Link
+          </button>
+        </div>
+      </div>
+
+      <!-- STATS -->
+      <section class="stats-grid">
+        <div class="card stat-card">
+          <div class="stat-top">
+            <div class="stat-icon i1">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <span class="stat-growth up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 15l-6-6-6 6"/></svg>
+              12.4%
+            </span>
+          </div>
+          <div class="stat-label">Total Revenue</div>
+          <div class="stat-value">₹24,18,950</div>
+          <canvas class="stat-sparkline" id="spark1"></canvas>
+        </div>
+
+        <div class="card stat-card">
+          <div class="stat-top">
+            <div class="stat-icon i2">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+            </div>
+            <span class="stat-growth up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 15l-6-6-6 6"/></svg>
+              8.1%
+            </span>
+          </div>
+          <div class="stat-label">Successful Payments</div>
+          <div class="stat-value">18,204</div>
+          <canvas class="stat-sparkline" id="spark2"></canvas>
+        </div>
+
+        <div class="card stat-card">
+          <div class="stat-top">
+            <div class="stat-icon i3">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <span class="stat-growth down">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+              3.2%
+            </span>
+          </div>
+          <div class="stat-label">Pending Settlements</div>
+          <div class="stat-value">₹3,42,610</div>
+          <canvas class="stat-sparkline" id="spark3"></canvas>
+        </div>
+
+        <div class="card stat-card">
+          <div class="stat-top">
+            <div class="stat-icon i4">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <span class="stat-growth up">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M18 15l-6-6-6 6"/></svg>
+              5.6%
+            </span>
+          </div>
+          <div class="stat-label">Active Customers</div>
+          <div class="stat-value">4,938</div>
+          <canvas class="stat-sparkline" id="spark4"></canvas>
+        </div>
+      </section>
+
+      <section class="dash-grid">
+
+        <!-- ANALYTICS CARD -->
+        <div class="card panel">
+
+          <div class="analytics-stats">
+            <div class="mini-stat">
+              <span class="mini-label">Today Revenue</span>
+              <h3>₹48,200</h3>
+              <span class="mini-growth positive">+12.4%</span>
+            </div>
+            <div class="mini-stat">
+              <span class="mini-label">Transactions</span>
+              <h3>1,284</h3>
+              <span class="mini-growth positive">+8.1%</span>
+            </div>
+            <div class="mini-stat">
+              <span class="mini-label">Refunds</span>
+              <h3>₹2,840</h3>
+              <span class="mini-growth negative">-2.3%</span>
+            </div>
+          </div>
+
+          <div class="analytics-chart-wrap">
+            <canvas id="revenueChart"></canvas>
+          </div>
+
+          <div class="analytics-bottom">
+            <div class="insight-card">
+              <div class="insight-top">
+                <span>Peak Sales Time</span>
+                <strong>7PM – 9PM</strong>
+              </div>
+              <div class="insight-bar"><div class="insight-fill fill1"></div></div>
+            </div>
+            <div class="insight-card">
+              <div class="insight-top">
+                <span>Success Rate</span>
+                <strong>98.4%</strong>
+              </div>
+              <div class="insight-bar"><div class="insight-fill fill2"></div></div>
+            </div>
+            <div class="insight-card">
+              <div class="insight-top">
+                <span>Returning Customers</span>
+                <strong>74%</strong>
+              </div>
+              <div class="insight-bar"><div class="insight-fill fill3"></div></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- PAYMENT METHODS CARD -->
+        <div class="card panel">
+          <div class="panel-head">
+            <div>
+              <div class="panel-title">Payment Methods</div>
+              <div class="panel-sub">Breakdown by channel</div>
+            </div>
+          </div>
+          <div class="pm-list">
+            <div class="pm-row">
+              <div class="pm-info">
+                <div class="pm-top"><span class="pm-name">UPI</span><span class="pm-pct">48%</span></div>
+                <div class="pm-bar"><div class="pm-bar-fill" style="width:48%; background:var(--grad-1);"></div></div>
+              </div>
+            </div>
+            <div class="pm-row">
+              <div class="pm-info">
+                <div class="pm-top"><span class="pm-name">Cards</span><span class="pm-pct">27%</span></div>
+                <div class="pm-bar"><div class="pm-bar-fill" style="width:27%; background:var(--grad-2);"></div></div>
+              </div>
+            </div>
+            <div class="pm-row">
+              <div class="pm-info">
+                <div class="pm-top"><span class="pm-name">Wallets</span><span class="pm-pct">16%</span></div>
+                <div class="pm-bar"><div class="pm-bar-fill" style="width:16%; background:var(--grad-3);"></div></div>
+              </div>
+            </div>
+            <div class="pm-row">
+              <div class="pm-info">
+                <div class="pm-top"><span class="pm-name">Net Banking</span><span class="pm-pct">9%</span></div>
+                <div class="pm-bar"><div class="pm-bar-fill" style="width:9%; background:var(--grad-4);"></div></div>
+              </div>
+            </div>
+          </div>
+          <div style="height:150px; margin-top:18px;">
+            <canvas id="donutChart"></canvas>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- QUICK ACTIONS -->
+      <section class="quick-grid">
+        <div class="card quick-card">
+          <div class="quick-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 13a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07l-1.5 1.5"/><path d="M14 11a5 5 0 0 0-7.07 0L4.1 13.83a5 5 0 0 0 7.07 7.07l1.49-1.49"/></svg>
+          </div>
+          <h4>Create Payment Link</h4>
+          <p>Share a link to collect payments instantly</p>
+        </div>
+        <div class="card quick-card">
+          <div class="quick-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+          </div>
+          <h4>Send Payout</h4>
+          <p>Transfer funds to vendors or employees</p>
+        </div>
+        <div class="card quick-card">
+          <div class="quick-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 13h6M9 17h6"/></svg>
+          </div>
+          <h4>Generate Invoice</h4>
+          <p>Create and send a professional invoice</p>
+        </div>
+        <div class="card quick-card">
+          <div class="quick-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
+          </div>
+          <h4>Add Customer</h4>
+          <p>Onboard a new customer to your account</p>
+        </div>
+      </section>
+
+      <section class="lower-grid">
+        <div class="card panel">
+          <div class="panel-head">
+            <div>
+              <div class="panel-title">Recent Transactions</div>
+              <div class="panel-sub">Your latest payment activity</div>
+            </div>
+            <button class="btn btn-ghost" style="padding:7px 12px; font-size:12px;">View all</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Transaction ID</th>
+                  <th>Customer</th>
+                  <th>Amount</th>
+                  <th>Method</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody id="txTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="card panel">
+          <div class="panel-head">
+            <div>
+              <div class="panel-title">Recent Activity</div>
+              <div class="panel-sub">Live account events</div>
+            </div>
+          </div>
+          <div class="activity-list">
+            <div class="activity-item">
+              <div class="act-icon a1">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <div class="act-body">
+                <p>Payment of <b>₹12,400</b> received from Rohan Sharma</p>
+                <div class="act-time">2 minutes ago</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="act-icon a2">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+              </div>
+              <div class="act-body">
+                <p>Refund of <b>₹2,150</b> processed for order #8821</p>
+                <div class="act-time">18 minutes ago</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="act-icon a3">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+              </div>
+              <div class="act-body">
+                <p>New API key <b>live_8f2k...</b> generated</p>
+                <div class="act-time">1 hour ago</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="act-icon a4">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-1"/><path d="M16 12h6m-3-3v6"/></svg>
+              </div>
+              <div class="act-body">
+                <p>Settlement of <b>₹1,84,200</b> completed</p>
+                <div class="act-time">3 hours ago</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="act-icon a1">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <div class="act-body">
+                <p>Payment of <b>₹5,600</b> received from Priya Nair</p>
+                <div class="act-time">5 hours ago</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- RIGHT PANEL -->
+  <aside class="right-panel">
+    <div class="card rp-card">
+      <div class="rp-title">
+        Upcoming Settlements
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </div>
+      <div class="settlement-row">
+        <span class="settlement-date">Tomorrow, 10:00 AM</span>
+        <span class="settlement-amt">₹1,42,800</span>
+      </div>
+      <div class="settlement-row">
+        <span class="settlement-date">Jul 3, 10:00 AM</span>
+        <span class="settlement-amt">₹2,08,400</span>
+      </div>
+      <div class="settlement-row">
+        <span class="settlement-date">Jul 5, 10:00 AM</span>
+        <span class="settlement-amt">₹96,120</span>
+      </div>
+    </div>
+
+    <div class="card rp-card">
+      <div class="rp-title">Support Status</div>
+      <div class="support-status">
+        <div class="pulse"></div>
+        <div>
+          <p>All systems operational</p>
+          <span>Avg response time: 4m 12s</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card rp-card">
+      <div class="rp-title">API &amp; Server Uptime</div>
+      <div class="uptime-row">
+        <span class="uptime-name"><span class="status-dot"></span> Payments API</span>
+        <span class="uptime-val">99.99%</span>
+      </div>
+      <div class="uptime-row">
+        <span class="uptime-name"><span class="status-dot"></span> Dashboard</span>
+        <span class="uptime-val">100%</span>
+      </div>
+      <div class="uptime-row">
+        <span class="uptime-name"><span class="status-dot"></span> Webhooks</span>
+        <span class="uptime-val">99.97%</span>
+      </div>
+    </div>
+
+    <div class="card rp-card">
+      <div class="rp-title">Financial Summary</div>
+      <div class="mini-summary">
+        <div class="ms-row"><span class="ms-label">Gross volume</span><span class="ms-val">₹24,18,950</span></div>
+        <div class="ms-row"><span class="ms-label">Refunds</span><span class="ms-val neg">−₹38,200</span></div>
+        <div class="ms-row"><span class="ms-label">Platform fees</span><span class="ms-val neg">−₹14,860</span></div>
+        <div class="ms-divider"></div>
+        <div class="ms-row"><span class="ms-label">Net balance</span><span class="ms-val pos">₹23,65,890</span></div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<script>
+/* ===== Transactions table — runs first, no dependencies ===== */
+const customers = [
+  {name:'Rohan Sharma', init:'RS'}, {name:'Priya Nair', init:'PN'}, {name:'Aditi Mehta', init:'AM'},
+  {name:'Karan Verma', init:'KV'}, {name:'Sneha Iyer', init:'SI'}, {name:'Vikram Joshi', init:'VJ'},
+  {name:'Ishaan Gupta', init:'IG'}, {name:'Neha Reddy', init:'NR'}
+];
+const txMethods = ['UPI','Credit Card','Net Banking','Wallet','Debit Card'];
+const statusLabel = {success:'Success', pending:'Pending', failed:'Failed'};
+
+function rand(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+function genId(){ return 'txn_' + Math.random().toString(36).substring(2,10); }
+
+let rows = '';
+for(let i = 0; i < 8; i++){
+  const c = rand(customers);
+  const amt = (Math.random() * 45000 + 500).toFixed(2);
+  const st = i < 5 ? (i === 2 ? 'pending' : i === 4 ? 'failed' : 'success') : rand(['success','pending','failed']);
+  const date = new Date(Date.now() - i * 3600 * 1000 * Math.random() * 20);
+  const dateStr = date.toLocaleDateString('en-IN',{day:'2-digit',month:'short'}) + ', ' + date.toLocaleTimeString('en-IN',{hour:'2-digit',minute:'2-digit'});
+  rows += `<tr>
+    <td class="tx-id mono">${genId()}</td>
+    <td><div class="cust-cell"><div class="cust-avatar">${c.init}</div>${c.name}</div></td>
+    <td class="amount-cell">₹${Number(amt).toLocaleString('en-IN',{minimumFractionDigits:2})}</td>
+    <td><span class="pmethod">${rand(txMethods)}</span></td>
+    <td><span class="badge ${st}">${statusLabel[st]}</span></td>
+    <td style="color:var(--txt-2); font-size:12px;">${dateStr}</td>
+  </tr>`;
+}
+document.getElementById('txTableBody').innerHTML = rows;
+
+/* ===== Theme toggle ===== */
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon   = document.getElementById('themeIcon');
+themeToggle.addEventListener('click', () => {
+  const root  = document.documentElement;
+  const isDark = root.getAttribute('data-theme') === 'dark';
+  root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  themeIcon.innerHTML = isDark
+    ? '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>'
+    : '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+});
+
+/* ===== Mode toggle (Test/Live) ===== */
+document.querySelectorAll('.mode-toggle .seg').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.mode-toggle .seg').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+/* ===== Mobile sidebar ===== */
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('overlay');
+document.getElementById('menuToggle').addEventListener('click', () => {
+  sidebar.classList.toggle('open');
+  overlay.classList.toggle('show');
+});
+overlay.addEventListener('click', () => {
+  sidebar.classList.remove('open');
+  overlay.classList.remove('show');
+});
+
+/* ===== Nav active state ===== */
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', (e) => {
+    
+    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+    sidebar.classList.remove('open');
+    overlay.classList.remove('show');
+  });
+});
+
+/* =================================================================
+   FIX 2 — CREATE PAYMENT LINK: modal open/close + link generation
+================================================================= */
+const plOverlay      = document.getElementById('plModalOverlay');
+const plCloseBtn     = document.getElementById('plModalClose');
+const plCancelBtn    = document.getElementById('plCancelBtn');
+const plGenerateBtn  = document.getElementById('plGenerateBtn');
+const plCopyBtn      = document.getElementById('plCopyBtn');
+const plLinkBox      = document.getElementById('plLinkBox');
+const plLinkValue    = document.getElementById('plLinkValue');
+
+function openPLModal() {
+  plLinkBox.classList.remove('show');
+  plLinkValue.value = '';
+  plOverlay.classList.add('open');
+}
+function closePLModal() {
+  plOverlay.classList.remove('open');
+}
+
+/* Both the topbar button AND any quick-card that says "Create Payment Link" open the modal */
+document.getElementById('createPaymentLinkBtn').addEventListener('click', openPLModal);
+
+/* Quick action cards — find by heading text */
+document.querySelectorAll('.quick-card').forEach(card => {
+  const heading = card.querySelector('h4');
+  if (heading && heading.textContent.trim() === 'Create Payment Link') {
+    card.addEventListener('click', openPLModal);
+  }
+});
+
+plCloseBtn.addEventListener('click', closePLModal);
+plCancelBtn.addEventListener('click', closePLModal);
+plOverlay.addEventListener('click', e => { if (e.target === plOverlay) closePLModal(); });
+
+plGenerateBtn.addEventListener('click', () => {
+  const name   = document.getElementById('plCustomerName').value.trim();
+  const amount = document.getElementById('plAmount').value.trim();
+  if (!name || !amount) {
+    showToast('Please fill in Customer Name and Amount first.', 'pink');
+    return;
+  }
+  const token = Math.random().toString(36).substring(2, 10).toUpperCase();
+  plLinkValue.value = 'https://pay.finpay.io/l/' + token;
+  plLinkBox.classList.add('show');
+  showToast('Payment link generated successfully!', 'green');
+});
+
+plCopyBtn.addEventListener('click', () => {
+  const val = plLinkValue.value;
+  if (!val) return;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(val).then(() => showToast('Link copied to clipboard!', 'green'));
+  } else {
+    /* Fallback for older browsers */
+    plLinkValue.select();
+    document.execCommand('copy');
+    showToast('Link copied to clipboard!', 'green');
+  }
+});
+
+/* =================================================================
+   FIX 3 — EXPORT BUTTON: downloads a CSV of the current transactions
+================================================================= */
+document.getElementById('exportBtn').addEventListener('click', () => {
+  const exportData = [
+    ['Transaction ID','Customer','Amount (INR)','Method','Status','Date'],
+    ['txn_a1b2c3d4','Rohan Sharma','12400.00','UPI','Success','01 Jul 2026, 09:12'],
+    ['txn_e5f6g7h8','Priya Nair','5600.00','Credit Card','Success','01 Jul 2026, 08:45'],
+    ['txn_i9j0k1l2','Aditi Mehta','31250.00','Net Banking','Pending','30 Jun 2026, 22:10'],
+    ['txn_m3n4o5p6','Karan Verma','8900.00','UPI','Success','30 Jun 2026, 19:55'],
+    ['txn_q7r8s9t0','Sneha Iyer','2100.00','Wallet','Failed','30 Jun 2026, 17:30'],
+    ['txn_u1v2w3x4','Vikram Joshi','44500.00','Debit Card','Success','30 Jun 2026, 14:20'],
+    ['txn_y5z6a7b8','Ishaan Gupta','7350.00','UPI','Success','30 Jun 2026, 11:05'],
+    ['txn_c9d0e1f2','Neha Reddy','18200.00','Credit Card','Pending','29 Jun 2026, 23:40'],
+  ];
+  const csvContent = exportData.map(row => row.map(cell => '"' + cell + '"').join(',')).join('\n');
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = 'pinpay_transactions_' + new Date().toISOString().slice(0,10) + '.csv';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast('Report exported successfully!', 'green');
+});
+
+/* ===== Shared toast helper ===== */
+let toastTimer;
+function showToast(msg, dotColor) {
+  const toast    = document.getElementById('plToast');
+  const toastMsg = document.getElementById('plToastMsg');
+  const dot      = toast.querySelector('.pl-toast-dot');
+  toastMsg.textContent = msg;
+  dot.className  = 'pl-toast-dot ' + (dotColor || 'green');
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 3200);
+}
+
+/* =================================================================
+   FIX 1 — Chart.js: runs only after the CDN + fallback have both
+   had a chance to load (wrapped in typeof guard, no duplicate calls)
+================================================================= */
+if (typeof Chart !== 'undefined') {
+
+  Chart.defaults.font.family = "'Inter', sans-serif";
+  Chart.defaults.color = '#6b7384';
+
+  /* Sparklines */
+  function makeSpark(id, data, color){
+    const el = document.getElementById(id);
+    if (!el) return;
+    new Chart(el, {
+      type: 'line',
+      data: {
+        labels: data.map((_,i) => i),
+        datasets: [{
+          data,
+          borderColor: color,
+          borderWidth: 2,
+          pointRadius: 0,
+          tension: 0.4,
+          fill: true,
+          backgroundColor: (ctx) => {
+            const g = ctx.chart.ctx.createLinearGradient(0, 0, 0, 40);
+            g.addColorStop(0, color + '33');
+            g.addColorStop(1, color + '00');
+            return g;
+          }
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins:{ legend:{display:false}, tooltip:{enabled:false} },
+        scales:{ x:{display:false}, y:{display:false} },
+        animation:{ duration: 1200, easing:'easeOutQuart' }
+      }
+    });
+  }
+  makeSpark('spark1', [4,6,5,8,7,10,9,12,11,14], '#ff6fa5');
+  makeSpark('spark2', [3,4,4,5,6,5,7,8,7,9],    '#36c5f0');
+  makeSpark('spark3', [8,7,9,6,7,5,6,4,5,4],    '#ff9d52');
+  makeSpark('spark4', [5,5,6,7,6,8,9,8,10,11],  '#a35bff');
+
+  /* Revenue chart */
+  const revData = {
+    weekly:  { labels:['Mon','Tue','Wed','Thu','Fri','Sat','Sun'], data:[42000,58000,49500,71000,68500,82000,76000] },
+    monthly: { labels:['W1','W2','W3','W4'],                      data:[280000,312000,298500,364000] },
+    yearly:  { labels:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+               data:[1200000,1340000,1180000,1520000,1610000,1480000,1720000,1690000,1850000,1920000,2040000,2180000] }
+  };
+
+  const revCanvas = document.getElementById('revenueChart');
+  if (revCanvas) {
+    const ctx = revCanvas.getContext('2d');
+    const gradientFill = ctx.createLinearGradient(0, 0, 0, 260);
+    gradientFill.addColorStop(0, 'rgba(255,111,165,0.35)');
+    gradientFill.addColorStop(1, 'rgba(255,111,165,0)');
+
+    const revenueChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: revData.weekly.labels,
+        datasets: [{
+          label: 'Revenue',
+          data: revData.weekly.data,
+          borderColor: '#ff6fa5',
+          borderWidth: 2.5,
+          pointRadius: 3,
+          pointBackgroundColor: '#ff6fa5',
+          pointBorderColor: '#ffffff',
+          pointBorderWidth: 2,
+          pointHoverRadius: 5,
+          tension: 0.4,
+          fill: true,
+          backgroundColor: gradientFill
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction:{ intersect:false, mode:'index' },
+        plugins:{
+          legend:{ display:false },
+          tooltip:{
+            backgroundColor:'#2b2440',
+            titleColor:'#ffffff',
+            bodyColor:'#cfc7e8',
+            borderColor:'rgba(255,255,255,0.1)',
+            borderWidth:1,
+            padding:10,
+            cornerRadius:10,
+            displayColors:false,
+            callbacks:{ label:(c) => '₹' + c.parsed.y.toLocaleString('en-IN') }
+          }
+        },
+        scales:{
+          x:{ grid:{ display:false }, ticks:{ font:{size:11} } },
+          y:{
+            grid:{ color:'rgba(150,110,200,0.1)' },
+            ticks:{ font:{size:11}, callback:(v) => '₹' + (v/1000) + 'k' }
+          }
+        },
+        animation:{ duration:900, easing:'easeOutQuart' }
+      }
+    });
+
+    document.querySelectorAll('.range-toggle button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.range-toggle button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const r = revData[btn.dataset.range];
+        revenueChart.data.labels = r.labels;
+        revenueChart.data.datasets[0].data = r.data;
+        revenueChart.update();
+      });
+    });
+  }
+
+  /* Donut chart */
+  const donutCanvas = document.getElementById('donutChart');
+  if (donutCanvas) {
+    new Chart(donutCanvas, {
+      type: 'doughnut',
+      data:{
+        labels: ['UPI','Cards','Wallets','Net Banking'],
+        datasets:[{
+          data: [48, 27, 16, 9],
+          backgroundColor: ['#ff6fa5','#36c5f0','#ff9d52','#a35bff'],
+          borderWidth: 0,
+          hoverOffset: 6
+        }]
+      },
+      options:{
+        responsive: true, maintainAspectRatio: false,
+        cutout: '72%',
+        plugins:{
+          legend:{ display:false },
+          tooltip:{
+            backgroundColor:'#2b2440', titleColor:'#ffffff', bodyColor:'#cfc7e8',
+            borderColor:'rgba(255,255,255,0.1)', borderWidth:1, padding:8, cornerRadius:8
+          }
+        },
+        animation:{ duration:1000, easing:'easeOutQuart' }
+      }
+    });
+  }
+
+} else {
+  console.warn('FinPay: Chart.js could not be loaded from either CDN. Charts unavailable.');
+}
+/* =========================
+UPGRADE BUTTON
+========================= */
+
+document.querySelectorAll(".upgrade-btn").forEach(btn => {
+
+  btn.addEventListener("click", () => {
+
+    alert(
+      "🚀 Premium Features\n\n" +
+      "• Advanced Analytics\n" +
+      "• AI Fraud Detection\n" +
+      "• Unlimited Transactions\n" +
+      "• Priority Support\n\n" +
+      "Coming Soon!"
+    );
+
+  });
+
+});
+</script>
+</body>
+</html>

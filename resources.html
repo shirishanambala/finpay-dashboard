@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="FinPay Resources — Documentation, API reference, developer guides, blog, and help center for the FinPay payment platform." />
+  <meta name="keywords" content="FinPay documentation, API reference, developer guides, payment integration, help center" />
+  <meta name="author" content="FinPay" />
+  <meta property="og:title" content="Resources — FinPay" />
+  <meta property="og:description" content="Everything you need to build, integrate, and grow with FinPay." />
+  <meta property="og:type" content="website" />
+  <title>Resources — FinPay | Global Payment Platform</title>
+  <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="resources.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       GLOBAL HEADER & NAVIGATION
+  ============================================================ -->
+  <header id="site-header" role="banner">
+    <nav id="main-nav" role="navigation" aria-label="Main site navigation">
+
+      <div class="nav-logo">
+        
+          <span class="logo-mark" aria-hidden="true">◈</span>
+          <span class="logo-wordmark">FinPay</span>
+        </a>
+      </div>
+
+      <ul class="nav-links" role="list">
+        <li><a href="payments.html" aria-label="Payments — Products and features">Payments</a></li>
+        <li><a href="pricing.html" aria-label="Pricing — Plans and fees">Pricing</a></li>
+        <li><a href="resources.html" aria-current="page" aria-label="Resources — Current page">Resources</a></li>
+        <li><a href="about.html" aria-label="About — Our company and mission">About</a></li>
+        <li><a href="contact.html" aria-label="Contact — Get in touch">Contact</a></li>
+      </ul>
+
+      <div class="nav-cta" role="group" aria-label="Account actions">
+        <a href="login.html" class="btn-nav-login" aria-label="Log in to your FinPay account">Login</a>
+        <a href="signup.html" class="btn-nav-signup" aria-label="Create a new FinPay account">Sign Up</a>
+      </div>
+
+      <button
+        type="button"
+        class="nav-mobile-toggle"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Open navigation menu"
+      >
+        <span class="hamburger-bar" aria-hidden="true"></span>
+        <span class="hamburger-bar" aria-hidden="true"></span>
+        <span class="hamburger-bar" aria-hidden="true"></span>
+      </button>
+
+    </nav>
+  </header>
+
+
+  <!-- ============================================================
+       MAIN CONTENT
+  ============================================================ -->
+  <main id="main-content" role="main">
+
+
+    <!-- ============================================================
+         SECTION 01 — HERO
+    ============================================================ -->
+    <section
+      id="resources-hero"
+      class="section section--hero section--dark"
+      aria-labelledby="resources-hero-heading"
+    >
+      <div class="container">
+
+        <div class="hero-eyebrow" aria-hidden="true">Resources</div>
+
+        <h1 id="resources-hero-heading" class="hero-title">
+          Everything you need<br />to build with FinPay
+        </h1>
+
+        <p class="hero-subtitle">
+          From quickstart guides to full API reference — find the documentation,
+          tools, and community content that help you integrate faster
+          and ship with confidence.
+        </p>
+
+        <!-- Resource Search Bar -->
+        <form
+          class="hero-search-form"
+          role="search"
+          action="#"
+          method="get"
+          aria-label="Search FinPay resources"
+        >
+          <label for="resource-search" class="sr-only">Search documentation and guides</label>
+          <input
+            type="search"
+            id="resource-search"
+            name="q"
+            class="hero-search-input"
+            placeholder="Search docs, guides, APIs…"
+            autocomplete="off"
+            aria-label="Search documentation, guides, and API reference"
+          />
+          <button
+            type="submit"
+            class="hero-search-btn"
+            aria-label="Submit search"
+          >
+            Search
+          </button>
+        </form>
+
+        <!-- Quick Links -->
+        <nav class="hero-quicklinks" aria-label="Quick links to resource sections">
+          <ul role="list">
+            <li><a href="#documentation">Documentation</a></li>
+            <li><a href="#api-reference">API Reference</a></li>
+            <li><a href="#guides">Dev Guides</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#help-center">Help Center</a></li>
+          </ul>
+        </nav>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 02 — DOCUMENTATION
+    ============================================================ -->
+    <section
+      id="documentation"
+      class="section section--docs"
+      aria-labelledby="docs-heading"
+    >
+      <div class="container">
+
+        <header class="section-header">
+          <div class="section-eyebrow" aria-hidden="true">Documentation</div>
+          <h2 id="docs-heading" class="section-title">
+            Start integrating in minutes
+          </h2>
+          <p class="section-subtitle">
+            Comprehensive guides covering every part of the FinPay platform.
+            Pick a topic or follow the quickstart.
+          </p>
+        </header>
+
+        <!-- Featured: Quickstart -->
+        <article
+          class="docs-quickstart"
+          aria-labelledby="quickstart-heading"
+        >
+          <div class="docs-quickstart__content">
+            <div class="docs-quickstart__tag" aria-hidden="true">Start here</div>
+            <h3 id="quickstart-heading" class="docs-quickstart__title">
+              Quickstart: Accept your first payment
+            </h3>
+            <p class="docs-quickstart__body">
+              Get from zero to a working checkout in under 15 minutes.
+              Install the SDK, create an order, and render the payment form.
+              Works on web, iOS, and Android.
+            </p>
+            <ol class="docs-quickstart__steps" aria-label="Quickstart steps overview">
+              <li>Create a FinPay account and get API keys</li>
+              <li>Install the FinPay SDK for your language</li>
+              <li>Create an order on your server</li>
+              <li>Render the checkout form on your frontend</li>
+              <li>Verify the payment on your server</li>
+            </ol>
+            <a
+              href="#"
+              class="btn btn--primary"
+              aria-label="Read the full quickstart guide"
+            >
+              Read Quickstart →
+            </a>
+          </div>
+          
+            
+        </article>
+
+        <!-- Doc Category Cards -->
+        <div class="docs-categories" role="list" aria-label="Documentation categories">
+
+          <article class="docs-card" role="listitem" aria-labelledby="doc-cat-1">
+            <span class="docs-card__icon" aria-hidden="true">⚡</span>
+            <h3 id="doc-cat-1" class="docs-card__title">Getting Started</h3>
+            <p class="docs-card__body">
+              Account setup, KYC, API keys, test mode vs live mode,
+              and your first integration end-to-end.
+            </p>
+            <ul class="docs-card__links" role="list">
+              <li><a href="#">Create an account</a></li>
+              <li><a href="#">Generate API keys</a></li>
+              <li><a href="#">Understand test mode</a></li>
+            </ul>
+          </article>
+
+          <article class="docs-card" role="listitem" aria-labelledby="doc-cat-2">
+            <span class="docs-card__icon" aria-hidden="true">💳</span>
+            <h3 id="doc-cat-2" class="docs-card__title">Payment Gateway</h3>
+            <p class="docs-card__body">
+              Integrate the hosted or embedded checkout, handle payment states,
+              and manage refunds and disputes.
+            </p>
+            <ul class="docs-card__links" role="list">
+              <li><a href="#">Hosted checkout</a></li>
+              <li><a href="#">Embedded checkout</a></li>
+              <li><a href="#">Refunds &amp; disputes</a></li>
+            </ul>
+          </article>
+
+          <article class="docs-card" role="listitem" aria-labelledby="doc-cat-3">
+            <span class="docs-card__icon" aria-hidden="true">🔗</span>
+            <h3 id="doc-cat-3" class="docs-card__title">Payment Links</h3>
+            <p class="docs-card__body">
+              Create, manage, and track shareable payment links
+              via the dashboard or API. No coding required.
+            </p>
+            <ul class="docs-card__links" role="list">
+              <li><a href="#">Create a payment link</a></li>
+              <li><a href="#">Link expiry &amp; reminders</a></li>
+              <li><a href="#">Bulk link creation</a></li>
+            </ul>
+          </article>
+
+          <article class="docs-card" role="listitem" aria-labelledby="doc-cat-4">
+            <span class="docs-card__icon" aria-hidden="true">📄</span>
+            <h3 id="doc-cat-4" class="docs-card__title">Payment Pages</h3>
+            <p class="docs-card__body">
+              Build branded, no-code payment pages for events,
+              products, donations, and services in minutes.
+            </p>
+            <ul class="docs-card__links" role="list">
+              <li><a href="#">Build a payment page</a></li>
+              <li><a href="#">Custom fields</a></li>
+              <li><a href="#">Embed on your website</a></li>
+            </ul>
+          </article>
+
+          <article class="docs-card" role="listitem" aria-labelledby="doc-cat-5">
+            <span class="docs-card__icon" aria-hidden="true">🔄</span>
+            <h3 id="doc-cat-5" class="docs-card__title">Subscriptions</h3>
+            <p class="docs-card__body">
+              Set up recurring billing plans, manage subscription
+              lifecycle events, and handle failed payments gracefully.
+            </p>
+            <ul class="docs-card__links" role="list">
+              <li><a href="#">Create a plan</a></li>
+              <li><a href="#">Subscription webhooks</a></li>
+              <li><a href="#">Retry logic</a></li>
+            </ul>
+          </article>
+
+          <article class="docs-card" role="listitem" aria-labelledby="doc-cat-6">
+            <span class="docs-card__icon" aria-hidden="true">🌍</span>
+            <h3 id="doc-cat-6" class="docs-card__title">International Payments</h3>
+            <p class="docs-card__body">
+              Accept payments in 100+ currencies, configure multi-currency
+              settlement, and meet cross-border compliance requirements.
+            </p>
+            <ul class="docs-card__links" role="list">
+              <li><a href="#">Enable international payments</a></li>
+              <li><a href="#">Supported currencies</a></li>
+              <li><a href="#">Multi-currency settlement</a></li>
+            </ul>
+          </article>
+
+          <article class="docs-card" role="listitem" aria-labelledby="doc-cat-7">
+            <span class="docs-card__icon" aria-hidden="true">🔔</span>
+            <h3 id="doc-cat-7" class="docs-card__title">Webhooks</h3>
+            <p class="docs-card__body">
+              Listen to real-time payment events with secure, signed
+              webhooks. Covers all event types and retry behaviour.
+            </p>
+            <ul class="docs-card__links" role="list">
+              <li><a href="#">Set up webhooks</a></li>
+              <li><a href="#">Event reference</a></li>
+              <li><a href="#">Webhook signature verification</a></li>
+            </ul>
+          </article>
+
+          <article class="docs-card" role="listitem" aria-labelledby="doc-cat-8">
+            <span class="docs-card__icon" aria-hidden="true">🔒</span>
+            <h3 id="doc-cat-8" class="docs-card__title">Security &amp; Compliance</h3>
+            <p class="docs-card__body">
+              PCI DSS controls, 3D Secure handling, tokenisation,
+              fraud filters, and RBI compliance guidance.
+            </p>
+            <ul class="docs-card__links" role="list">
+              <li><a href="#">3D Secure 2.0</a></li>
+              <li><a href="#">Card tokenisation (CoF)</a></li>
+              <li><a href="#">Fraud &amp; risk management</a></li>
+            </ul>
+          </article>
+
+        </div>
+        <!-- /docs-categories -->
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 03 — API REFERENCE
+    ============================================================ -->
+    <section
+      id="api-reference"
+      class="section section--dark section--api"
+      aria-labelledby="api-heading"
+    >
+      <div class="container">
+
+        <div class="api-layout">
+
+          <div class="api-intro">
+            <div class="section-eyebrow section-eyebrow--light" aria-hidden="true">API Reference</div>
+            <h2 id="api-heading" class="section-title section-title--light">
+              A REST API built for developers
+            </h2>
+            <p class="section-body section-body--light">
+              The FinPay API follows REST conventions, uses JSON for all
+              request and response bodies, and authenticates with HTTP
+              Basic Auth using your API keys. SDKs are available for
+              Node.js, Python, PHP, Java, Ruby, Go, and .NET.
+            </p>
+
+            <ul class="api-highlights" role="list" aria-label="API key features">
+              <li>
+                <span class="api-highlight__icon" aria-hidden="true">◈</span>
+                Predictable, resource-oriented URLs
+              </li>
+              <li>
+                <span class="api-highlight__icon" aria-hidden="true">◈</span>
+                Standard HTTP response codes
+              </li>
+              <li>
+                <span class="api-highlight__icon" aria-hidden="true">◈</span>
+                Idempotency keys on all write operations
+              </li>
+              <li>
+                <span class="api-highlight__icon" aria-hidden="true">◈</span>
+                Cursor-based pagination on list endpoints
+              </li>
+              <li>
+                <span class="api-highlight__icon" aria-hidden="true">◈</span>
+                Signed webhooks with HMAC-SHA256
+              </li>
+            </ul>
+
+            <div class="api-cta-group" role="group" aria-label="API reference links">
+              <a href="#" class="btn btn--primary" aria-label="View the full API reference">
+                Full API Reference →
+              </a>
+              <a href="#" class="btn btn--ghost" aria-label="Open the API in Postman">
+                Open in Postman
+              </a>
+            </div>
+          </div>
+
+          <!-- API Endpoint Quick Reference -->
+          <div class="api-endpoints" aria-label="Sample API endpoints">
+
+            <h3 class="api-endpoints__heading" id="api-endpoints-heading">
+              Core endpoints
+            </h3>
+
+            <dl class="api-endpoint-list" aria-labelledby="api-endpoints-heading">
+
+              <div class="api-endpoint-item">
+                <dt class="api-endpoint__method api-endpoint__method--post" aria-label="HTTP method: POST">POST</dt>
+                <dd class="api-endpoint__path">
+                  <code>/v1/orders</code>
+                  <span class="api-endpoint__desc">Create an order</span>
+                </dd>
+              </div>
+
+              <div class="api-endpoint-item">
+                <dt class="api-endpoint__method api-endpoint__method--get" aria-label="HTTP method: GET">GET</dt>
+                <dd class="api-endpoint__path">
+                  <code>/v1/orders/:id</code>
+                  <span class="api-endpoint__desc">Fetch an order</span>
+                </dd>
+              </div>
+
+              <div class="api-endpoint-item">
+                <dt class="api-endpoint__method api-endpoint__method--get" aria-label="HTTP method: GET">GET</dt>
+                <dd class="api-endpoint__path">
+                  <code>/v1/payments</code>
+                  <span class="api-endpoint__desc">List payments</span>
+                </dd>
+              </div>
+
+              <div class="api-endpoint-item">
+                <dt class="api-endpoint__method api-endpoint__method--post" aria-label="HTTP method: POST">POST</dt>
+                <dd class="api-endpoint__path">
+                  <code>/v1/payments/:id/refund</code>
+                  <span class="api-endpoint__desc">Issue a refund</span>
+                </dd>
+              </div>
+
+              <div class="api-endpoint-item">
+                <dt class="api-endpoint__method api-endpoint__method--post" aria-label="HTTP method: POST">POST</dt>
+                <dd class="api-endpoint__path">
+                  <code>/v1/subscriptions</code>
+                  <span class="api-endpoint__desc">Create a subscription</span>
+                </dd>
+              </div>
+
+              <div class="api-endpoint-item">
+                <dt class="api-endpoint__method api-endpoint__method--get" aria-label="HTTP method: GET">GET</dt>
+                <dd class="api-endpoint__path">
+                  <code>/v1/settlements</code>
+                  <span class="api-endpoint__desc">List settlements</span>
+                </dd>
+              </div>
+
+              <div class="api-endpoint-item">
+                <dt class="api-endpoint__method api-endpoint__method--post" aria-label="HTTP method: POST">POST</dt>
+                <dd class="api-endpoint__path">
+                  <code>/v1/payment-links</code>
+                  <span class="api-endpoint__desc">Create a payment link</span>
+                </dd>
+              </div>
+
+              <div class="api-endpoint-item">
+                <dt class="api-endpoint__method api-endpoint__method--delete" aria-label="HTTP method: DELETE">DEL</dt>
+                <dd class="api-endpoint__path">
+                  <code>/v1/subscriptions/:id</code>
+                  <span class="api-endpoint__desc">Cancel a subscription</span>
+                </dd>
+              </div>
+
+            </dl>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 04 — DEVELOPER GUIDES
+    ============================================================ -->
+    <section
+      id="guides"
+      class="section section--guides"
+      aria-labelledby="guides-heading"
+    >
+      <div class="container">
+
+        <header class="section-header">
+          <div class="section-eyebrow" aria-hidden="true">Developer Guides</div>
+          <h2 id="guides-heading" class="section-title">
+            Step-by-step integration guides
+          </h2>
+          <p class="section-subtitle">
+            Practical, opinionated walkthroughs for common integration patterns —
+            built by the FinPay developer experience team.
+          </p>
+        </header>
+
+        <!-- SDK Tabs Navigation (semantic-only) -->
+        <nav class="sdk-nav" aria-label="SDK language selection">
+          <ul role="list" class="sdk-nav__list">
+            <li><a href="#" class="sdk-nav__item sdk-nav__item--active" aria-current="true" aria-label="Node.js SDK guide">Node.js</a></li>
+            <li><a href="#" class="sdk-nav__item" aria-label="Python SDK guide">Python</a></li>
+            <li><a href="#" class="sdk-nav__item" aria-label="PHP SDK guide">PHP</a></li>
+            <li><a href="#" class="sdk-nav__item" aria-label="Java SDK guide">Java</a></li>
+            <li><a href="#" class="sdk-nav__item" aria-label="Ruby SDK guide">Ruby</a></li>
+            <li><a href="#" class="sdk-nav__item" aria-label="Go SDK guide">Go</a></li>
+          </ul>
+        </nav>
+
+        <!-- Guide Cards Grid -->
+        <div class="guides-grid" role="list" aria-label="Developer integration guides">
+
+          <article class="guide-card guide-card--featured" role="listitem" aria-labelledby="guide-1">
+            <div class="guide-card__meta">
+              <span class="guide-card__tag">Quickstart</span>
+              <span class="guide-card__time" aria-label="15 minute read">15 min</span>
+            </div>
+            <h3 id="guide-1" class="guide-card__title">
+              Accept a one-time payment with Node.js
+            </h3>
+            <p class="guide-card__body">
+              Create orders, render the checkout form, and verify
+              payment signatures end-to-end using Express.js.
+            </p>
+            <a href="#" class="guide-card__link" aria-label="Read: Accept a one-time payment with Node.js">
+              Read guide →
+            </a>
+          </article>
+
+          <article class="guide-card" role="listitem" aria-labelledby="guide-2">
+            <div class="guide-card__meta">
+              <span class="guide-card__tag">Subscriptions</span>
+              <span class="guide-card__time" aria-label="20 minute read">20 min</span>
+            </div>
+            <h3 id="guide-2" class="guide-card__title">
+              Build a SaaS billing flow with recurring payments
+            </h3>
+            <p class="guide-card__body">
+              Set up plans, manage subscription states, and handle
+              dunning with webhook-driven retry logic.
+            </p>
+            <a href="#" class="guide-card__link" aria-label="Read: Build a SaaS billing flow with recurring payments">
+              Read guide →
+            </a>
+          </article>
+
+          <article class="guide-card" role="listitem" aria-labelledby="guide-3">
+            <div class="guide-card__meta">
+              <span class="guide-card__tag">Mobile</span>
+              <span class="guide-card__time" aria-label="25 minute read">25 min</span>
+            </div>
+            <h3 id="guide-3" class="guide-card__title">
+              Integrate FinPay into a React Native app
+            </h3>
+            <p class="guide-card__body">
+              Use the FinPay Mobile SDK to embed a native checkout
+              experience in iOS and Android apps.
+            </p>
+            <a href="#" class="guide-card__link" aria-label="Read: Integrate FinPay into a React Native app">
+              Read guide →
+            </a>
+          </article>
+
+          <article class="guide-card" role="listitem" aria-labelledby="guide-4">
+            <div class="guide-card__meta">
+              <span class="guide-card__tag">Security</span>
+              <span class="guide-card__time" aria-label="10 minute read">10 min</span>
+            </div>
+            <h3 id="guide-4" class="guide-card__title">
+              Verify webhook signatures securely
+            </h3>
+            <p class="guide-card__body">
+              Prevent replay attacks and spoofed events by validating
+              HMAC-SHA256 signatures on every incoming webhook.
+            </p>
+            <a href="#" class="guide-card__link" aria-label="Read: Verify webhook signatures securely">
+              Read guide →
+            </a>
+          </article>
+
+          <article class="guide-card" role="listitem" aria-labelledby="guide-5">
+            <div class="guide-card__meta">
+              <span class="guide-card__tag">International</span>
+              <span class="guide-card__time" aria-label="15 minute read">15 min</span>
+            </div>
+            <h3 id="guide-5" class="guide-card__title">
+              Accept USD and EUR payments from global customers
+            </h3>
+            <p class="guide-card__body">
+              Enable multi-currency checkout, configure settlement
+              currency, and meet FEMA compliance requirements.
+            </p>
+            <a href="#" class="guide-card__link" aria-label="Read: Accept USD and EUR payments from global customers">
+              Read guide →
+            </a>
+          </article>
+
+          <article class="guide-card" role="listitem" aria-labelledby="guide-6">
+            <div class="guide-card__meta">
+              <span class="guide-card__tag">E-commerce</span>
+              <span class="guide-card__time" aria-label="30 minute read">30 min</span>
+            </div>
+            <h3 id="guide-6" class="guide-card__title">
+              Add FinPay to a WooCommerce store
+            </h3>
+            <p class="guide-card__body">
+              Install the FinPay WooCommerce plugin, configure
+              payment methods, and go live without writing code.
+            </p>
+            <a href="#" class="guide-card__link" aria-label="Read: Add FinPay to a WooCommerce store">
+              Read guide →
+            </a>
+          </article>
+
+        </div>
+
+        <div class="section-cta-row">
+          <a href="#" class="btn btn--outline" aria-label="Browse all developer guides">
+            Browse all guides →
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 05 — BLOG
+    ============================================================ -->
+    <section
+      id="blog"
+      class="section section--light section--blog"
+      aria-labelledby="blog-heading"
+    >
+      <div class="container">
+
+        <header class="section-header">
+          <div class="section-eyebrow" aria-hidden="true">Blog</div>
+          <h2 id="blog-heading" class="section-title">
+            Insights from the FinPay team
+          </h2>
+          <p class="section-subtitle">
+            Product updates, engineering deep dives, fintech industry
+            analysis, and payment best practices.
+          </p>
+        </header>
+
+        <div class="blog-grid" role="list" aria-label="Recent blog posts">
+
+          <!-- Featured Post -->
+          <article
+            class="blog-card blog-card--featured"
+            role="listitem"
+            aria-labelledby="blog-post-1"
+          >
+            <div class="blog-card__image-placeholder" role="img" aria-label="Blog post cover image: RBI tokenisation guidelines explained"></div>
+            <div class="blog-card__content">
+              <div class="blog-card__meta">
+                <span class="blog-card__category">Compliance</span>
+                <time class="blog-card__date" datetime="2025-06-10">10 Jun 2025</time>
+              </div>
+              <h3 id="blog-post-1" class="blog-card__title">
+                RBI Card Tokenisation: What Every Indian Business Needs to Know
+              </h3>
+              <p class="blog-card__excerpt">
+                The RBI's card-on-file tokenisation mandate changes how stored
+                cards work. Here's what has changed, what it means for your
+                checkout, and how FinPay handles it automatically.
+              </p>
+              <div class="blog-card__footer">
+                <span class="blog-card__author">
+                  <span class="sr-only">Written by</span>Priya Nambiar · 8 min read
+                </span>
+                <a href="#" class="blog-card__link" aria-label="Read: RBI Card Tokenisation — What Every Indian Business Needs to Know">
+                  Read post →
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Standard Post 1 -->
+          <article
+            class="blog-card"
+            role="listitem"
+            aria-labelledby="blog-post-2"
+          >
+            <div class="blog-card__content">
+              <div class="blog-card__meta">
+                <span class="blog-card__category">Engineering</span>
+                <time class="blog-card__date" datetime="2025-05-28">28 May 2025</time>
+              </div>
+              <h3 id="blog-post-2" class="blog-card__title">
+                How We Achieved 99.99% Uptime During IPL Season Traffic Spikes
+              </h3>
+              <p class="blog-card__excerpt">
+                A behind-the-scenes look at the autoscaling, circuit breakers,
+                and load-shedding strategies that kept us online during
+                peak 450,000 TPS events.
+              </p>
+              <div class="blog-card__footer">
+                <span class="blog-card__author">
+                  <span class="sr-only">Written by</span>Rohan Mehta · 12 min read
+                </span>
+                <a href="#" class="blog-card__link" aria-label="Read: How We Achieved 99.99% Uptime During IPL Season Traffic Spikes">
+                  Read post →
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Standard Post 2 -->
+          <article
+            class="blog-card"
+            role="listitem"
+            aria-labelledby="blog-post-3"
+          >
+            <div class="blog-card__content">
+              <div class="blog-card__meta">
+                <span class="blog-card__category">Product</span>
+                <time class="blog-card__date" datetime="2025-05-14">14 May 2025</time>
+              </div>
+              <h3 id="blog-post-3" class="blog-card__title">
+                Introducing Smart Retry: Recover Failed Payments Automatically
+              </h3>
+              <p class="blog-card__excerpt">
+                Smart Retry uses ML-based routing to re-attempt failed
+                transactions on alternate processors, recovering up to
+                18% of otherwise lost revenue.
+              </p>
+              <div class="blog-card__footer">
+                <span class="blog-card__author">
+                  <span class="sr-only">Written by</span>Anika Sharma · 5 min read
+                </span>
+                <a href="#" class="blog-card__link" aria-label="Read: Introducing Smart Retry — Recover Failed Payments Automatically">
+                  Read post →
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Standard Post 3 -->
+          <article
+            class="blog-card"
+            role="listitem"
+            aria-labelledby="blog-post-4"
+          >
+            <div class="blog-card__content">
+              <div class="blog-card__meta">
+                <span class="blog-card__category">Fintech</span>
+                <time class="blog-card__date" datetime="2025-04-30">30 Apr 2025</time>
+              </div>
+              <h3 id="blog-post-4" class="blog-card__title">
+                UPI 3.0: Credit Lines, Offline Payments, and What Comes Next
+              </h3>
+              <p class="blog-card__excerpt">
+                An analysis of NPCI's upcoming UPI protocol changes,
+                how they expand access to credit, and what merchants
+                should prepare for in 2025.
+              </p>
+              <div class="blog-card__footer">
+                <span class="blog-card__author">
+                  <span class="sr-only">Written by</span>Vikram Iyer · 9 min read
+                </span>
+                <a href="#" class="blog-card__link" aria-label="Read: UPI 3.0 — Credit Lines, Offline Payments, and What Comes Next">
+                  Read post →
+                </a>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="section-cta-row">
+          <a href="#" class="btn btn--outline" aria-label="View all blog posts on the FinPay blog">
+            View all posts →
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 06 — HELP CENTER
+    ============================================================ -->
+    <section
+      id="help-center"
+      class="section section--help"
+      aria-labelledby="help-heading"
+    >
+      <div class="container">
+
+        <header class="section-header section-header--centered">
+          <div class="section-eyebrow" aria-hidden="true">Help Center</div>
+          <h2 id="help-heading" class="section-title">
+            Find answers fast
+          </h2>
+          <p class="section-subtitle">
+            Browse by topic or search our knowledge base.
+            Most questions are answered in under two minutes.
+          </p>
+        </header>
+
+        <div class="help-categories" role="list" aria-label="Help center topic categories">
+
+          <article class="help-category" role="listitem" aria-labelledby="help-cat-1">
+            <span class="help-category__icon" aria-hidden="true">🏦</span>
+            <h3 id="help-cat-1" class="help-category__title">Account &amp; KYC</h3>
+            <ul class="help-category__links" role="list">
+              <li><a href="#">How to complete KYC verification</a></li>
+              <li><a href="#">Acceptable KYC documents</a></li>
+              <li><a href="#">Change registered bank account</a></li>
+              <li><a href="#">Add team members and roles</a></li>
+            </ul>
+          </article>
+
+          <article class="help-category" role="listitem" aria-labelledby="help-cat-2">
+            <span class="help-category__icon" aria-hidden="true">💸</span>
+            <h3 id="help-cat-2" class="help-category__title">Payments &amp; Refunds</h3>
+            <ul class="help-category__links" role="list">
+              <li><a href="#">Why did a payment fail?</a></li>
+              <li><a href="#">Issue a full or partial refund</a></li>
+              <li><a href="#">Handle a chargeback</a></li>
+              <li><a href="#">Payment status meanings</a></li>
+            </ul>
+          </article>
+
+          <article class="help-category" role="listitem" aria-labelledby="help-cat-3">
+            <span class="help-category__icon" aria-hidden="true">📅</span>
+            <h3 id="help-cat-3" class="help-category__title">Settlements</h3>
+            <ul class="help-category__links" role="list">
+              <li><a href="#">When will my money settle?</a></li>
+              <li><a href="#">Settlement reports and exports</a></li>
+              <li><a href="#">On-demand settlement</a></li>
+              <li><a href="#">Settlement holds explained</a></li>
+            </ul>
+          </article>
+
+          <article class="help-category" role="listitem" aria-labelledby="help-cat-4">
+            <span class="help-category__icon" aria-hidden="true">🧾</span>
+            <h3 id="help-cat-4" class="help-category__title">Billing &amp; Invoices</h3>
+            <ul class="help-category__links" role="list">
+              <li><a href="#">Download invoices and GST receipts</a></li>
+              <li><a href="#">Update billing details</a></li>
+              <li><a href="#">Understand your fee statement</a></li>
+              <li><a href="#">Upgrade or downgrade a plan</a></li>
+            </ul>
+          </article>
+
+          <article class="help-category" role="listitem" aria-labelledby="help-cat-5">
+            <span class="help-category__icon" aria-hidden="true">🔌</span>
+            <h3 id="help-cat-5" class="help-category__title">Integrations</h3>
+            <ul class="help-category__links" role="list">
+              <li><a href="#">WooCommerce plugin setup</a></li>
+              <li><a href="#">Shopify app installation</a></li>
+              <li><a href="#">Tally integration guide</a></li>
+              <li><a href="#">Zapier &amp; automation tools</a></li>
+            </ul>
+          </article>
+
+          <article class="help-category" role="listitem" aria-labelledby="help-cat-6">
+            <span class="help-category__icon" aria-hidden="true">🔐</span>
+            <h3 id="help-cat-6" class="help-category__title">Security</h3>
+            <ul class="help-category__links" role="list">
+              <li><a href="#">Enable two-factor authentication</a></li>
+              <li><a href="#">Manage API key permissions</a></li>
+              <li><a href="#">Report a suspicious transaction</a></li>
+              <li><a href="#">FinPay's fraud detection system</a></li>
+            </ul>
+          </article>
+
+        </div>
+
+        <!-- Support Channels -->
+        <div class="help-support-channels" aria-labelledby="support-channels-heading">
+          <h3 id="support-channels-heading" class="help-support__heading">
+            Still need help? Reach us directly.
+          </h3>
+          <ul class="support-channels-list" role="list" aria-label="FinPay support contact options">
+            <li class="support-channel">
+              <span class="support-channel__icon" aria-hidden="true">💬</span>
+              <strong>Live Chat</strong>
+              <span>Available Mon–Sat, 9am–9pm IST</span>
+              <a href="#" aria-label="Open live chat with FinPay support">Start chat →</a>
+            </li>
+            <li class="support-channel">
+              <span class="support-channel__icon" aria-hidden="true">✉️</span>
+              <strong>Email Support</strong>
+              <span>Response within 4 hours on business days</span>
+              <a href="mailto:support@finpay.in" aria-label="Email FinPay support at support@finpay.in">support@finpay.in</a>
+            </li>
+            <li class="support-channel">
+              <span class="support-channel__icon" aria-hidden="true">📞</span>
+              <strong>Phone (Scale &amp; Enterprise)</strong>
+              <span>Dedicated line for Scale plan and above</span>
+              <a href="tel:+918008001234" aria-label="Call FinPay priority support at +91 800 800 1234">+91 800 800 1234</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 07 — FAQS
+    ============================================================ -->
+    <section
+      id="resources-faq"
+      class="section section--light"
+      aria-labelledby="resources-faq-heading"
+    >
+      <div class="container container--narrow">
+
+        <header class="section-header section-header--centered">
+          <h2 id="resources-faq-heading" class="section-title">
+            Common developer questions
+          </h2>
+        </header>
+
+        <dl class="faq-list" aria-label="Developer and resources frequently asked questions">
+
+          <div class="faq-item">
+            <dt class="faq-question" id="res-faq-q1">
+              Is there a sandbox environment for testing?
+            </dt>
+            <dd class="faq-answer" aria-labelledby="res-faq-q1">
+              Yes. Every FinPay account gets a fully isolated test mode with
+              test API keys, simulated payment methods, and test card numbers.
+              No real money moves in test mode. Switch between live and test
+              mode from your dashboard at any time.
+            </dd>
+          </div>
+
+          <div class="faq-item">
+            <dt class="faq-question" id="res-faq-q2">
+              Which SDK languages are supported?
+            </dt>
+            <dd class="faq-answer" aria-labelledby="res-faq-q2">
+              FinPay maintains official SDKs for Node.js, Python, PHP, Java,
+              Ruby, Go, and .NET. iOS and Android SDKs are available for
+              native mobile integrations. All SDKs are open source on GitHub
+              and updated with every API version release.
+            </dd>
+          </div>
+
+          <div class="faq-item">
+            <dt class="faq-question" id="res-faq-q3">
+              How do I handle payment verification to prevent fraud?
+            </dt>
+            <dd class="faq-answer" aria-labelledby="res-faq-q3">
+              After a payment is completed on the client, always verify the
+              payment signature on your server using your API secret key
+              before fulfilling the order. The FinPay signature verification
+              docs and SDK helpers walk you through this process for every
+              supported language.
+            </dd>
+          </div>
+
+          <div class="faq-item">
+            <dt class="faq-question" id="res-faq-q4">
+              Does FinPay support API versioning?
+            </dt>
+            <dd class="faq-answer" aria-labelledby="res-faq-q4">
+              Yes. FinPay follows a date-based versioning scheme. Your
+              integration is pinned to the API version active when your
+              account was created. Breaking changes are only introduced
+              in new versions, and you'll receive advance notice before
+              any version is deprecated.
+            </dd>
+          </div>
+
+          <div class="faq-item">
+            <dt class="faq-question" id="res-faq-q5">
+              Where can I see API uptime and incident history?
+            </dt>
+            <dd class="faq-answer" aria-labelledby="res-faq-q5">
+              FinPay publishes a public status page at status.finpay.in
+              with real-time uptime metrics and a full incident history.
+              You can subscribe to incident alerts via email or webhook.
+            </dd>
+          </div>
+
+        </dl>
+
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         SECTION 08 — CALL TO ACTION
+    ============================================================ -->
+    <section
+      id="resources-cta"
+      class="section section--cta"
+      aria-labelledby="resources-cta-heading"
+    >
+      <div class="container">
+        <div class="cta-block">
+          <h2 id="resources-cta-heading" class="cta-title">
+            Ready to build?
+          </h2>
+          <p class="cta-body">
+            Create a free account and start integrating in minutes.
+            Full API access is available the moment you sign up.
+          </p>
+          <div class="cta-actions" role="group" aria-label="Resources CTA actions">
+            <a href="signup.html" class="btn btn--primary btn--large" aria-label="Create a free FinPay developer account">
+              Create Free Account
+            </a>
+            <a href="#api-reference" class="btn btn--secondary btn--large" aria-label="Read the FinPay API reference">
+              Read API Docs
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+  </main>
+
+
+  <!-- ============================================================
+       GLOBAL FOOTER
+  ============================================================ -->
+  <footer id="site-footer" role="contentinfo" aria-label="Site footer">
+    <div class="container">
+
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          
+            <span class="logo-mark" aria-hidden="true">◈</span>
+            <span class="logo-wordmark">FinPay</span>
+          </a>
+          <p class="footer-tagline">
+            The global payment platform built for modern businesses.
+            Accept payments anywhere, grow everywhere.
+          </p>
+          <div class="footer-newsletter">
+            <p class="footer-newsletter__label" id="newsletter-label">Stay updated with FinPay</p>
+            <form class="footer-newsletter__form" action="#" method="post" aria-labelledby="newsletter-label" novalidate>
+              <div class="footer-newsletter__input-group">
+                <label for="footer-email" class="sr-only">Email address</label>
+                <input type="email" id="footer-email" name="email" class="footer-newsletter__input" placeholder="you@company.com" autocomplete="email" required aria-required="true" aria-describedby="footer-email-hint" />
+                <button type="submit" class="footer-newsletter__btn" aria-label="Subscribe to FinPay newsletter">Subscribe</button>
+              </div>
+              <span id="footer-email-hint" class="footer-newsletter__hint">No spam. Unsubscribe at any time.</span>
+            </form>
+          </div>
+        </div>
+
+        <nav class="footer-nav" aria-label="Footer products navigation">
+          <h3 class="footer-nav__heading">Products</h3>
+          <ul class="footer-nav__list" role="list">
+            <li><a href="payments.html">Payment Gateway</a></li>
+            <li><a href="payments.html#payment-links">Payment Links</a></li>
+            <li><a href="payments.html#payment-pages">Payment Pages</a></li>
+            <li><a href="payments.html#subscriptions">Subscriptions</a></li>
+            <li><a href="payments.html#international">International Payments</a></li>
+            <li><a href="payments.html#developer-apis">Developer APIs</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer-nav" aria-label="Footer resources navigation">
+          <h3 class="footer-nav__heading">Resources</h3>
+          <ul class="footer-nav__list" role="list">
+            <li><a href="resources.html#documentation">Documentation</a></li>
+            <li><a href="resources.html#api-reference">API Reference</a></li>
+            <li><a href="resources.html#guides">Developer Guides</a></li>
+            <li><a href="resources.html#blog">Blog</a></li>
+            <li><a href="resources.html#help-center">Help Center</a></li>
+            <li><a href="#">Changelog</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer-nav" aria-label="Footer company navigation">
+          <h3 class="footer-nav__heading">Company</h3>
+          <ul class="footer-nav__list" role="list">
+            <li><a href="about.html">About FinPay</a></li>
+            <li><a href="about.html#careers">Careers</a></li>
+            <li><a href="about.html#press">Press &amp; Media</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="about.html#partners">Partners</a></li>
+          </ul>
+        </nav>
+
+        <nav class="footer-nav" aria-label="Footer legal navigation">
+          <h3 class="footer-nav__heading">Legal</h3>
+          <ul class="footer-nav__list" role="list">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">Refund Policy</a></li>
+            <li><a href="#">Grievance Redressal</a></li>
+          </ul>
+        </nav>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">
+          © <time datetime="2025">2025</time> FinPay Technologies Pvt. Ltd.
+          All rights reserved. CIN: U72900MH2020PTC123456
+        </p>
+        <ul class="footer-social" role="list" aria-label="FinPay social media links">
+          <li><a href="https://twitter.com/finpay" class="footer-social__link" rel="noopener noreferrer" target="_blank" aria-label="Follow FinPay on Twitter (opens in new tab)"><span aria-hidden="true">𝕏</span></a></li>
+          <li><a href="https://linkedin.com/company/finpay" class="footer-social__link" rel="noopener noreferrer" target="_blank" aria-label="Follow FinPay on LinkedIn (opens in new tab)"><span aria-hidden="true">in</span></a></li>
+          <li><a href="https://github.com/finpay" class="footer-social__link" rel="noopener noreferrer" target="_blank" aria-label="View FinPay open source on GitHub (opens in new tab)"><span aria-hidden="true">GH</span></a></li>
+          <li><a href="https://youtube.com/finpay" class="footer-social__link" rel="noopener noreferrer" target="_blank" aria-label="Watch FinPay on YouTube (opens in new tab)"><span aria-hidden="true">▶</span></a></li>
+        </ul>
+        <p class="footer-regulatory">
+          FinPay is a Payment Aggregator licensed by the Reserve Bank of India.
+          Payments are processed on PCI DSS Level 1 certified infrastructure.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+<script src="Main.js"></script>
+<script src="Navigation.js"></script>
+<script src="Animations.js"></script>
+
+</body>
+</html>

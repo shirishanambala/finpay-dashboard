@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Compliance — FinPay</title>
+  <meta name="description" content="FinPay's global compliance framework — PCI DSS, GDPR, SOC 2, ISO 27001, AML, and KYC standards." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #07080f;
+      --bg-2:        #0d0f1e;
+      --bg-card:     #111328;
+      --border:      rgba(255,255,255,0.07);
+      --border-glow: rgba(99,102,241,0.35);
+      --accent:      #6366f1;
+      --accent-2:    #06b6d4;
+      --accent-3:    #10b981;
+      --text-primary:#f1f5f9;
+      --text-muted:  #94a3b8;
+      --text-dim:    #475569;
+      --radius-sm:   8px;
+      --radius-md:   14px;
+      --radius-lg:   20px;
+      --shadow-card: 0 4px 28px rgba(0,0,0,0.5);
+      --transition:  0.22s cubic-bezier(.4,0,.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: rgba(7,8,15,0.78);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 24px;
+      height: 64px; display: flex; align-items: center;
+      justify-content: space-between; gap: 32px;
+    }
+    .logo {
+      font-size: 1.3rem; font-weight: 800;
+      background: linear-gradient(135deg,#6366f1,#06b6d4);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; text-decoration: none;
+      letter-spacing: -0.5px; white-space: nowrap;
+    }
+    .nav-links { display: flex; align-items: center; gap: 28px; list-style: none; }
+    .nav-links a {
+      color: var(--text-muted); text-decoration: none;
+      font-size: 0.88rem; font-weight: 500;
+      transition: color var(--transition); position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -3px; left: 0;
+      width: 0; height: 2px; background: var(--accent);
+      border-radius: 2px; transition: width var(--transition);
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: linear-gradient(135deg,#6366f1,#4f46e5);
+      color: #fff !important; padding: 8px 20px;
+      border-radius: var(--radius-sm); font-weight: 600 !important;
+      font-size: 0.85rem !important;
+      transition: opacity var(--transition), transform var(--transition) !important;
+    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px; background: none; border: none;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--text-muted); border-radius: 2px; transition: var(--transition);
+    }
+    .mobile-menu {
+      display: none; position: absolute; top: 64px; left: 0; right: 0;
+      background: rgba(7,8,15,0.97); border-bottom: 1px solid var(--border);
+      padding: 20px 24px; flex-direction: column; gap: 16px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: var(--text-muted); text-decoration: none;
+      font-size: 0.95rem; font-weight: 500;
+      padding: 8px 0; border-bottom: 1px solid var(--border);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; overflow: hidden;
+      padding: 100px 24px 80px; text-align: center;
+      background:
+        radial-gradient(ellipse 80% 55% at 50% 0%, rgba(16,185,129,0.11) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 90% 40%, rgba(99,102,241,0.08) 0%, transparent 60%),
+        var(--bg);
+    }
+    .hero-blob {
+      position: absolute; border-radius: 50%;
+      filter: blur(90px); pointer-events: none; opacity: 0.35;
+    }
+    .blob-1 { width: 500px; height: 500px; background: rgba(16,185,129,0.18); top: -140px; left: -100px; }
+    .blob-2 { width: 360px; height: 360px; background: rgba(99,102,241,0.14); top: -40px; right: -80px; }
+    .blob-3 { width: 260px; height: 260px; background: rgba(6,182,212,0.12); bottom: -50px; left: 45%; }
+
+    .breadcrumb {
+      display: flex; align-items: center; gap: 8px;
+      justify-content: center; font-size: 0.8rem; color: var(--text-dim); margin-bottom: 28px;
+    }
+    .breadcrumb a { color: var(--text-dim); text-decoration: none; transition: color var(--transition); }
+    .breadcrumb a:hover { color: var(--accent-3); }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.25);
+      border-radius: 100px; padding: 5px 14px; font-size: 0.78rem;
+      font-weight: 600; color: #6ee7b7; letter-spacing: 0.04em;
+      text-transform: uppercase; margin-bottom: 22px;
+    }
+    .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-3); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 800;
+      letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 20px;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg,#6ee7b7 0%,#06b6d4 55%,#a5b4fc 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .hero p {
+      max-width: 560px; margin: 0 auto 40px;
+      color: var(--text-muted); font-size: 1.05rem; line-height: 1.75;
+    }
+
+    /* cert strip */
+    .cert-strip {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;
+      max-width: 760px; margin: 0 auto;
+    }
+    .cert-chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 9px 18px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      font-size: 0.82rem; font-weight: 700; color: var(--text-muted);
+      transition: all var(--transition);
+    }
+    .cert-chip:hover { border-color: rgba(16,185,129,0.4); color: #6ee7b7; background: rgba(16,185,129,0.05); }
+    .cert-chip-icon { font-size: 1.1rem; }
+
+    /* ── LAYOUT ── */
+    .page-body {
+      max-width: 1200px; margin: 0 auto;
+      padding: 60px 24px 80px;
+      display: grid; grid-template-columns: 220px 1fr;
+      gap: 48px; align-items: start;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar { position: sticky; top: 88px; }
+    .sidebar-label {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-dim); margin-bottom: 12px; padding-left: 12px;
+    }
+    .sidebar-nav { list-style: none; }
+    .sidebar-nav li a {
+      display: flex; align-items: center; gap: 10px; padding: 9px 12px;
+      border-radius: var(--radius-sm); font-size: 0.85rem; color: var(--text-muted);
+      text-decoration: none; font-weight: 500; transition: all var(--transition);
+      border-left: 2px solid transparent;
+    }
+    .sidebar-nav li a:hover, .sidebar-nav li a.active {
+      color: var(--text-primary); background: rgba(16,185,129,0.08); border-left-color: var(--accent-3);
+    }
+    .sidebar-nav li a .nav-icon { font-size: 0.9rem; width: 18px; text-align: center; }
+
+    .mobile-toc { display: none; margin-bottom: 32px; }
+    .mobile-toc-toggle {
+      width: 100%; display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 16px; background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-md); color: var(--text-primary); font-size: 0.88rem;
+      font-weight: 600; cursor: pointer;
+    }
+    .mobile-toc-links { display: none; flex-direction: column; gap: 4px; padding: 10px 0 4px; }
+    .mobile-toc-links.open { display: flex; }
+    .mobile-toc-links a { padding: 8px 12px; color: var(--text-muted); text-decoration: none; font-size: 0.88rem; }
+
+    /* ── CONTENT ── */
+    .content section {
+      margin-bottom: 68px; opacity: 0; transform: translateY(18px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .content section.visible { opacity: 1; transform: translateY(0); }
+
+    .section-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent-3); margin-bottom: 10px;
+    }
+    .section-eyebrow-line { width: 20px; height: 2px; background: var(--accent-3); border-radius: 2px; }
+
+    .content h2 { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 16px; line-height: 1.2; }
+    .content p  { color: var(--text-muted); margin-bottom: 16px; font-size: 0.95rem; }
+
+    /* ── CERT CARDS ── */
+    .cert-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+    .cert-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(16,185,129,0.3);
+      box-shadow: var(--shadow-card);
+    }
+    .cert-card-header {
+      padding: 24px 28px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: flex-start; gap: 16px;
+    }
+    .cert-badge-icon {
+      width: 52px; height: 52px; border-radius: var(--radius-md);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; flex-shrink: 0;
+    }
+    .cert-badge-icon.green  { background: rgba(16,185,129,0.12); }
+    .cert-badge-icon.indigo { background: rgba(99,102,241,0.12); }
+    .cert-badge-icon.cyan   { background: rgba(6,182,212,0.12);  }
+    .cert-badge-icon.amber  { background: rgba(245,158,11,0.12); }
+    .cert-badge-icon.rose   { background: rgba(244,63,94,0.12);  }
+    .cert-badge-icon.purple { background: rgba(168,85,247,0.12); }
+
+    .cert-card-title { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.2px; margin-bottom: 4px; }
+    .cert-card-sub   { font-size: 0.8rem; color: var(--text-muted); }
+    .cert-card-status {
+      margin-left: auto; flex-shrink: 0;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 12px; border-radius: 100px;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .status-green  { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); color: #6ee7b7; }
+    .status-indigo { background: rgba(99,102,241,0.1); border: 1px solid rgba(99,102,241,0.3); color: #a5b4fc; }
+    .status-cyan   { background: rgba(6,182,212,0.1);  border: 1px solid rgba(6,182,212,0.3);  color: #67e8f9; }
+    .cert-card-status::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+
+    .cert-card-body { padding: 22px 28px; }
+    .cert-card-body p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 18px; }
+    .cert-features { list-style: none; display: flex; flex-direction: column; gap: 9px; }
+    .cert-features li {
+      font-size: 0.84rem; color: var(--text-muted);
+      display: flex; align-items: flex-start; gap: 9px;
+    }
+    .cert-features li::before { content: '✓'; color: var(--accent-3); font-weight: 700; flex-shrink: 0; }
+
+    .cert-card-footer {
+      padding: 16px 28px; border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 10px;
+    }
+    .cert-meta { font-size: 0.75rem; color: var(--text-dim); font-family: 'JetBrains Mono', monospace; }
+    .cert-link {
+      font-size: 0.8rem; font-weight: 600; color: var(--accent-3);
+      text-decoration: none; transition: opacity var(--transition);
+    }
+    .cert-link:hover { opacity: 0.75; }
+
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 24px; }
+
+    /* ── AUDIT CARDS ── */
+    .card {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: var(--radius-md); padding: 28px;
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+    .card:hover { transform: translateY(-3px); border-color: rgba(16,185,129,0.25); box-shadow: var(--shadow-card); }
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 24px; }
+    .card-icon {
+      width: 44px; height: 44px; border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 16px;
+    }
+    .icon-green  { background: rgba(16,185,129,0.12); }
+    .icon-indigo { background: rgba(99,102,241,0.12); }
+    .icon-cyan   { background: rgba(6,182,212,0.12);  }
+    .icon-amber  { background: rgba(245,158,11,0.12); }
+    .icon-rose   { background: rgba(244,63,94,0.12);  }
+    .icon-purple { background: rgba(168,85,247,0.12); }
+    .card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .card p  { font-size: 0.88rem; color: var(--text-muted); margin: 0; }
+
+    /* ── STAT CARDS ── */
+    .stat-card {
+      background: linear-gradient(135deg,rgba(16,185,129,0.07),rgba(6,182,212,0.04));
+      border: 1px solid rgba(16,185,129,0.16); border-radius: var(--radius-md);
+      padding: 28px 24px; text-align: center;
+    }
+    .stat-val {
+      font-size: 2.2rem; font-weight: 800;
+      background: linear-gradient(135deg,#6ee7b7,#06b6d4);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      letter-spacing: -1px; display: block;
+    }
+    .stat-desc { font-size: 0.82rem; color: var(--text-muted); margin-top: 6px; }
+
+    /* ── INFO BOX ── */
+    .info-box {
+      display: flex; gap: 14px; padding: 18px 20px;
+      border-radius: var(--radius-md); border: 1px solid; margin: 20px 0; align-items: flex-start;
+    }
+    .info-box-icon { font-size: 1.1rem; margin-top: 1px; flex-shrink: 0; }
+    .info-box-text { font-size: 0.88rem; line-height: 1.65; }
+    .info-box-text strong { display: block; margin-bottom: 3px; font-weight: 700; }
+    .info-box.green  { background: rgba(16,185,129,0.06); border-color: rgba(16,185,129,0.22); }
+    .info-box.green .info-box-text strong { color: #6ee7b7; }
+    .info-box.indigo { background: rgba(99,102,241,0.06); border-color: rgba(99,102,241,0.22); }
+    .info-box.indigo .info-box-text strong { color: #a5b4fc; }
+    .info-box.cyan   { background: rgba(6,182,212,0.06);  border-color: rgba(6,182,212,0.22);  }
+    .info-box.cyan   .info-box-text strong { color: #67e8f9; }
+    .info-box.amber  { background: rgba(245,158,11,0.06); border-color: rgba(245,158,11,0.22); }
+    .info-box.amber  .info-box-text strong { color: #fcd34d; }
+
+    /* ── TIMELINE ── */
+    .timeline { position: relative; padding-left: 28px; margin-top: 24px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 2px;
+      background: linear-gradient(to bottom,var(--accent-3),var(--accent-2),var(--accent));
+      border-radius: 2px;
+    }
+    .timeline-item { position: relative; margin-bottom: 30px; }
+    .timeline-item::before {
+      content: ''; position: absolute; left: -33px; top: 6px;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent-3); border: 2px solid var(--bg); box-shadow: 0 0 0 2px var(--accent-3);
+    }
+    .timeline-year  { font-size: 0.72rem; font-weight: 700; color: var(--accent-3); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 5px; }
+    .timeline-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 5px; }
+    .timeline-desc  { font-size: 0.85rem; color: var(--text-muted); }
+
+    /* ── BADGES ── */
+    .badge-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 6px 14px; border-radius: 100px; font-size: 0.78rem; font-weight: 600; border: 1px solid;
+    }
+    .badge-green  { background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.3); color: #6ee7b7; }
+    .badge-indigo { background: rgba(99,102,241,0.08); border-color: rgba(99,102,241,0.3); color: #a5b4fc; }
+    .badge-cyan   { background: rgba(6,182,212,0.08);  border-color: rgba(6,182,212,0.3);  color: #67e8f9; }
+    .badge-amber  { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.3); color: #fcd34d; }
+    .badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: linear-gradient(135deg,rgba(16,185,129,0.1) 0%,rgba(6,182,212,0.07) 100%);
+      border: 1px solid rgba(16,185,129,0.2); border-radius: var(--radius-lg);
+      padding: 56px 40px; text-align: center;
+      max-width: 1200px; margin: 60px auto 80px; position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: ''; position: absolute; top: -60px; left: 50%; transform: translateX(-50%);
+      width: 300px; height: 300px;
+      background: radial-gradient(circle,rgba(16,185,129,0.1),transparent 70%);
+      pointer-events: none;
+    }
+    .cta-section h2 { font-size: 1.9rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 14px; }
+    .cta-section p  { color: var(--text-muted); font-size: 1rem; margin-bottom: 28px; max-width: 460px; margin-left: auto; margin-right: auto; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg,#10b981,#059669);
+      color: #fff; padding: 13px 28px; border-radius: var(--radius-sm);
+      font-size: 0.92rem; font-weight: 700; text-decoration: none;
+      transition: opacity var(--transition), transform var(--transition);
+      box-shadow: 0 4px 20px rgba(16,185,129,0.3);
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--text-primary); border: 1px solid var(--border);
+      padding: 12px 24px; border-radius: var(--radius-sm); font-size: 0.88rem;
+      font-weight: 600; text-decoration: none; margin-left: 12px;
+      transition: border-color var(--transition), transform var(--transition);
+    }
+    .btn-outline:hover { border-color: var(--accent-3); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); background: var(--bg-2); }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 60px 24px 40px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 48px; }
+    .footer-brand p { font-size: 0.85rem; color: var(--text-dim); margin-top: 12px; max-width: 260px; line-height: 1.75; }
+    .footer-col h4 { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color var(--transition); }
+    .footer-col ul a:hover { color: var(--text-primary); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 16px; }
+    .footer-bottom p { font-size: 0.8rem; color: var(--text-dim); }
+    .social-links { display: flex; gap: 12px; }
+    .social-links a {
+      width: 36px; height: 36px; border-radius: var(--radius-sm); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); font-size: 0.85rem; text-decoration: none; transition: all var(--transition);
+    }
+    .social-links a:hover { border-color: var(--accent-3); color: var(--accent-3); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .page-body { grid-template-columns: 1fr; gap: 0; }
+      .sidebar { display: none; }
+      .mobile-toc { display: block; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .cert-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 620px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      nav { position: relative; }
+      .hero { padding: 64px 20px 56px; }
+      .card-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .cta-section { padding: 40px 24px; }
+      .btn-outline { margin-left: 0; margin-top: 12px; }
+      .cert-card-header { flex-wrap: wrap; }
+      .cert-card-status { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    
+    <ul class="nav-links">
+      
+      <li><a href="payments.html">Payments</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="signup.html" class="nav-cta">Get Started</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu" role="menu">
+    
+    <a href="payments.html">Payments</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="resources.html">Resources</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="signup.html">Get Started →</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" aria-label="Page hero">
+  <div class="hero-blob blob-1"></div>
+  <div class="hero-blob blob-2"></div>
+  <div class="hero-blob blob-3"></div>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    
+  </nav>
+
+  <div class="hero-badge"><span class="hero-badge-dot"></span>Continuously Audited</div>
+
+  <h1>Built for<br /><span>Global Compliance</span></h1>
+  <p>FinPay holds the certifications that matter most to enterprise finance — independently verified, continuously maintained, and published for your due diligence.</p>
+
+  <div class="cert-strip" role="list" aria-label="Certifications held">
+    <div class="cert-chip" role="listitem"><span class="cert-chip-icon">🏅</span> PCI DSS Level 1</div>
+    <div class="cert-chip" role="listitem"><span class="cert-chip-icon">🇪🇺</span> GDPR</div>
+    <div class="cert-chip" role="listitem"><span class="cert-chip-icon">🔐</span> SOC 2 Type II</div>
+    <div class="cert-chip" role="listitem"><span class="cert-chip-icon">🌐</span> ISO 27001</div>
+    <div class="cert-chip" role="listitem"><span class="cert-chip-icon">🏦</span> AML / CFT</div>
+    <div class="cert-chip" role="listitem"><span class="cert-chip-icon">🪪</span> KYC</div>
+  </div>
+</section>
+
+<!-- ── PAGE BODY ── -->
+<div class="page-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" aria-label="Page sections">
+    <p class="sidebar-label">On This Page</p>
+    <ul class="sidebar-nav" id="sidebarNav">
+      <li><a href="#overview"  class="active"><span class="nav-icon">🌐</span> Overview</a></li>
+      <li><a href="#pci"><span class="nav-icon">💳</span> PCI DSS</a></li>
+      <li><a href="#gdpr"><span class="nav-icon">🇪🇺</span> GDPR</a></li>
+      <li><a href="#soc2"><span class="nav-icon">🔐</span> SOC 2</a></li>
+      <li><a href="#iso"><span class="nav-icon">🌐</span> ISO 27001</a></li>
+      <li><a href="#aml"><span class="nav-icon">🏦</span> AML Compliance</a></li>
+      <li><a href="#kyc"><span class="nav-icon">🪪</span> KYC Standards</a></li>
+      <li><a href="#audit"><span class="nav-icon">📋</span> Audit &amp; Reports</a></li>
+    </ul>
+  </aside>
+
+  <!-- MOBILE TOC -->
+  <div class="mobile-toc" aria-label="Jump to section">
+    <button class="mobile-toc-toggle" id="tocToggle" aria-expanded="false">
+      <span>Jump to section</span><span id="tocArrow">▾</span>
+    </button>
+    <div class="mobile-toc-links" id="tocLinks">
+      <a href="#overview">🌐 Overview</a>
+      <a href="#pci">💳 PCI DSS</a>
+      <a href="#gdpr">🇪🇺 GDPR</a>
+      <a href="#soc2">🔐 SOC 2</a>
+      <a href="#iso">🌐 ISO 27001</a>
+      <a href="#aml">🏦 AML Compliance</a>
+      <a href="#kyc">🪪 KYC Standards</a>
+      <a href="#audit">📋 Audit &amp; Reports</a>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <main class="content" id="mainContent">
+
+    <!-- OVERVIEW -->
+    <section id="overview" tabindex="-1">
+      <div class="section-eyebrow"><span class="section-eyebrow-line"></span>Compliance Overview</div>
+      <h2>A compliance posture built for enterprise trust</h2>
+      <p>Compliance at FinPay is not a checkbox exercise. Every certification we hold is maintained through continuous controls monitoring, real-time evidence collection, and annual third-party audits by accredited assessors.</p>
+
+      <div class="card-grid">
+        <div class="stat-card">
+          <span class="stat-val">6</span>
+          <p class="stat-desc">Active certifications &amp; frameworks</p>
+        </div>
+        <div class="stat-card">
+          <span class="stat-val">150+</span>
+          <p class="stat-desc">Countries supported</p>
+        </div>
+        <div class="stat-card">
+          <span class="stat-val">100%</span>
+          <p class="stat-desc">Annual audit pass rate</p>
+        </div>
+      </div>
+
+      <div class="info-box green" role="note" style="margin-top: 28px;">
+        <span class="info-box-icon">✅</span>
+        <div class="info-box-text">
+          <strong>Enterprise compliance packages available</strong>
+          Enterprise customers can request our SOC 2 Type II report, ISO 27001 certificate, and PCI DSS Attestation of Compliance (AoC) under NDA. Contact your account manager or our compliance team directly.
+        </div>
+      </div>
+    </section>
+
+    <!-- PCI DSS -->
+    <section id="pci" tabindex="-1">
+      <div class="section-eyebrow"><span class="section-eyebrow-line"></span>Payment Card Industry</div>
+      <h2>PCI DSS Level 1 — the highest tier</h2>
+      <p>FinPay is a PCI DSS Level 1 certified service provider — the highest designation in the payment card industry. Our infrastructure is assessed annually by a Qualified Security Assessor (QSA) and we maintain continuous compliance through automated control monitoring.</p>
+
+      <div class="cert-grid">
+        <div class="cert-card">
+          <div class="cert-card-header">
+            <div class="cert-badge-icon green">💳</div>
+            <div>
+              <div class="cert-card-title">PCI DSS v4.0</div>
+              <div class="cert-card-sub">Payment Card Industry Data Security Standard</div>
+            </div>
+            <div class="cert-card-status status-green">Active</div>
+          </div>
+          <div class="cert-card-body">
+            <p>Covers all 12 PCI DSS requirements across our cardholder data environment, including network security, encryption, access control, and monitoring.</p>
+            <ul class="cert-features">
+              <li>Annual on-site assessment by accredited QSA</li>
+              <li>Quarterly network vulnerability scans</li>
+              <li>Card data handled exclusively within tokenised vault</li>
+              <li>Full cardholder data environment (CDE) scoping</li>
+              <li>Annual penetration testing of CDE systems</li>
+            </ul>
+          </div>
+          <div class="cert-card-footer">
+            <span class="cert-meta">Level 1 · Assessed 2025 · Next audit Q1 2026</span>
+            <a href="contact.html" class="cert-link">Request AoC →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-grid" style="margin-top: 16px;">
+        <div class="card">
+          <div class="card-icon icon-green">🔒</div>
+          <h3>Tokenisation</h3>
+          <p>Raw card numbers are never stored. All PANs are replaced with tokens at the point of entry into our systems.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon icon-cyan">🌐</div>
+          <h3>Network Segmentation</h3>
+          <p>The CDE is fully isolated from other network segments using firewalls, VPCs, and strict access control lists.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon icon-indigo">👁️</div>
+          <h3>Continuous Monitoring</h3>
+          <p>All access to cardholder data environments is logged, monitored, and alerted on 24/7 by our SOC team.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- GDPR -->
+    <section id="gdpr" tabindex="-1">
+      <div class="section-eyebrow"><span class="section-eyebrow-line"></span>Data Protection</div>
+      <h2>GDPR — privacy by design</h2>
+      <p>FinPay is fully compliant with the EU General Data Protection Regulation (GDPR) and the UK GDPR post-Brexit. We act as both a data controller and data processor depending on context, and maintain appropriate legal bases for all personal data processing activities.</p>
+
+      <div class="cert-grid">
+        <div class="cert-card">
+          <div class="cert-card-header">
+            <div class="cert-badge-icon indigo">🇪🇺</div>
+            <div>
+              <div class="cert-card-title">EU GDPR</div>
+              <div class="cert-card-sub">General Data Protection Regulation (2016/679)</div>
+            </div>
+            <div class="cert-card-status status-green">Compliant</div>
+          </div>
+          <div class="cert-card-body">
+            <p>Our GDPR programme covers lawful basis documentation, data subject rights fulfilment, DPA agreements, and cross-border transfer mechanisms.</p>
+            <ul class="cert-features">
+              <li>Data Protection Officer (DPO) appointed</li>
+              <li>Standard Contractual Clauses (SCCs) for data transfers</li>
+              <li>Records of Processing Activities (RoPA) maintained</li>
+              <li>Data Subject Access Requests fulfilled within 30 days</li>
+              <li>Privacy by design embedded in product development</li>
+            </ul>
+          </div>
+          <div class="cert-card-footer">
+            <span class="cert-meta">EU &amp; UK GDPR · DPO appointed · RoPA current</span>
+            <a href="privacy.html" class="cert-link">Privacy Policy →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box cyan" role="note">
+        <span class="info-box-icon">ℹ️</span>
+        <div class="info-box-text">
+          <strong>Data Processing Agreements</strong>
+          All merchants processing personal data through FinPay must sign a Data Processing Agreement (DPA). Enterprise customers can download our standard DPA from the compliance portal or request a custom version via their account manager.
+        </div>
+      </div>
+    </section>
+
+    <!-- SOC 2 -->
+    <section id="soc2" tabindex="-1">
+      <div class="section-eyebrow"><span class="section-eyebrow-line"></span>Service Organisation Controls</div>
+      <h2>SOC 2 Type II — independently verified</h2>
+      <p>Our SOC 2 Type II report covers a minimum 12-month observation period and is issued by a Big 4 accounting firm. It provides independent verification that our controls for security, availability, processing integrity, confidentiality, and privacy operate effectively over time.</p>
+
+      <div class="cert-grid">
+        <div class="cert-card">
+          <div class="cert-card-header">
+            <div class="cert-badge-icon cyan">🔐</div>
+            <div>
+              <div class="cert-card-title">SOC 2 Type II</div>
+              <div class="cert-card-sub">AICPA Trust Services Criteria</div>
+            </div>
+            <div class="cert-card-status status-green">Current</div>
+          </div>
+          <div class="cert-card-body">
+            <p>Covers all five Trust Services Categories with a 12-month testing period, audited annually by an independent CPA firm.</p>
+            <ul class="cert-features">
+              <li>Security (CC6) — all 33 common criteria met</li>
+              <li>Availability (A1) — uptime commitments validated</li>
+              <li>Processing Integrity (PI1) — transaction accuracy verified</li>
+              <li>Confidentiality (C1) — data handling controls tested</li>
+              <li>Privacy (P1–P8) — GDPR alignment demonstrated</li>
+            </ul>
+          </div>
+          <div class="cert-card-footer">
+            <span class="cert-meta">Period: Jan 2024 – Dec 2024 · Issued Q1 2025</span>
+            <a href="contact.html" class="cert-link">Request Report →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ISO 27001 -->
+    <section id="iso" tabindex="-1">
+      <div class="section-eyebrow"><span class="section-eyebrow-line"></span>Information Security Management</div>
+      <h2>ISO 27001 — certified since 2021</h2>
+      <p>ISO/IEC 27001:2022 is the international gold standard for information security management systems (ISMS). FinPay has been certified since 2021 and maintains surveillance audits every six months with a full recertification every three years.</p>
+
+      <div class="cert-grid">
+        <div class="cert-card">
+          <div class="cert-card-header">
+            <div class="cert-badge-icon amber">🌐</div>
+            <div>
+              <div class="cert-card-title">ISO/IEC 27001:2022</div>
+              <div class="cert-card-sub">Information Security Management System</div>
+            </div>
+            <div class="cert-card-status status-green">Certified</div>
+          </div>
+          <div class="cert-card-body">
+            <p>Our ISMS covers the full scope of FinPay's payment processing platform, APIs, cloud infrastructure, and corporate IT systems.</p>
+            <ul class="cert-features">
+              <li>93 Annex A controls implemented and verified</li>
+              <li>Statement of Applicability (SoA) published internally</li>
+              <li>Risk treatment plan reviewed semi-annually</li>
+              <li>Surveillance audits every 6 months</li>
+              <li>Internal audit programme across all departments</li>
+            </ul>
+          </div>
+          <div class="cert-card-footer">
+            <span class="cert-meta">Cert. No. IS-2021-04812 · Valid to Dec 2026</span>
+            <a href="contact.html" class="cert-link">Request Certificate →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AML -->
+    <section id="aml" tabindex="-1">
+      <div class="section-eyebrow"><span class="section-eyebrow-line"></span>Financial Crime Prevention</div>
+      <h2>AML / CFT compliance</h2>
+      <p>FinPay maintains a comprehensive Anti-Money Laundering (AML) and Counter-Financing of Terrorism (CFT) programme that meets the requirements of the Financial Action Task Force (FATF) recommendations and the EU's Anti-Money Laundering Directives (AMLD).</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon icon-rose">🚨</div>
+          <h3>Transaction Monitoring</h3>
+          <p>Automated rules and ML models monitor all transactions for patterns indicative of money laundering or sanctions evasion.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon icon-indigo">📋</div>
+          <h3>Suspicious Activity Reports</h3>
+          <p>Dedicated MLRO and compliance team reviews alerts and files SARs with the relevant Financial Intelligence Unit within required timeframes.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon icon-amber">🌍</div>
+          <h3>Sanctions Screening</h3>
+          <p>All customers and transactions are screened against OFAC, EU, UN, and HM Treasury sanctions lists in real time.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon icon-cyan">🔄</div>
+          <h3>Programme Reviews</h3>
+          <p>Our AML programme undergoes annual independent review by external legal counsel specialising in financial crime.</p>
+        </div>
+      </div>
+
+      <div class="badge-row">
+        <span class="badge badge-green">FATF Aligned</span>
+        <span class="badge badge-indigo">6th AMLD Compliant</span>
+        <span class="badge badge-cyan">OFAC Screened</span>
+        <span class="badge badge-amber">Dedicated MLRO</span>
+      </div>
+    </section>
+
+    <!-- KYC -->
+    <section id="kyc" tabindex="-1">
+      <div class="section-eyebrow"><span class="section-eyebrow-line"></span>Identity Verification</div>
+      <h2>KYC — frictionless, not reckless</h2>
+      <p>Our Know Your Customer programme combines regulated identity checks with a streamlined user experience, so onboarding is fast for legitimate businesses without compromising the rigour regulators require.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon icon-green">🪪</div>
+          <h3>Identity Verification</h3>
+          <p>Document authentication and biometric liveness checks using IDEMIA and Onfido for individuals and directors.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon icon-indigo">🏢</div>
+          <h3>Business Verification</h3>
+          <p>Corporate registry lookups, beneficial ownership mapping to 25%+ threshold, and UBO verification across 180+ jurisdictions.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon icon-cyan">⚡</div>
+          <h3>Instant Onboarding</h3>
+          <p>Risk-tiered onboarding means low-risk merchants can start transacting in minutes while enhanced due diligence runs asynchronously.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon icon-amber">🔄</div>
+          <h3>Ongoing Monitoring</h3>
+          <p>Customer risk ratings are recalculated automatically when adverse media, PEP status, or transaction behaviour changes.</p>
+        </div>
+      </div>
+
+      <div class="info-box indigo" role="note">
+        <span class="info-box-icon">ℹ️</span>
+        <div class="info-box-text">
+          <strong>KYC as a Service</strong>
+          Platform merchants can leverage FinPay's KYC infrastructure to verify their own end customers. Our KYC API supports 195+ countries, 10,000+ document types, and returns a decision in under 60 seconds.
+        </div>
+      </div>
+    </section>
+
+    <!-- AUDIT -->
+    <section id="audit" tabindex="-1">
+      <div class="section-eyebrow"><span class="section-eyebrow-line"></span>Audit &amp; Transparency</div>
+      <h2>Our compliance journey</h2>
+      <p>FinPay has grown its compliance programme continuously since launch. Below is an overview of key milestones and our forward audit calendar.</p>
+
+      <div class="timeline" role="list">
+        <div class="timeline-item" role="listitem">
+          <div class="timeline-year">2021</div>
+          <div class="timeline-title">ISO 27001 Initial Certification</div>
+          <div class="timeline-desc">Achieved first ISO/IEC 27001 certification covering core payment processing infrastructure.</div>
+        </div>
+        <div class="timeline-item" role="listitem">
+          <div class="timeline-year">2022</div>
+          <div class="timeline-title">PCI DSS Level 1 — First Assessment</div>
+          <div class="timeline-desc">Completed Level 1 assessment by QSA; migrated fully to tokenised card vault.</div>
+        </div>
+        <div class="timeline-item" role="listitem">
+          <div class="timeline-year">2023</div>
+          <div class="timeline-title">SOC 2 Type II — First Report</div>
+          <div class="timeline-desc">First 12-month SOC 2 observation period completed; all five Trust Services Categories covered.</div>
+        </div>
+        <div class="timeline-item" role="listitem">
+          <div class="timeline-year">2024</div>
+          <div class="timeline-title">PCI DSS v4.0 Transition &amp; GDPR DPA Programme</div>
+          <div class="timeline-desc">Migrated to PCI DSS v4.0; launched DPA self-service portal for merchants.</div>
+        </div>
+        <div class="timeline-item" role="listitem">
+          <div class="timeline-year">2025 →</div>
+          <div class="timeline-title">ISO 27001:2022 Recertification &amp; SOC 3 Publication</div>
+          <div class="timeline-desc">Full recertification audit underway; public SOC 3 report to be published Q3 2025.</div>
+        </div>
+      </div>
+
+      <div class="info-box amber" role="note">
+        <span class="info-box-icon">📋</span>
+        <div class="info-box-text">
+          <strong>Request compliance documentation</strong>
+          Enterprise customers and prospective partners can request the full suite of compliance reports through our secure compliance portal. All documents are watermarked and provided under mutual NDA.
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ── CTA ── -->
+<section class="cta-section" aria-label="Call to action">
+  <h2>Ready for enterprise due diligence?</h2>
+  <p>Our compliance team can provide attestation letters, shared responsibility matrices, and audit reports to support your vendor risk assessment.</p>
+  <a href="contact.html"  class="btn-primary">Contact Compliance Team →</a>
+  <a href="security.html" class="btn-outline">Security Overview</a>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        
+        <p>The payment infrastructure trusted by 50,000+ businesses to move money securely across 150+ countries.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="payments.html">Payments</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="resources.html">Resources</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="sitemap.html">Sitemap</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="terms.html">Terms</a></li>
+          <li><a href="security.html">Security</a></li>
+          <li><a href="cookies.html">Cookies</a></li>
+          <li><a href="compliance.html">Compliance</a></li>
+          <li><a href="accessibility.html">Accessibility</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 FinPay Technologies, Inc. All rights reserved.</p>
+      <div class="social-links" aria-label="Social media">
+        <a href="#" aria-label="Twitter">𝕏</a>
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="GitHub">GH</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', open);
+  });
+
+  // Mobile TOC
+  const tocToggle = document.getElementById('tocToggle');
+  const tocLinks  = document.getElementById('tocLinks');
+  const tocArrow  = document.getElementById('tocArrow');
+  tocToggle.addEventListener('click', () => {
+    const open = tocLinks.classList.toggle('open');
+    tocArrow.textContent = open ? '▴' : '▾';
+    tocToggle.setAttribute('aria-expanded', open);
+  });
+  tocLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    tocLinks.classList.remove('open');
+    tocArrow.textContent = '▾';
+  }));
+
+  // Active sidebar
+  const sections = document.querySelectorAll('main section[id]');
+  const navLinks  = document.querySelectorAll('#sidebarNav a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+  }, { passive: true });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('main section').forEach(s => observer.observe(s));
+</script>
+</body>
+</html>

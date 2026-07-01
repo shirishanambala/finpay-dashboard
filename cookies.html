@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cookie Policy — FinPay</title>
+  <meta name="description" content="Understand how FinPay uses cookies and manage your preferences." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #07080f;
+      --bg-2:        #0d0f1e;
+      --bg-card:     #111328;
+      --border:      rgba(255,255,255,0.07);
+      --border-glow: rgba(99,102,241,0.35);
+      --accent:      #6366f1;
+      --accent-2:    #06b6d4;
+      --accent-3:    #10b981;
+      --text-primary:#f1f5f9;
+      --text-muted:  #94a3b8;
+      --text-dim:    #475569;
+      --radius-sm:   8px;
+      --radius-md:   14px;
+      --radius-lg:   20px;
+      --shadow-card: 0 4px 24px rgba(0,0,0,0.45);
+      --transition:  0.22s cubic-bezier(.4,0,.2,1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      background: rgba(7,8,15,0.78);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+    .logo {
+      font-size: 1.3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #6366f1, #06b6d4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+      letter-spacing: -0.5px;
+      white-space: nowrap;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: color var(--transition);
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: width var(--transition);
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: #fff !important;
+      padding: 8px 20px;
+      border-radius: var(--radius-sm);
+      font-weight: 600 !important;
+      font-size: 0.85rem !important;
+      transition: opacity var(--transition), transform var(--transition) !important;
+    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover  { opacity: 0.88; transform: translateY(-1px); }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--text-muted);
+      border-radius: 2px;
+      transition: var(--transition);
+    }
+    .mobile-menu {
+      display: none;
+      position: absolute;
+      top: 64px; left: 0; right: 0;
+      background: rgba(7,8,15,0.97);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 24px;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 100px 24px 80px;
+      text-align: center;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(6,182,212,0.12) 0%, transparent 65%),
+                  radial-gradient(ellipse 50% 40% at 20% 50%, rgba(99,102,241,0.08) 0%, transparent 60%),
+                  var(--bg);
+    }
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      opacity: 0.35;
+    }
+    .blob-1 { width: 440px; height: 440px; background: rgba(6,182,212,0.2);  top: -100px; right: -60px; }
+    .blob-2 { width: 320px; height: 320px; background: rgba(99,102,241,0.18); bottom: -40px; left: 5%; }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-bottom: 28px;
+    }
+    .breadcrumb a { color: var(--text-dim); text-decoration: none; transition: color var(--transition); }
+    .breadcrumb a:hover { color: var(--accent); }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(6,182,212,0.1);
+      border: 1px solid rgba(6,182,212,0.25);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #67e8f9;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+    .hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-2); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, #67e8f9 0%, #a5b4fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      max-width: 520px;
+      margin: 0 auto 36px;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.75;
+    }
+
+    /* quick jump chips */
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .hero-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all var(--transition);
+    }
+    .hero-chip:hover {
+      background: rgba(99,102,241,0.1);
+      border-color: rgba(99,102,241,0.35);
+      color: var(--text-primary);
+    }
+
+    /* ── LAYOUT ── */
+    .page-body {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 24px 80px;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar { position: sticky; top: 88px; }
+    .sidebar-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+      padding-left: 12px;
+    }
+    .sidebar-nav { list-style: none; }
+    .sidebar-nav li a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: all var(--transition);
+      border-left: 2px solid transparent;
+    }
+    .sidebar-nav li a:hover, .sidebar-nav li a.active {
+      color: var(--text-primary);
+      background: rgba(6,182,212,0.08);
+      border-left-color: var(--accent-2);
+    }
+    .sidebar-nav li a .nav-icon { font-size: 0.9rem; width: 18px; text-align: center; }
+
+    .mobile-toc { display: none; margin-bottom: 32px; }
+    .mobile-toc-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .mobile-toc-links { display: none; flex-direction: column; gap: 4px; padding: 10px 0 4px; }
+    .mobile-toc-links.open { display: flex; }
+    .mobile-toc-links a { padding: 8px 12px; color: var(--text-muted); text-decoration: none; font-size: 0.88rem; }
+
+    /* ── CONTENT ── */
+    .content section {
+      margin-bottom: 64px;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .content section.visible { opacity: 1; transform: translateY(0); }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      margin-bottom: 10px;
+    }
+    .section-eyebrow-line { width: 20px; height: 2px; background: var(--accent-2); border-radius: 2px; }
+
+    .content h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .content p { color: var(--text-muted); margin-bottom: 16px; font-size: 0.95rem; }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(6,182,212,0.3);
+      box-shadow: var(--shadow-card);
+    }
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-top: 24px; }
+
+    .card-icon {
+      width: 44px; height: 44px;
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 16px;
+    }
+    .icon-cyan   { background: rgba(6,182,212,0.12); }
+    .icon-indigo { background: rgba(99,102,241,0.12); }
+    .icon-green  { background: rgba(16,185,129,0.12); }
+    .icon-amber  { background: rgba(245,158,11,0.12); }
+    .icon-rose   { background: rgba(244,63,94,0.12); }
+    .icon-purple { background: rgba(168,85,247,0.12); }
+
+    .card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .card p  { font-size: 0.88rem; color: var(--text-muted); margin: 0; }
+
+    /* info box */
+    .info-box {
+      display: flex;
+      gap: 14px;
+      padding: 18px 20px;
+      border-radius: var(--radius-md);
+      border: 1px solid;
+      margin: 20px 0;
+      align-items: flex-start;
+    }
+    .info-box-icon { font-size: 1.1rem; margin-top: 1px; flex-shrink: 0; }
+    .info-box-text { font-size: 0.88rem; line-height: 1.65; }
+    .info-box-text strong { display: block; margin-bottom: 3px; font-weight: 700; }
+    .info-box.cyan   { background: rgba(6,182,212,0.06); border-color: rgba(6,182,212,0.22); }
+    .info-box.cyan .info-box-text strong { color: #67e8f9; }
+    .info-box.green  { background: rgba(16,185,129,0.06); border-color: rgba(16,185,129,0.22); }
+    .info-box.green .info-box-text strong { color: #6ee7b7; }
+    .info-box.amber  { background: rgba(245,158,11,0.06); border-color: rgba(245,158,11,0.22); }
+    .info-box.amber .info-box-text strong { color: #fcd34d; }
+
+    /* cookie type table */
+    .cookie-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      font-size: 0.85rem;
+    }
+    .cookie-table th {
+      text-align: left;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.03);
+      border-bottom: 1px solid var(--border);
+      color: var(--text-dim);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+    }
+    .cookie-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text-muted);
+      vertical-align: top;
+    }
+    .cookie-table tr:last-child td { border-bottom: none; }
+    .cookie-table tr:hover td { background: rgba(255,255,255,0.015); }
+    .cookie-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: #67e8f9;
+    }
+    .cookie-duration {
+      white-space: nowrap;
+      font-size: 0.78rem;
+      color: var(--text-dim);
+    }
+
+    /* ── TOGGLE PANEL ── */
+    .pref-panel {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-top: 24px;
+    }
+    .pref-header {
+      padding: 24px 28px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .pref-header h3 { font-size: 1.05rem; font-weight: 700; }
+    .pref-header p  { font-size: 0.85rem; color: var(--text-muted); margin: 4px 0 0; }
+    .pref-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .pref-item {
+      padding: 22px 28px;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+    }
+    .pref-item:last-child { border-bottom: none; }
+   
+    .pref-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 5px;
+    }
+    .pref-required {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #6ee7b7;
+      background: rgba(16,185,129,0.1);
+      border: 1px solid rgba(16,185,129,0.25);
+      padding: 2px 8px;
+      border-radius: 100px;
+    }
+    .pref-desc { font-size: 0.84rem; color: var(--text-muted); }
+    .pref-examples { font-size: 0.78rem; color: var(--text-dim); margin-top: 4px; font-family: 'JetBrains Mono', monospace; }
+
+    /* Toggle switch */
+    .toggle-wrap { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+    .toggle-label { font-size: 0.75rem; color: var(--text-dim); font-weight: 600; min-width: 28px; text-align: right; transition: color var(--transition); }
+    .toggle {
+      position: relative;
+      width: 48px;
+      height: 26px;
+      flex-shrink: 0;
+    }
+    .toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+    .toggle-track {
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      cursor: pointer;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .toggle input:checked + .toggle-track {
+      background: linear-gradient(135deg, #6366f1, #06b6d4);
+      border-color: transparent;
+    }
+    .toggle input:disabled + .toggle-track {
+      background: rgba(16,185,129,0.25);
+      border-color: rgba(16,185,129,0.4);
+      cursor: not-allowed;
+      opacity: 0.9;
+    }
+    .toggle-thumb {
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform var(--transition);
+      pointer-events: none;
+    }
+    .toggle input:checked ~ .toggle-thumb { transform: translateX(22px); }
+    .toggle input:focus-visible + .toggle-track { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+    .pref-save-bar {
+      padding: 18px 28px;
+      background: rgba(99,102,241,0.06);
+      border-top: 1px solid rgba(99,102,241,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .pref-save-note { font-size: 0.82rem; color: var(--text-muted); }
+    .pref-save-msg  { font-size: 0.82rem; color: #6ee7b7; opacity: 0; transition: opacity 0.4s; }
+    .pref-save-msg.show { opacity: 1; }
+
+    /* Buttons */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: #fff;
+      padding: 11px 22px;
+      border-radius: var(--radius-sm);
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: opacity var(--transition), transform var(--transition);
+      box-shadow: 0 4px 16px rgba(99,102,241,0.3);
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color var(--transition), color var(--transition), transform var(--transition);
+    }
+    .btn-outline:hover { border-color: var(--accent-2); color: var(--text-primary); transform: translateY(-1px); }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .btn-ghost:hover { color: var(--text-muted); background: rgba(255,255,255,0.03); }
+
+    /* badge row */
+    .badge-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border: 1px solid;
+    }
+    .badge-green  { background: rgba(16,185,129,0.08); border-color: rgba(16,185,129,0.3); color: #6ee7b7; }
+    .badge-indigo { background: rgba(99,102,241,0.08); border-color: rgba(99,102,241,0.3); color: #a5b4fc; }
+    .badge-cyan   { background: rgba(6,182,212,0.08);  border-color: rgba(6,182,212,0.3);  color: #67e8f9; }
+    .badge-amber  { background: rgba(245,158,11,0.08); border-color: rgba(245,158,11,0.3); color: #fcd34d; }
+    .badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: linear-gradient(135deg, rgba(6,182,212,0.1) 0%, rgba(99,102,241,0.07) 100%);
+      border: 1px solid rgba(6,182,212,0.2);
+      border-radius: var(--radius-lg);
+      padding: 56px 40px;
+      text-align: center;
+      margin: 60px 24px 80px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: 50%; transform: translateX(-50%);
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(6,182,212,0.1), transparent 70%);
+      pointer-events: none;
+    }
+    .cta-section h2 { font-size: 1.9rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 14px; }
+    .cta-section p  { color: var(--text-muted); font-size: 1rem; margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); background: var(--bg-2); }
+    .footer-inner { max-width: 1200px; margin: 0 auto; padding: 60px 24px 40px; }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 48px;
+    }
+    .footer-brand p { font-size: 0.85rem; color: var(--text-dim); margin-top: 12px; max-width: 260px; line-height: 1.75; }
+    .footer-col h4 { font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul a { color: var(--text-muted); text-decoration: none; font-size: 0.85rem; transition: color var(--transition); }
+    .footer-col ul a:hover { color: var(--text-primary); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 28px; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 16px; }
+    .footer-bottom p { font-size: 0.8rem; color: var(--text-dim); }
+    .social-links { display: flex; gap: 12px; }
+    .social-links a {
+      width: 36px; height: 36px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      text-decoration: none;
+      transition: all var(--transition);
+    }
+    .social-links a:hover { border-color: var(--accent-2); color: var(--accent-2); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .page-body { grid-template-columns: 1fr; gap: 0; }
+      .sidebar { display: none; }
+      .mobile-toc { display: block; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .pref-item { grid-template-columns: 1fr; }
+      .toggle-wrap { justify-content: flex-start; }
+    }
+    @media (max-width: 620px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      nav { position: relative; }
+      .hero { padding: 64px 20px 56px; }
+      .card-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .cta-section { padding: 40px 24px; }
+      .cookie-table { font-size: 0.78rem; }
+      .pref-header { flex-direction: column; align-items: flex-start; }
+      .pref-save-bar { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAVBAR ── -->
+<nav role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    
+    <ul class="nav-links">
+      
+      <li><a href="payments.html">Payments</a></li>
+      <li><a href="pricing.html">Pricing</a></li>
+      <li><a href="resources.html">Resources</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="signup.html" class="nav-cta">Get Started</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Toggle menu" aria-expanded="false" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu" role="menu">
+    
+    <a href="payments.html">Payments</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="resources.html">Resources</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="signup.html">Get Started →</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero" aria-label="Page hero">
+  <div class="hero-blob blob-1"></div>
+  <div class="hero-blob blob-2"></div>
+
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    
+    <span>›</span>
+    <span>Cookie Policy</span>
+  </nav>
+
+  <div class="hero-badge">
+    <span class="hero-badge-dot"></span>
+    Effective — January 2025
+  </div>
+
+  <h1>Cookies &amp; <span>Your Choices</span></h1>
+  <p>We use cookies to keep things running smoothly and to give you a better experience. Here's exactly what we use and how to control it.</p>
+
+  <div class="hero-chips" role="list">
+    <a href="#what-are-cookies"  class="hero-chip" role="listitem">🍪 What Are Cookies</a>
+    <a href="#types"             class="hero-chip" role="listitem">📋 Types of Cookies</a>
+    <a href="#essential"         class="hero-chip" role="listitem">🔒 Essential</a>
+    <a href="#analytics"         class="hero-chip" role="listitem">📊 Analytics</a>
+    <a href="#marketing"         class="hero-chip" role="listitem">🎯 Marketing</a>
+    <a href="#preferences"       class="hero-chip" role="listitem">⚙️ Preferences</a>
+  </div>
+</section>
+
+<!-- ── PAGE BODY ── -->
+<div class="page-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" aria-label="Page sections">
+    <p class="sidebar-label">On This Page</p>
+    <ul class="sidebar-nav" id="sidebarNav">
+      <li><a href="#what-are-cookies" class="active"><span class="nav-icon">🍪</span> What Are Cookies</a></li>
+      <li><a href="#types"><span class="nav-icon">📋</span> Types of Cookies</a></li>
+      <li><a href="#essential"><span class="nav-icon">🔒</span> Essential Cookies</a></li>
+      <li><a href="#analytics"><span class="nav-icon">📊</span> Analytics Cookies</a></li>
+      <li><a href="#marketing"><span class="nav-icon">🎯</span> Marketing Cookies</a></li>
+      <li><a href="#preferences"><span class="nav-icon">⚙️</span> Cookie Preferences</a></li>
+    </ul>
+  </aside>
+
+  <!-- MOBILE TOC -->
+  <div class="mobile-toc" aria-label="Jump to section">
+    <button class="mobile-toc-toggle" id="tocToggle" aria-expanded="false">
+      <span>Jump to section</span> <span id="tocArrow">▾</span>
+    </button>
+    <div class="mobile-toc-links" id="tocLinks">
+      <a href="#what-are-cookies">🍪 What Are Cookies</a>
+      <a href="#types">📋 Types of Cookies</a>
+      <a href="#essential">🔒 Essential Cookies</a>
+      <a href="#analytics">📊 Analytics Cookies</a>
+      <a href="#marketing">🎯 Marketing Cookies</a>
+      <a href="#preferences">⚙️ Cookie Preferences</a>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <main class="content" id="mainContent">
+
+    <!-- 1. WHAT ARE COOKIES -->
+    <section id="what-are-cookies" tabindex="-1">
+      <div class="section-eyebrow"><span class="section-eyebrow-line"></span>Introduction</div>
+      <h2>What are cookies?</h2>
+      <p>Cookies are small text files placed on your device when you visit a website. They allow the site to remember your actions and preferences over time, so you don't have to re-enter them every time you visit or navigate between pages.</p>
+      <p>FinPay uses cookies and similar technologies (such as local storage and session storage) to provide, protect, and improve our platform. We never use cookies to identify you personally without your consent.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon icon-cyan">📁</div>
+          <h3>Session Cookies</h3>
+          <p>Temporary cookies deleted when you close your browser. Used for things like keeping you logged in during a session.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon icon-indigo">💾</div>
+          <h3>Persistent Cookies</h3>
+          <p>Stored on your device for a set period. Used to remember preferences across visits.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon icon-green">🏠</div>
+          <h3>First-Party Cookies</h3>
+          <p>Set directly by FinPay for core functionality and performance measurement.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon icon-amber">🌐</div>
+          <h3>Third-Party Cookies</h3>
+          <p>Set by our trusted partners for analytics and, where you've consented, personalised advertising.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. TYPES -->
+    <section id="types" tabindex="-1">
+      <div class="section-eyebrow"><span class="section-eyebrow-line"></span>Cookie Categories</div>
+      <h2>The four types we use</h2>
+      <p>We categorise every cookie we place into one of four groups. Essential cookies are always active. You can freely manage the others in the preference panel below.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon icon-green">🔒</div>
+          <h3>Essential</h3>
+          <p>Required for the platform to function. Cannot be turned off — but they don't store any personal data.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon icon-cyan">📊</div>
+          <h3>Analytics</h3>
+          <p>Help us understand how people use FinPay so we can improve it. All data is anonymised and aggregated.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon icon-amber">🎯</div>
+          <h3>Marketing</h3>
+          <p>Used to show relevant advertising on third-party platforms. Only active with your explicit consent.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon icon-purple">⭐</div>
+          <h3>Personalisation</h3>
+          <p>Remember your preferences like theme and language to give you a consistent, tailored experience.</p>
+        </div>
+      </div>
+
+      <div class="info-box cyan" role="note" style="margin-top: 24px;">
+        <span class="info-box-icon">ℹ️</span>
+        <div class="info-box-text">
+          <strong>GDPR &amp; ePrivacy compliant</strong>
+          We obtain verifiable consent before setting any non-essential cookies, in line with GDPR Article 7 and the EU ePrivacy Directive. You can withdraw consent at any time using the panel below.
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. ESSENTIAL -->
+    <section id="essential" tabindex="-1">
+      <div class="section-eyebrow"><span class="section-eyebrow-line"></span>Essential Cookies</div>
+      <h2>Always-on, always safe</h2>
+      <p>These cookies are strictly necessary for the secure operation of FinPay. Without them, services like authentication, payment processing, and fraud protection cannot function. They contain no personally identifiable information.</p>
+
+      <div class="badge-row">
+        <span class="badge badge-green">Cannot be disabled</span>
+        <span class="badge badge-green">No personal data</span>
+        <span class="badge badge-green">Session only</span>
+      </div>
+
+      <table class="cookie-table" aria-label="Essential cookies list">
+        <thead>
+          <tr>
+            <th>Cookie Name</th>
+            <th>Purpose</th>
+            <th>Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="cookie-name">fp_session</span></td>
+            <td>Maintains your authenticated session securely</td>
+            <td class="cookie-duration">Session</td>
+          </tr>
+          <tr>
+            <td><span class="cookie-name">fp_csrf</span></td>
+            <td>Protects against cross-site request forgery attacks</td>
+            <td class="cookie-duration">Session</td>
+          </tr>
+          <tr>
+            <td><span class="cookie-name">fp_device</span></td>
+            <td>Identifies trusted devices for fraud prevention</td>
+            <td class="cookie-duration">30 days</td>
+          </tr>
+          <tr>
+            <td><span class="cookie-name">fp_consent</span></td>
+            <td>Stores your cookie preference choices</td>
+            <td class="cookie-duration">1 year</td>
+          </tr>
+          <tr>
+            <td><span class="cookie-name">__stripe_mid</span></td>
+            <td>Fraud detection for payment processing (Stripe)</td>
+            <td class="cookie-duration">1 year</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 4. ANALYTICS -->
+    <section id="analytics" tabindex="-1">
+      <div class="section-eyebrow"><span class="section-eyebrow-line"></span>Analytics Cookies</div>
+      <h2>Helping us build a better product</h2>
+      <p>Analytics cookies collect anonymous, aggregated information about how our platform is used — which pages are popular, where users encounter friction, and how long features take to load. No individual user is ever identified.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-icon icon-cyan">🔮</div>
+          <h3>Mixpanel</h3>
+          <p>Product analytics to understand feature usage and user journeys. All data is anonymised before storage.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon icon-indigo">📈</div>
+          <h3>Google Analytics 4</h3>
+          <p>Traffic and engagement metrics on our marketing site. IP anonymisation is always enabled.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon icon-green">⚡</div>
+          <h3>Datadog RUM</h3>
+          <p>Real user monitoring for performance tracking — page load times and error rates, no personal data.</p>
+        </div>
+      </div>
+
+      <table class="cookie-table" aria-label="Analytics cookies" style="margin-top: 24px;">
+        <thead>
+          <tr>
+            <th>Cookie Name</th>
+            <th>Provider</th>
+            <th>Duration</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="cookie-name">_ga</span></td>
+            <td>Google Analytics — identifies unique sessions</td>
+            <td class="cookie-duration">2 years</td>
+          </tr>
+          <tr>
+            <td><span class="cookie-name">_ga_XXXXXXX</span></td>
+            <td>Google Analytics 4 — session state</td>
+            <td class="cookie-duration">2 years</td>
+          </tr>
+          <tr>
+            <td><span class="cookie-name">mp_*</span></td>
+            <td>Mixpanel — product analytics identifier</td>
+            <td class="cookie-duration">1 year</td>
+          </tr>
+          <tr>
+            <td><span class="cookie-name">dd_s</span></td>
+            <td>Datadog RUM — performance session</td>
+            <td class="cookie-duration">Session</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- 5. MARKETING -->
+    <section id="marketing" tabindex="-1">
+      <div class="section-eyebrow"><span class="section-eyebrow-line"></span>Marketing Cookies</div>
+      <h2>Relevant ads — only with consent</h2>
+      <p>Marketing cookies are only set after you give explicit consent. They allow our advertising partners to show you FinPay-related content on third-party platforms. We never sell your data to advertisers.</p>
+
+      <div class="info-box amber" role="note">
+        <span class="info-box-icon">⚠️</span>
+        <div class="info-box-text">
+          <strong>Consent required</strong>
+          Marketing cookies are turned off by default. You must actively enable them in the preference panel below. You can change your mind at any time.
+        </div>
+      </div>
+
+      <div class="card-grid" style="margin-top: 20px;">
+        <div class="card">
+          <div class="card-icon icon-indigo">🎯</div>
+          <h3>Google Ads</h3>
+          <p>Measures conversion events and enables remarketing on Google's ad network. Data is hashed before transmission.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon icon-cyan">🔗</div>
+          <h3>LinkedIn Insights</h3>
+          <p>B2B audience analytics and campaign attribution for LinkedIn ad spend. No sensitive categories processed.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon icon-rose">📌</div>
+          <h3>Meta Pixel</h3>
+          <p>Facebook and Instagram campaign performance. Advanced Matching uses hashed email only, never plain-text.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. PREFERENCES PANEL -->
+    <section id="preferences" tabindex="-1">
+      <div class="section-eyebrow"><span class="section-eyebrow-line"></span>Cookie Preferences</div>
+      <h2>Your settings, your control</h2>
+      <p>Use the panel below to manage your cookie preferences at any time. Changes take effect immediately. Essential cookies cannot be disabled as they are required for the service to work.</p>
+
+      <div class="pref-panel" role="region" aria-label="Cookie preference settings">
+        <div class="pref-header">
+          <div>
+            <h3>Manage Cookie Preferences</h3>
+            <p>Adjust your choices below. Settings are saved automatically.</p>
+          </div>
+          <div class="pref-actions">
+            <button class="btn-ghost" id="btnRejectAll" aria-label="Reject all optional cookies">Reject All</button>
+            <button class="btn-outline" id="btnAcceptAll" aria-label="Accept all cookies">Accept All</button>
+          </div>
+        </div>
+
+        <!-- Essential -->
+        <div class="pref-item">
+          <div class="pref-info">
+            <div class="pref-name">
+              🔒 Essential Cookies
+              <span class="pref-required">Always Active</span>
+            </div>
+            <div class="pref-desc">Required for login, security, fraud prevention, and payment processing. Cannot be disabled.</div>
+            <div class="pref-examples">fp_session · fp_csrf · fp_device</div>
+          </div>
+          <div class="toggle-wrap">
+            <span class="toggle-label" id="lbl-essential">On</span>
+            <label class="toggle" aria-label="Essential cookies (always on)">
+              <input type="checkbox" id="toggle-essential" checked disabled />
+              <span class="toggle-track"></span>
+              <span class="toggle-thumb"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Analytics -->
+        <div class="pref-item">
+          <div class="pref-info">
+            <div class="pref-name">📊 Analytics Cookies</div>
+            <div class="pref-desc">Anonymous usage data that helps us improve performance and fix issues.</div>
+            <div class="pref-examples">_ga · mp_* · dd_s</div>
+          </div>
+          <div class="toggle-wrap">
+            <span class="toggle-label" id="lbl-analytics">Off</span>
+            <label class="toggle" aria-label="Toggle analytics cookies">
+              <input type="checkbox" id="toggle-analytics" />
+              <span class="toggle-track"></span>
+              <span class="toggle-thumb"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Marketing -->
+        <div class="pref-item">
+          <div class="pref-info">
+            <div class="pref-name">🎯 Marketing Cookies</div>
+            <div class="pref-desc">Used for advertising campaign measurement. Only shown on third-party sites.</div>
+            <div class="pref-examples">_gcl_au · _fbp · li_sugr</div>
+          </div>
+          <div class="toggle-wrap">
+            <span class="toggle-label" id="lbl-marketing">Off</span>
+            <label class="toggle" aria-label="Toggle marketing cookies">
+              <input type="checkbox" id="toggle-marketing" />
+              <span class="toggle-track"></span>
+              <span class="toggle-thumb"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Personalisation -->
+        <div class="pref-item">
+          <div class="pref-info">
+            <div class="pref-name">⭐ Personalisation Cookies</div>
+            <div class="pref-desc">Remember your theme, language, and layout preferences across visits.</div>
+            <div class="pref-examples">fp_prefs · fp_lang · fp_theme</div>
+          </div>
+          <div class="toggle-wrap">
+            <span class="toggle-label" id="lbl-personal">Off</span>
+            <label class="toggle" aria-label="Toggle personalisation cookies">
+              <input type="checkbox" id="toggle-personal" />
+              <span class="toggle-track"></span>
+              <span class="toggle-thumb"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Save bar -->
+        <div class="pref-save-bar">
+          <p class="pref-save-note">Preferences are saved in your browser. Clear cookies to reset.</p>
+          <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+            <span class="pref-save-msg" id="saveMsg" role="status" aria-live="polite">✅ Preferences saved</span>
+            <button class="btn-primary" id="btnSave" aria-label="Save cookie preferences">Save Preferences</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box green" role="note" style="margin-top: 24px;">
+        <span class="info-box-icon">✅</span>
+        <div class="info-box-text">
+          <strong>Browser-level control</strong>
+          You can also manage cookies directly in your browser settings. Visit your browser's help pages for instructions on blocking or deleting cookies. Note that disabling all cookies may affect the functionality of FinPay.
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ── CTA ── -->
+<section class="cta-section" aria-label="Call to action">
+  <h2>Questions about your privacy?</h2>
+  <p>Our Data Protection Officer is available to answer any questions about how we handle your personal data and cookies.</p>
+  <a href="privacy.html"  class="btn-primary">Read Privacy Policy →</a>
+  <a href="contact.html"  class="btn-outline" style="margin-left:12px;">Contact DPO</a>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        
+        <p>The payment infrastructure trusted by 50,000+ businesses to move money securely across 150+ countries.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="payments.html">Payments</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="resources.html">Resources</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="sitemap.html">Sitemap</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="terms.html">Terms</a></li>
+          <li><a href="security.html">Security</a></li>
+          <li><a href="cookies.html">Cookies</a></li>
+          <li><a href="compliance.html">Compliance</a></li>
+          <li><a href="accessibility.html">Accessibility</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 FinPay Technologies, Inc. All rights reserved.</p>
+      <div class="social-links" aria-label="Social media">
+        <a href="#" aria-label="Twitter">𝕏</a>
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="GitHub">GH</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', open);
+  });
+
+  // Mobile TOC
+  const tocToggle = document.getElementById('tocToggle');
+  const tocLinks  = document.getElementById('tocLinks');
+  const tocArrow  = document.getElementById('tocArrow');
+  tocToggle.addEventListener('click', () => {
+    const open = tocLinks.classList.toggle('open');
+    tocArrow.textContent = open ? '▴' : '▾';
+    tocToggle.setAttribute('aria-expanded', open);
+  });
+  tocLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    tocLinks.classList.remove('open');
+    tocArrow.textContent = '▾';
+  }));
+
+  // Active sidebar on scroll
+  const sections = document.querySelectorAll('main section[id]');
+  const navLinks  = document.querySelectorAll('#sidebarNav a');
+  function onScroll() {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+    navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('main section').forEach(s => observer.observe(s));
+
+  // ── COOKIE PREFERENCE PANEL ──
+  const prefs = {
+    analytics:  { toggle: document.getElementById('toggle-analytics'), label: document.getElementById('lbl-analytics') },
+    marketing:  { toggle: document.getElementById('toggle-marketing'), label: document.getElementById('lbl-marketing') },
+    personal:   { toggle: document.getElementById('toggle-personal'),  label: document.getElementById('lbl-personal')  }
+  };
+  const saveMsg = document.getElementById('saveMsg');
+
+  // Load saved prefs
+  function loadPrefs() {
+    try {
+      const saved = JSON.parse(localStorage.getItem('fp_cookie_prefs') || '{}');
+      Object.keys(prefs).forEach(key => {
+        if (saved[key] !== undefined) {
+          prefs[key].toggle.checked = saved[key];
+          updateLabel(key, saved[key]);
+        }
+      });
+    } catch(e) {}
+  }
+
+  function updateLabel(key, on) {
+    prefs[key].label.textContent = on ? 'On' : 'Off';
+    prefs[key].label.style.color = on ? '#6ee7b7' : '';
+  }
+
+  // Live label update on toggle
+  Object.keys(prefs).forEach(key => {
+    prefs[key].toggle.addEventListener('change', () => updateLabel(key, prefs[key].toggle.checked));
+  });
+
+  // Save
+  document.getElementById('btnSave').addEventListener('click', () => {
+    const data = {};
+    Object.keys(prefs).forEach(key => { data[key] = prefs[key].toggle.checked; });
+    try { localStorage.setItem('fp_cookie_prefs', JSON.stringify(data)); } catch(e) {}
+    saveMsg.classList.add('show');
+    setTimeout(() => saveMsg.classList.remove('show'), 2800);
+  });
+
+  // Accept all
+  document.getElementById('btnAcceptAll').addEventListener('click', () => {
+    Object.keys(prefs).forEach(key => {
+      prefs[key].toggle.checked = true;
+      updateLabel(key, true);
+    });
+  });
+
+  // Reject all
+  document.getElementById('btnRejectAll').addEventListener('click', () => {
+    Object.keys(prefs).forEach(key => {
+      prefs[key].toggle.checked = false;
+      updateLabel(key, false);
+    });
+  });
+
+  loadPrefs();
+</script>
+</body>
+</html>

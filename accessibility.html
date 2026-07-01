@@ -1,0 +1,1881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Accessibility — FinPay</title>
+  <meta name="description" content="FinPay is committed to building an inclusive, accessible payment platform for everyone." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =============================================
+       DESIGN TOKENS
+    ============================================= */
+    :root {
+      --bg:           #07080f;
+      --bg-2:         #0d0f1c;
+      --bg-card:      #11131f;
+      --border:       rgba(255,255,255,0.07);
+      --border-hover: rgba(255,255,255,0.14);
+
+      --blue:         #4f6ef7;
+      --blue-light:   #7b93ff;
+      --teal:         #00c9a7;
+      --purple:       #8b5cf6;
+      --amber:        #f59e0b;
+
+      --text-1:       #f0f2ff;
+      --text-2:       #9ba3c0;
+      --text-3:       #5c6380;
+
+      --radius-sm:    10px;
+      --radius-md:    16px;
+      --radius-lg:    24px;
+
+      --shadow-card:  0 4px 32px rgba(0,0,0,0.45);
+      --shadow-glow:  0 0 40px rgba(79,110,247,0.15);
+
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'Inter', sans-serif;
+
+      --nav-h:        68px;
+    }
+
+    /* =============================================
+       RESET & BASE
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text-1);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    :focus-visible {
+      outline: 2px solid var(--blue-light);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* =============================================
+       NOISE OVERLAY
+    ============================================= */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.6;
+    }
+
+    /* =============================================
+       NAVBAR
+    ============================================= */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      padding: 0 clamp(16px, 5vw, 48px);
+      background: whitesmoke;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+
+    .nav__inner {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav__logo {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff 30%, var(--blue-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.02em;
+    }
+
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav__links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-2);
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    .nav__links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1.5px;
+      background: var(--blue-light);
+      transition: width 0.25s ease;
+    }
+
+    .nav__links a:hover { color: var(--text-1); }
+    .nav__links a:hover::after { width: 100%; }
+
+    .nav__cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 50px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.22s ease;
+      font-family: var(--font-body);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-2);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      color: var(--text-1);
+      border-color: var(--border-hover);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      color: #fff;
+      box-shadow: 0 0 24px rgba(79,110,247,0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 32px rgba(79,110,247,0.5);
+    }
+
+    .nav__hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+      background: none;
+      border: none;
+    }
+
+    .nav__hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: var(--text-2);
+      border-radius: 2px;
+      transition: all 0.25s;
+    }
+
+    .nav__mobile {
+      display: none;
+      position: fixed;
+      top: var(--nav-h); left: 0; right: 0;
+      background: rgba(13,15,28,0.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 24px clamp(16px,5vw,48px);
+      z-index: 999;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .nav__mobile.open { display: flex; }
+
+    .nav__mobile a {
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-2);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav__mobile a:hover { color: var(--text-1); }
+
+    /* =============================================
+       PAGE WRAPPER
+    ============================================= */
+    .page {
+      padding-top: var(--nav-h);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 96px clamp(16px,6vw,64px) 80px;
+      text-align: center;
+    }
+
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(0,201,167,0.18) 0%, transparent 70%),
+                  radial-gradient(ellipse 50% 40% at 85% 60%, rgba(79,110,247,0.12) 0%, transparent 60%);
+      z-index: 0;
+    }
+
+    /* floating blobs */
+    .hero__blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.25;
+      animation: float 8s ease-in-out infinite;
+      z-index: 0;
+    }
+
+    .hero__blob--1 {
+      width: 420px; height: 420px;
+      background: var(--teal);
+      top: -80px; left: -120px;
+      animation-delay: 0s;
+    }
+
+    .hero__blob--2 {
+      width: 300px; height: 300px;
+      background: var(--blue);
+      top: 40px; right: -80px;
+      animation-delay: -3s;
+    }
+
+    .hero__blob--3 {
+      width: 200px; height: 200px;
+      background: var(--purple);
+      bottom: -60px; left: 40%;
+      animation-delay: -5s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50%       { transform: translateY(-20px) scale(1.03); }
+    }
+
+    .hero__inner {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .hero__badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 50px;
+      background: rgba(0,201,167,0.1);
+      border: 1px solid rgba(0,201,167,0.25);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--teal);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .hero__badge svg { width: 14px; height: 14px; }
+
+    .hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: var(--text-1);
+      margin-bottom: 20px;
+    }
+
+    .hero__title .accent {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--blue-light) 60%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero__sub {
+      font-size: clamp(1rem, 2.2vw, 1.2rem);
+      color: var(--text-2);
+      max-width: 560px;
+      margin: 0 auto 36px;
+      line-height: 1.8;
+    }
+
+    .hero__breadcrumb {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: var(--text-3);
+    }
+
+    .hero__breadcrumb a {
+      color: var(--text-3);
+      transition: color 0.2s;
+    }
+
+    .hero__breadcrumb a:hover { color: var(--text-2); }
+
+    .hero__breadcrumb span { color: var(--text-3); }
+
+    /* =============================================
+       WCAG BADGE STRIP
+    ============================================= */
+    .badge-strip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 0 clamp(16px,6vw,64px) 64px;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border-radius: 50px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-2);
+      transition: all 0.2s;
+    }
+
+    .badge-pill:hover {
+      border-color: var(--border-hover);
+      color: var(--text-1);
+    }
+
+    .badge-pill .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+    }
+
+    .dot--teal    { background: var(--teal); }
+    .dot--blue    { background: var(--blue); }
+    .dot--purple  { background: var(--purple); }
+    .dot--amber   { background: var(--amber); }
+
+    /* =============================================
+       MAIN LAYOUT (sidebar + content)
+    ============================================= */
+    .layout {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 clamp(16px,5vw,48px) 120px;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    /* =============================================
+       SIDEBAR
+    ============================================= */
+    .sidebar {
+      position: sticky;
+      top: calc(var(--nav-h) + 32px);
+    }
+
+    .sidebar__label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 16px;
+    }
+
+    .sidebar__nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .sidebar__nav a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-3);
+      border: 1px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .sidebar__nav a:hover {
+      color: var(--text-2);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .sidebar__nav a.active {
+      color: var(--text-1);
+      background: rgba(79,110,247,0.1);
+      border-color: rgba(79,110,247,0.2);
+    }
+
+    .sidebar__nav .s-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--border-hover);
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+
+    .sidebar__nav a.active .s-dot { background: var(--blue); }
+
+    .sidebar__mobile-toggle {
+      display: none;
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text-2);
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 600;
+      padding: 12px 18px;
+      cursor: pointer;
+      text-align: left;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    /* =============================================
+       CONTENT AREA
+    ============================================= */
+    .content {
+      min-width: 0;
+    }
+
+    .section {
+      margin-bottom: 72px;
+      scroll-margin-top: calc(var(--nav-h) + 32px);
+    }
+
+    .section__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 14px;
+    }
+
+    .section__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--text-1);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+
+    .section__lead {
+      font-size: 1.05rem;
+      color: var(--text-2);
+      line-height: 1.8;
+      margin-bottom: 32px;
+      max-width: 680px;
+    }
+
+    .section__body {
+      font-size: 0.95rem;
+      color: var(--text-2);
+      line-height: 1.85;
+    }
+
+    .section__body p { margin-bottom: 16px; }
+
+    /* =============================================
+       CARDS
+    ============================================= */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 28px;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+
+    .card:hover {
+      border-color: var(--border-hover);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .card__icon {
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      font-size: 1.3rem;
+    }
+
+    .card__title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-1);
+      margin-bottom: 8px;
+    }
+
+    .card__text {
+      font-size: 0.875rem;
+      color: var(--text-2);
+      line-height: 1.75;
+    }
+
+    /* grids */
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+    /* icon colours */
+    .icon--teal   { background: rgba(0,201,167,0.12); color: var(--teal); }
+    .icon--blue   { background: rgba(79,110,247,0.12); color: var(--blue-light); }
+    .icon--purple { background: rgba(139,92,246,0.12); color: var(--purple); }
+    .icon--amber  { background: rgba(245,158,11,0.12); color: var(--amber); }
+
+    /* =============================================
+       COMMITMENT HERO CARD
+    ============================================= */
+    .commitment-card {
+      background: linear-gradient(135deg, rgba(0,201,167,0.08) 0%, rgba(79,110,247,0.08) 100%);
+      border: 1px solid rgba(0,201,167,0.2);
+      border-radius: var(--radius-lg);
+      padding: 40px;
+      display: flex;
+      gap: 32px;
+      align-items: center;
+      margin-bottom: 48px;
+    }
+
+    .commitment-card__visual {
+      flex-shrink: 0;
+      width: 80px; height: 80px;
+      border-radius: 20px;
+      background: rgba(0,201,167,0.12);
+      border: 1px solid rgba(0,201,167,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+
+    .commitment-card__title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-1);
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .commitment-card__text {
+      font-size: 0.95rem;
+      color: var(--text-2);
+      line-height: 1.8;
+    }
+
+    /* =============================================
+       CHECKLIST
+    ============================================= */
+    .checklist {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .checklist__item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 20px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      transition: border-color 0.2s;
+    }
+
+    .checklist__item:hover { border-color: var(--border-hover); }
+
+    .checklist__check {
+      width: 22px; height: 22px;
+      border-radius: 6px;
+      background: rgba(0,201,167,0.15);
+      border: 1px solid rgba(0,201,167,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .checklist__check svg { width: 12px; height: 12px; color: var(--teal); }
+
+    .checklist__label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-1);
+      margin-bottom: 4px;
+    }
+
+    .checklist__desc {
+      font-size: 0.825rem;
+      color: var(--text-2);
+      line-height: 1.6;
+    }
+
+    /* =============================================
+       STATS ROW
+    ============================================= */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 48px;
+    }
+
+    .stat {
+      background: var(--bg-card);
+      padding: 28px 24px;
+      text-align: center;
+    }
+
+    .stat__num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-1);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat__num .accent { color: var(--teal); }
+
+    .stat__label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-3);
+      letter-spacing: 0.02em;
+    }
+
+    /* =============================================
+       INFO BOX
+    ============================================= */
+    .info-box {
+      display: flex;
+      gap: 16px;
+      padding: 20px 24px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 24px;
+      border-left: 3px solid;
+    }
+
+    .info-box--blue {
+      background: rgba(79,110,247,0.07);
+      border-color: var(--blue);
+    }
+
+    .info-box--teal {
+      background: rgba(0,201,167,0.07);
+      border-color: var(--teal);
+    }
+
+    .info-box__icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      line-height: 1.4;
+    }
+
+    .info-box__title {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--text-1);
+      margin-bottom: 4px;
+    }
+
+    .info-box__text {
+      font-size: 0.845rem;
+      color: var(--text-2);
+      line-height: 1.7;
+    }
+
+    /* =============================================
+       FEATURE LIST (keyboard shortcuts etc.)
+    ============================================= */
+    .kbd-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .kbd-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 18px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      transition: border-color 0.2s;
+    }
+
+    .kbd-item:hover { border-color: var(--border-hover); }
+
+    .kbd-keys {
+      display: flex;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    kbd {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 10px;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-1);
+      box-shadow: 0 2px 0 rgba(0,0,0,0.4);
+      min-width: 30px;
+    }
+
+    .kbd-desc {
+      font-size: 0.875rem;
+      color: var(--text-2);
+    }
+
+    .kbd-desc strong {
+      color: var(--text-1);
+      font-weight: 600;
+    }
+
+    /* =============================================
+       CONTRAST PALETTE
+    ============================================= */
+    .contrast-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .contrast-chip {
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+
+    .contrast-chip__swatch {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .contrast-chip__info {
+      padding: 12px;
+      background: var(--bg-card);
+    }
+
+    .contrast-chip__ratio {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--text-1);
+      margin-bottom: 2px;
+    }
+
+    .contrast-chip__label {
+      font-size: 0.72rem;
+      color: var(--text-3);
+    }
+
+    .contrast-pass {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(0,201,167,0.15);
+      color: var(--teal);
+      border: 1px solid rgba(0,201,167,0.3);
+    }
+
+    /* =============================================
+       TIMELINE (WCAG conformance)
+    ============================================= */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .timeline__item {
+      display: flex;
+      gap: 20px;
+      padding-bottom: 32px;
+      position: relative;
+    }
+
+    .timeline__item:last-child { padding-bottom: 0; }
+
+    .timeline__left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .timeline__dot {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 800;
+      flex-shrink: 0;
+      z-index: 1;
+    }
+
+    .timeline__dot--teal   { background: rgba(0,201,167,0.15); color: var(--teal); border: 2px solid rgba(0,201,167,0.4); }
+    .timeline__dot--blue   { background: rgba(79,110,247,0.15); color: var(--blue-light); border: 2px solid rgba(79,110,247,0.4); }
+    .timeline__dot--purple { background: rgba(139,92,246,0.15); color: var(--purple); border: 2px solid rgba(139,92,246,0.4); }
+
+    .timeline__line {
+      width: 2px;
+      flex: 1;
+      background: linear-gradient(to bottom, var(--border-hover), transparent);
+      margin-top: 4px;
+    }
+
+    .timeline__item:last-child .timeline__line { display: none; }
+
+    .timeline__body {
+      padding-top: 6px;
+      padding-bottom: 8px;
+    }
+
+    .timeline__tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 6px;
+    }
+
+    .timeline__name {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-1);
+      margin-bottom: 8px;
+    }
+
+    .timeline__text {
+      font-size: 0.875rem;
+      color: var(--text-2);
+      line-height: 1.75;
+    }
+
+    /* =============================================
+       FEEDBACK CARD
+    ============================================= */
+    .feedback-card {
+      background: linear-gradient(135deg, rgba(79,110,247,0.08), rgba(139,92,246,0.08));
+      border: 1px solid rgba(79,110,247,0.2);
+      border-radius: var(--radius-lg);
+      padding: 36px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .feedback-card__title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--text-1);
+      margin-bottom: 8px;
+    }
+
+    .feedback-card__text {
+      font-size: 0.9rem;
+      color: var(--text-2);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+
+    .feedback-card__actions {
+      display: flex;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    /* =============================================
+       DIVIDER
+    ============================================= */
+    .section-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 0 72px;
+    }
+
+    /* =============================================
+       CTA SECTION
+    ============================================= */
+    .cta-section {
+      margin: 80px clamp(16px,5vw,48px);
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-card {
+      background: linear-gradient(135deg, var(--bg-card) 0%, rgba(79,110,247,0.08) 100%);
+      border: 1px solid rgba(79,110,247,0.2);
+      border-radius: var(--radius-lg);
+      padding: clamp(40px,6vw,72px);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-card::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 200px;
+      background: radial-gradient(ellipse, rgba(79,110,247,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-card__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-1);
+      margin-bottom: 16px;
+    }
+
+    .cta-card__sub {
+      font-size: 1.05rem;
+      color: var(--text-2);
+      margin-bottom: 36px;
+    }
+
+    .cta-card__actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .footer {
+      background: var(--bg-2);
+      border-top: 1px solid var(--border);
+      padding: 72px clamp(16px,5vw,48px) 40px;
+    }
+
+    .footer__inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer__top {
+      display: grid;
+      grid-template-columns: 1.5fr repeat(4, 1fr);
+      gap: 48px;
+      margin-bottom: 56px;
+    }
+
+    .footer__brand-logo {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #fff 30%, var(--blue-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 14px;
+    }
+
+    .footer__brand-text {
+      font-size: 0.875rem;
+      color: var(--text-3);
+      line-height: 1.75;
+      margin-bottom: 24px;
+      max-width: 240px;
+    }
+
+    .footer__socials {
+      display: flex;
+      gap: 10px;
+    }
+
+    .footer__social-btn {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .footer__social-btn:hover {
+      background: rgba(79,110,247,0.12);
+      border-color: rgba(79,110,247,0.3);
+    }
+
+    .footer__social-btn svg { width: 16px; height: 16px; color: var(--text-2); }
+
+    .footer__col-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      margin-bottom: 18px;
+    }
+
+    .footer__links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer__links a {
+      font-size: 0.875rem;
+      color: var(--text-3);
+      transition: color 0.2s;
+    }
+
+    .footer__links a:hover { color: var(--text-1); }
+
+    .footer__bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer__copy {
+      font-size: 0.8rem;
+      color: var(--text-3);
+    }
+
+    .footer__legal {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer__legal a {
+      font-size: 0.8rem;
+      color: var(--text-3);
+      transition: color 0.2s;
+    }
+
+    .footer__legal a:hover { color: var(--text-2); }
+
+    /* =============================================
+       REVEAL ANIMATION
+    ============================================= */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 1024px) {
+      .layout { grid-template-columns: 1fr; }
+      .sidebar {
+        position: static;
+        display: block;
+      }
+      .sidebar__nav { display: none; flex-direction: column; }
+      .sidebar__nav.open { display: flex; }
+      .sidebar__mobile-toggle { display: flex; }
+
+      .grid-3 { grid-template-columns: 1fr 1fr; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .contrast-grid { grid-template-columns: 1fr 1fr; }
+      .footer__top { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav__links, .nav__cta { display: none; }
+      .nav__hamburger { display: flex; }
+
+      .grid-2, .grid-3 { grid-template-columns: 1fr; }
+      .commitment-card { flex-direction: column; text-align: center; }
+      .feedback-card { flex-direction: column; text-align: center; }
+      .feedback-card__actions { flex-direction: column; width: 100%; }
+      .feedback-card__actions .btn { justify-content: center; }
+      .footer__top { grid-template-columns: 1fr; }
+      .footer__bottom { flex-direction: column; text-align: center; }
+      .footer__legal { justify-content: center; }
+      .contrast-grid { grid-template-columns: 1fr 1fr; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .contrast-grid, .stats-row { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== NAVBAR ==================== -->
+  <nav class="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav__inner">
+      
+
+      <ul class="nav__links">
+        <li><a href="payments.html">Payments</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="resources.html">Resources</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+
+      <div class="nav__cta">
+        <a href="login.html" class="btn btn-ghost">Log in</a>
+        <a href="signup.html" class="btn btn-primary">Get Started</a>
+      </div>
+
+      <button class="nav__hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav__mobile" id="mobileNav" role="navigation" aria-label="Mobile navigation">
+    <a href="payments.html">Payments</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="resources.html">Resources</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="login.html" class="btn btn-ghost" style="width:fit-content">Log in</a>
+    <a href="signup.html" class="btn btn-primary" style="width:fit-content">Get Started</a>
+  </div>
+
+  <!-- ==================== PAGE ==================== -->
+  <main class="page" id="main-content">
+
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero__bg" aria-hidden="true"></div>
+      <div class="hero__blob hero__blob--1" aria-hidden="true"></div>
+      <div class="hero__blob hero__blob--2" aria-hidden="true"></div>
+      <div class="hero__blob hero__blob--3" aria-hidden="true"></div>
+
+      <div class="hero__inner">
+        <div class="hero__badge" aria-hidden="true">
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 2a8 8 0 100 16A8 8 0 0010 2zm0 14a6 6 0 110-12 6 6 0 010 12zm1-9H9v4l3.5 2.1.75-1.23-2.25-1.37V7z"/></svg>
+          WCAG 2.1 AA Compliant
+        </div>
+
+        <h1 class="hero__title" id="hero-title">
+          Built for <span class="accent">Everyone</span>
+        </h1>
+
+        <p class="hero__sub">
+          FinPay is committed to creating a payment experience that is accessible, inclusive, and usable by every person — regardless of ability or assistive technology.
+        </p>
+
+        <nav class="hero__breadcrumb" aria-label="Breadcrumb">
+          
+          <span aria-hidden="true">›</span>
+          <span aria-current="page">Accessibility</span>
+        </nav>
+      </div>
+    </section>
+
+    <!-- BADGE STRIP -->
+    <div class="badge-strip" role="list" aria-label="Accessibility standards">
+      <span class="badge-pill" role="listitem"><span class="dot dot--teal" aria-hidden="true"></span>WCAG 2.1 Level AA</span>
+      <span class="badge-pill" role="listitem"><span class="dot dot--blue" aria-hidden="true"></span>ARIA Compliant</span>
+      <span class="badge-pill" role="listitem"><span class="dot dot--purple" aria-hidden="true"></span>Keyboard Navigable</span>
+      <span class="badge-pill" role="listitem"><span class="dot dot--amber" aria-hidden="true"></span>Screen Reader Ready</span>
+      <span class="badge-pill" role="listitem"><span class="dot dot--teal" aria-hidden="true"></span>Reduced Motion Support</span>
+    </div>
+
+    <!-- STATS -->
+    <div class="layout" style="padding-bottom: 0; margin-bottom: 0;">
+      <div></div>
+      <div class="stats-row reveal" role="region" aria-label="Accessibility statistics">
+        <div class="stat">
+          <div class="stat__num"><span class="accent">AA</span></div>
+          <div class="stat__label">WCAG 2.1 Level</div>
+        </div>
+        <div class="stat">
+          <div class="stat__num"><span class="accent">100%</span></div>
+          <div class="stat__label">Keyboard Navigable</div>
+        </div>
+        <div class="stat">
+          <div class="stat__num"><span class="accent">4.5:1</span></div>
+          <div class="stat__label">Min Contrast Ratio</div>
+        </div>
+        <div class="stat">
+          <div class="stat__num"><span class="accent">3</span></div>
+          <div class="stat__label">Screen Readers Tested</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LAYOUT -->
+    <div class="layout">
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar" aria-label="Page sections">
+        <button class="sidebar__mobile-toggle" id="sidebarToggle" aria-expanded="false" aria-controls="sidebarNav">
+          On This Page ▾
+        </button>
+
+        <p class="sidebar__label" aria-hidden="true">On This Page</p>
+        <ul class="sidebar__nav" id="sidebarNav" role="list">
+          <li><a href="#commitment" class="active"><span class="s-dot" aria-hidden="true"></span>Our Commitment</a></li>
+          <li><a href="#keyboard"><span class="s-dot" aria-hidden="true"></span>Keyboard Navigation</a></li>
+          <li><a href="#screen-reader"><span class="s-dot" aria-hidden="true"></span>Screen Reader Support</a></li>
+          <li><a href="#color-contrast"><span class="s-dot" aria-hidden="true"></span>Color & Contrast</a></li>
+          <li><a href="#features"><span class="s-dot" aria-hidden="true"></span>Accessibility Features</a></li>
+          <li><a href="#conformance"><span class="s-dot" aria-hidden="true"></span>Conformance</a></li>
+          <li><a href="#feedback"><span class="s-dot" aria-hidden="true"></span>Feedback & Support</a></li>
+        </ul>
+      </aside>
+
+      <!-- CONTENT -->
+      <div class="content">
+
+        <!-- SECTION: Commitment -->
+        <section class="section reveal" id="commitment" aria-labelledby="commitment-title">
+          <div class="section__eyebrow">♿ Our Commitment</div>
+          <h2 class="section__title" id="commitment-title">Inclusive by Design</h2>
+          <p class="section__lead">
+            Accessibility at FinPay is not an afterthought — it's a core product value. We believe that financial tools should be available to every individual, and we invest in making that a reality.
+          </p>
+
+          <div class="commitment-card">
+            <div class="commitment-card__visual" aria-hidden="true">♿</div>
+            <div>
+              <div class="commitment-card__title">WCAG 2.1 Level AA Standard</div>
+              <p class="commitment-card__text">
+                FinPay targets conformance with the Web Content Accessibility Guidelines (WCAG) 2.1 at Level AA across all of our web products. We conduct regular audits with assistive technology users and automated testing tools to ensure we meet and exceed these standards.
+              </p>
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <article class="card reveal">
+              <div class="card__icon icon--teal" aria-hidden="true">🔍</div>
+              <h3 class="card__title">Regular Audits</h3>
+              <p class="card__text">We run quarterly accessibility audits using both automated tools and manual testing with real assistive technology users.</p>
+            </article>
+            <article class="card reveal">
+              <div class="card__icon icon--blue" aria-hidden="true">🤝</div>
+              <h3 class="card__title">Inclusive Testing</h3>
+              <p class="card__text">Our QA process includes team members and consultants who rely on screen readers, keyboard navigation, and other assistive tools daily.</p>
+            </article>
+            <article class="card reveal">
+              <div class="card__icon icon--purple" aria-hidden="true">🔄</div>
+              <h3 class="card__title">Continuous Improvement</h3>
+              <p class="card__text">Every product sprint includes dedicated accessibility acceptance criteria. Regressions are treated as critical bugs and resolved with urgency.</p>
+            </article>
+          </div>
+        </section>
+
+        <hr class="section-divider" aria-hidden="true" />
+
+        <!-- SECTION: Keyboard Navigation -->
+        <section class="section reveal" id="keyboard" aria-labelledby="keyboard-title">
+          <div class="section__eyebrow">⌨️ Keyboard Navigation</div>
+          <h2 class="section__title" id="keyboard-title">Navigate With Only a Keyboard</h2>
+          <p class="section__lead">
+            Every feature and workflow in FinPay is fully operable without a mouse. We follow a logical tab order, provide visible focus indicators, and support all standard keyboard interaction patterns.
+          </p>
+
+          <div class="info-box info-box--blue">
+            <div class="info-box__icon" aria-hidden="true">ℹ️</div>
+            <div>
+              <div class="info-box__title">Focus Indicators Are Always Visible</div>
+              <p class="info-box__text">We never suppress the browser's native focus ring. Every interactive element displays a clear, high-contrast focus indicator that meets WCAG 2.1 AA focus appearance criteria.</p>
+            </div>
+          </div>
+
+          <div class="kbd-grid" role="list" aria-label="Keyboard shortcuts">
+            <div class="kbd-item" role="listitem">
+              <div class="kbd-keys"><kbd>Tab</kbd></div>
+              <div class="kbd-desc"><strong>Move forward</strong> through interactive elements</div>
+            </div>
+            <div class="kbd-item" role="listitem">
+              <div class="kbd-keys"><kbd>Shift</kbd><kbd>Tab</kbd></div>
+              <div class="kbd-desc"><strong>Move backward</strong> through interactive elements</div>
+            </div>
+            <div class="kbd-item" role="listitem">
+              <div class="kbd-keys"><kbd>Enter</kbd></div>
+              <div class="kbd-desc"><strong>Activate</strong> buttons, links, and form controls</div>
+            </div>
+            <div class="kbd-item" role="listitem">
+              <div class="kbd-keys"><kbd>Space</kbd></div>
+              <div class="kbd-desc"><strong>Toggle</strong> checkboxes, open dropdowns, and activate buttons</div>
+            </div>
+            <div class="kbd-item" role="listitem">
+              <div class="kbd-keys"><kbd>↑</kbd><kbd>↓</kbd></div>
+              <div class="kbd-desc"><strong>Navigate options</strong> in dropdowns, lists, and radio groups</div>
+            </div>
+            <div class="kbd-item" role="listitem">
+              <div class="kbd-keys"><kbd>Esc</kbd></div>
+              <div class="kbd-desc"><strong>Close</strong> dialogs, menus, and popovers</div>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider" aria-hidden="true" />
+
+        <!-- SECTION: Screen Reader Support -->
+        <section class="section reveal" id="screen-reader" aria-labelledby="sr-title">
+          <div class="section__eyebrow">🔊 Screen Reader Support</div>
+          <h2 class="section__title" id="sr-title">Works Seamlessly With Your Screen Reader</h2>
+          <p class="section__lead">
+            FinPay is designed and tested with leading screen readers to ensure every user can complete payment tasks independently and confidently.
+          </p>
+
+          <div class="grid-2" style="margin-bottom: 32px;">
+            <article class="card reveal">
+              <div class="card__icon icon--teal" aria-hidden="true">🍎</div>
+              <h3 class="card__title">VoiceOver (macOS & iOS)</h3>
+              <p class="card__text">Fully tested with Apple VoiceOver on both Safari and Chrome. All landmarks, headings, and live regions are announced correctly.</p>
+            </article>
+            <article class="card reveal">
+              <div class="card__icon icon--blue" aria-hidden="true">🪟</div>
+              <h3 class="card__title">NVDA & JAWS (Windows)</h3>
+              <p class="card__text">Verified with NVDA and JAWS on Firefox and Chrome. Form instructions, validation errors, and status messages use ARIA live regions for real-time feedback.</p>
+            </article>
+            <article class="card reveal">
+              <div class="card__icon icon--purple" aria-hidden="true">🤖</div>
+              <h3 class="card__title">TalkBack (Android)</h3>
+              <p class="card__text">Our mobile web experience is verified with Android TalkBack. Touch targets meet minimum size requirements and all interactive controls are properly labeled.</p>
+            </article>
+            <article class="card reveal">
+              <div class="card__icon icon--amber" aria-hidden="true">🏗️</div>
+              <h3 class="card__title">Semantic HTML First</h3>
+              <p class="card__text">We build with native HTML elements wherever possible, using ARIA roles, properties, and states only to supplement where no semantic HTML equivalent exists.</p>
+            </article>
+          </div>
+
+          <div class="info-box info-box--teal">
+            <div class="info-box__icon" aria-hidden="true">✅</div>
+            <div>
+              <div class="info-box__title">Dynamic Content Announcements</div>
+              <p class="info-box__text">Form errors, success states, notifications, and loading indicators are all communicated through ARIA live regions and alert roles — so screen reader users never miss a status update.</p>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider" aria-hidden="true" />
+
+        <!-- SECTION: Color & Contrast -->
+        <section class="section reveal" id="color-contrast" aria-labelledby="contrast-title">
+          <div class="section__eyebrow">🎨 Color & Contrast</div>
+          <h2 class="section__title" id="contrast-title">Designed for Visual Clarity</h2>
+          <p class="section__lead">
+            Color is never the sole means of conveying information. All UI elements meet or exceed WCAG 2.1 AA contrast requirements.
+          </p>
+
+          <div class="contrast-grid reveal" role="region" aria-label="Color contrast examples">
+            <div class="contrast-chip">
+              <div class="contrast-chip__swatch" style="background:#07080f; color:#f0f2ff;" aria-label="White on dark: 18.9 to 1 ratio">
+                Aa
+              </div>
+              <div class="contrast-chip__info">
+                <div class="contrast-chip__ratio">18.9:1</div>
+                <div class="contrast-chip__label">Body Text</div>
+                <span class="contrast-pass">AAA Pass</span>
+              </div>
+            </div>
+            <div class="contrast-chip">
+              <div class="contrast-chip__swatch" style="background:#07080f; color:#9ba3c0;" aria-label="Secondary text: 7.1 to 1 ratio">
+                Aa
+              </div>
+              <div class="contrast-chip__info">
+                <div class="contrast-chip__ratio">7.1:1</div>
+                <div class="contrast-chip__label">Secondary Text</div>
+                <span class="contrast-pass">AA Pass</span>
+              </div>
+            </div>
+            <div class="contrast-chip">
+              <div class="contrast-chip__swatch" style="background:#4f6ef7; color:#fff;" aria-label="Button text: 4.6 to 1 ratio">
+                Aa
+              </div>
+              <div class="contrast-chip__info">
+                <div class="contrast-chip__ratio">4.6:1</div>
+                <div class="contrast-chip__label">Button Labels</div>
+                <span class="contrast-pass">AA Pass</span>
+              </div>
+            </div>
+            <div class="contrast-chip">
+              <div class="contrast-chip__swatch" style="background:#11131f; color:#00c9a7;" aria-label="Accent text: 5.2 to 1 ratio">
+                Aa
+              </div>
+              <div class="contrast-chip__info">
+                <div class="contrast-chip__ratio">5.2:1</div>
+                <div class="contrast-chip__label">Accent / Teal</div>
+                <span class="contrast-pass">AA Pass</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="section__body" style="margin-top:28px;">
+            <p>We also support users with colour vision deficiencies by pairing colour with text labels, icons, and patterns. All error states and status indicators are communicated with both colour and a descriptive text label.</p>
+          </div>
+        </section>
+
+        <hr class="section-divider" aria-hidden="true" />
+
+        <!-- SECTION: Accessibility Features -->
+        <section class="section reveal" id="features" aria-labelledby="features-title">
+          <div class="section__eyebrow">⚙️ Accessibility Features</div>
+          <h2 class="section__title" id="features-title">Platform-Wide Accessibility Checklist</h2>
+          <p class="section__lead">
+            Across every screen and workflow, these foundational features are in place.
+          </p>
+
+          <div class="checklist" role="list" aria-label="Accessibility features checklist">
+            <div class="checklist__item" role="listitem">
+              <div class="checklist__check" aria-hidden="true">
+                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg>
+              </div>
+              <div>
+                <div class="checklist__label">Skip to Main Content</div>
+                <p class="checklist__desc">A skip navigation link is the first focusable element on every page, allowing keyboard users to bypass repeated navigation.</p>
+              </div>
+            </div>
+
+            <div class="checklist__item" role="listitem">
+              <div class="checklist__check" aria-hidden="true">
+                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg>
+              </div>
+              <div>
+                <div class="checklist__label">Descriptive Alt Text</div>
+                <p class="checklist__desc">All meaningful images carry concise, descriptive alt text. Purely decorative images use empty alt="" so screen readers skip them.</p>
+              </div>
+            </div>
+
+            <div class="checklist__item" role="listitem">
+              <div class="checklist__check" aria-hidden="true">
+                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg>
+              </div>
+              <div>
+                <div class="checklist__label">Logical Heading Hierarchy</div>
+                <p class="checklist__desc">Every page uses a single H1 followed by a logical hierarchy of H2–H6 headings, enabling screen reader users to navigate by heading structure.</p>
+              </div>
+            </div>
+
+            <div class="checklist__item" role="listitem">
+              <div class="checklist__check" aria-hidden="true">
+                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg>
+              </div>
+              <div>
+                <div class="checklist__label">Accessible Form Labels</div>
+                <p class="checklist__desc">All form inputs are associated with visible labels. Required fields and error messages are clearly identified to assistive technologies.</p>
+              </div>
+            </div>
+
+            <div class="checklist__item" role="listitem">
+              <div class="checklist__check" aria-hidden="true">
+                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg>
+              </div>
+              <div>
+                <div class="checklist__label">Reduced Motion Respect</div>
+                <p class="checklist__desc">All animations and transitions are disabled when the user's operating system is set to "prefer reduced motion", eliminating vestibular and seizure risks.</p>
+              </div>
+            </div>
+
+            <div class="checklist__item" role="listitem">
+              <div class="checklist__check" aria-hidden="true">
+                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg>
+              </div>
+              <div>
+                <div class="checklist__label">Responsive & Zoom-Safe</div>
+                <p class="checklist__desc">Content reflows correctly at 400% browser zoom with no loss of functionality or horizontal scrolling, supporting users with low vision.</p>
+              </div>
+            </div>
+
+            <div class="checklist__item" role="listitem">
+              <div class="checklist__check" aria-hidden="true">
+                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg>
+              </div>
+              <div>
+                <div class="checklist__label">Touch Target Sizing</div>
+                <p class="checklist__desc">All interactive touch targets are a minimum of 44×44 CSS pixels, meeting WCAG 2.5.5 Target Size for users with motor impairments.</p>
+              </div>
+            </div>
+
+            <div class="checklist__item" role="listitem">
+              <div class="checklist__check" aria-hidden="true">
+                <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2,6 5,9 10,3"/></svg>
+              </div>
+              <div>
+                <div class="checklist__label">Timeout Warnings</div>
+                <p class="checklist__desc">Session timeouts notify users at least 2 minutes in advance and allow an extension, ensuring users who need more time are not unexpectedly logged out.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider" aria-hidden="true" />
+
+        <!-- SECTION: Conformance Timeline -->
+        <section class="section reveal" id="conformance" aria-labelledby="conformance-title">
+          <div class="section__eyebrow">📋 Conformance</div>
+          <h2 class="section__title" id="conformance-title">Our Standards Roadmap</h2>
+          <p class="section__lead">
+            FinPay tracks its accessibility journey transparently. Here's where we stand and where we're heading.
+          </p>
+
+          <div class="timeline" role="list" aria-label="Accessibility conformance milestones">
+            <div class="timeline__item" role="listitem">
+              <div class="timeline__left">
+                <div class="timeline__dot timeline__dot--teal" aria-label="Completed">✓</div>
+                <div class="timeline__line" aria-hidden="true"></div>
+              </div>
+              <div class="timeline__body">
+                <div class="timeline__tag">Achieved — Q1 2024</div>
+                <div class="timeline__name">WCAG 2.1 Level A Conformance</div>
+                <p class="timeline__text">All Level A success criteria met across our core payment flows and dashboard. Verified by a third-party accessibility auditor.</p>
+              </div>
+            </div>
+
+            <div class="timeline__item" role="listitem">
+              <div class="timeline__left">
+                <div class="timeline__dot timeline__dot--teal" aria-label="Completed">✓</div>
+                <div class="timeline__line" aria-hidden="true"></div>
+              </div>
+              <div class="timeline__body">
+                <div class="timeline__tag">Achieved — Q3 2024</div>
+                <div class="timeline__name">WCAG 2.1 Level AA Conformance</div>
+                <p class="timeline__text">All Level AA success criteria met. Full keyboard operability, colour contrast compliance, and screen reader compatibility verified across NVDA, JAWS, VoiceOver, and TalkBack.</p>
+              </div>
+            </div>
+
+            <div class="timeline__item" role="listitem">
+              <div class="timeline__left">
+                <div class="timeline__dot timeline__dot--blue" aria-label="In progress">→</div>
+                <div class="timeline__line" aria-hidden="true"></div>
+              </div>
+              <div class="timeline__body">
+                <div class="timeline__tag">In Progress — 2025</div>
+                <div class="timeline__name">WCAG 2.2 Level AA</div>
+                <p class="timeline__text">We are actively remediating against WCAG 2.2's new success criteria, including Focus Appearance (2.4.11), Dragging Movements (2.5.7), and Target Size (2.5.8).</p>
+              </div>
+            </div>
+
+            <div class="timeline__item" role="listitem">
+              <div class="timeline__left">
+                <div class="timeline__dot timeline__dot--purple" aria-label="Planned">◎</div>
+                <div class="timeline__line" aria-hidden="true"></div>
+              </div>
+              <div class="timeline__body">
+                <div class="timeline__tag">Planned — 2026</div>
+                <div class="timeline__name">WCAG 2.1 Level AAA (Selected Criteria)</div>
+                <p class="timeline__text">We are targeting AAA conformance for a subset of criteria — enhanced contrast ratios, sign language alternatives for video content, and extended session timeout controls.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr class="section-divider" aria-hidden="true" />
+
+        <!-- SECTION: Feedback -->
+        <section class="section reveal" id="feedback" aria-labelledby="feedback-title">
+          <div class="section__eyebrow">💬 Feedback & Support</div>
+          <h2 class="section__title" id="feedback-title">We Want to Hear From You</h2>
+          <p class="section__lead">
+            If you encounter an accessibility barrier on FinPay, please let us know. We take every report seriously and respond within 2 business days.
+          </p>
+
+          <div class="feedback-card">
+            <div>
+              <div class="feedback-card__title">Report an Accessibility Issue</div>
+              <p class="feedback-card__text">
+                Contact our dedicated accessibility team at <strong style="color:var(--teal)">accessibility@finpay.com</strong> or use the button below. Please include the page URL, your assistive technology, and a description of the issue.
+              </p>
+            </div>
+            <div class="feedback-card__actions">
+              <a href="mailto:accessibility@finpay.com" class="btn btn-primary">Email Us</a>
+              <a href="contact.html" class="btn btn-ghost">Contact Page</a>
+            </div>
+          </div>
+        </section>
+
+      </div><!-- end .content -->
+    </div><!-- end .layout -->
+
+    <!-- CTA SECTION -->
+    <section class="cta-section" aria-labelledby="cta-title">
+      <div class="cta-card reveal">
+        <h2 class="cta-card__title" id="cta-title">Access the Future of Payments</h2>
+        <p class="cta-card__sub">Start building with a platform that works for everyone. No barriers. No compromises.</p>
+        <div class="cta-card__actions">
+          <a href="signup.html" class="btn btn-primary">Create Free Account</a>
+          <a href="contact.html" class="btn btn-ghost">Talk to Sales</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="footer__inner">
+      <div class="footer__top">
+        <div>
+          <div class="footer__brand-logo">FinPay</div>
+          <p class="footer__brand-text">Enterprise payment infrastructure for the modern internet.</p>
+          <div class="footer__socials" aria-label="Social media links">
+            <a href="#" class="footer__social-btn" aria-label="Twitter">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.402 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a href="#" class="footer__social-btn" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="#" class="footer__social-btn" aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer__col-title">Product</div>
+          <ul class="footer__links">
+            <li><a href="payments.html">Payments</a></li>
+            <li><a href="pricing.html">Pricing</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="about.html">About</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer__col-title">Developers</div>
+          <ul class="footer__links">
+            <li><a href="#">API Docs</a></li>
+            <li><a href="#">SDKs</a></li>
+            <li><a href="#">Changelog</a></li>
+            <li><a href="#">Status</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer__col-title">Company</div>
+          <ul class="footer__links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer__col-title">Legal</div>
+          <ul class="footer__links">
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+            <li><a href="security.html">Security</a></li>
+            <li><a href="cookies.html">Cookie Policy</a></li>
+            <li><a href="compliance.html">Compliance</a></li>
+            <li><a href="accessibility.html" aria-current="page">Accessibility</a></li>
+            <li><a href="sitemap.html">Sitemap</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2025 FinPay Inc. All rights reserved.</p>
+        <nav class="footer__legal" aria-label="Legal links">
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+          <a href="cookies.html">Cookies</a>
+          <a href="accessibility.html" aria-current="page">Accessibility</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+  <script>
+    // ---- Hamburger menu ----
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+
+    hamburger.addEventListener('click', () => {
+      const open = mobileNav.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', String(open));
+    });
+
+    // ---- Sidebar mobile toggle ----
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const sidebarNav    = document.getElementById('sidebarNav');
+
+    if (sidebarToggle && sidebarNav) {
+      sidebarToggle.addEventListener('click', () => {
+        const open = sidebarNav.classList.toggle('open');
+        sidebarToggle.setAttribute('aria-expanded', String(open));
+        sidebarToggle.textContent = open ? 'On This Page ▴' : 'On This Page ▾';
+      });
+    }
+
+    // ---- Active sidebar link on scroll ----
+    const sections = document.querySelectorAll('.section[id]');
+    const navLinks  = document.querySelectorAll('.sidebar__nav a');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(a => a.classList.remove('active'));
+          const active = document.querySelector(`.sidebar__nav a[href="#${entry.target.id}"]`);
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-30% 0px -60% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+
+    // ---- Reveal animation on scroll ----
+    const reveals = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    reveals.forEach(el => revealObserver.observe(el));
+
+    // ---- Scroll stagger for checklist items ----
+    const checkItems = document.querySelectorAll('.checklist__item');
+    checkItems.forEach((item, i) => {
+      item.style.opacity = '0';
+      item.style.transform = 'translateY(12px)';
+      item.style.transition = `opacity 0.4s ease ${i * 0.07}s, transform 0.4s ease ${i * 0.07}s`;
+    });
+
+    const checkObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const items = entry.target.querySelectorAll('.checklist__item');
+          items.forEach(item => {
+            item.style.opacity = '1';
+            item.style.transform = 'translateY(0)';
+          });
+          checkObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.checklist').forEach(list => checkObserver.observe(list));
+  </script>
+
+</body>
+</html>

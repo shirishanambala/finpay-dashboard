@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="FinPay Payments — Accept online payments via gateway, payment links, pages, subscriptions, and international transfers. Developer-first APIs with 120+ payment methods." />
+  <meta name="keywords" content="payment gateway, payment links, payment pages, subscriptions, international payments, UPI, cards, wallets, FinPay" />
+  <meta name="author" content="FinPay Inc." />
+  <meta property="og:title" content="Payments — FinPay Global Payment Platform" />
+  <meta property="og:description" content="Every payment tool your business needs. Gateway, links, pages, subscriptions, and global reach — all in one platform." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.finpay.io/payments" />
+  <title>Payments — FinPay Global Payment Platform</title>
+  <link rel="canonical" href="https://www.finpay.io/payments" />
+  <link rel="stylesheet" href="pay.css">
+</head>
+
+<body>
+
+  <!-- ===========================================================
+       GLOBAL HEADER & NAVIGATION
+       =========================================================== -->
+  <header class="site-header" role="banner">
+    <nav class="nav-primary" aria-label="Primary navigation">
+      <div class="nav-inner">
+
+        <!-- Logo -->
+         <div class="brand">
+  <div class="logo-mark">◈</div>
+  <div class="logo-text">FinPay</div>
+</div>
+
+        <!-- Mobile menu toggle -->
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="primary-menu"
+          aria-label="Open navigation menu"
+        >
+          <span class="toggle-bar" aria-hidden="true"></span>
+          <span class="toggle-bar" aria-hidden="true"></span>
+          <span class="toggle-bar" aria-hidden="true"></span>
+        </button>
+
+        <!-- Primary links -->
+        <ul class="nav-links" id="primary-menu" role="list">
+          <li class="nav-item nav-item--active nav-item--has-mega">
+            <a href="payments.html" class="nav-link" aria-current="page" aria-haspopup="true" aria-expanded="false">
+              Payments
+            </a>
+            <div class="mega-menu" aria-label="Payments menu" hidden>
+              <ul role="list">
+                <li><a href="#gateway">Payment Gateway</a></li>
+                <li><a href="#links">Payment Links</a></li>
+                <li><a href="#pages">Payment Pages</a></li>
+                <li><a href="#subscriptions">Subscriptions</a></li>
+                <li><a href="#international">International Payments</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a href="pricing.html" class="nav-link">Pricing</a>
+          </li>
+          <li class="nav-item nav-item--has-dropdown">
+            <a href="resources.html" class="nav-link" aria-haspopup="true" aria-expanded="false">
+              Resources
+            </a>
+            <ul class="dropdown-menu" role="list" hidden>
+              <li><a href="resources.html#docs">Documentation</a></li>
+              <li><a href="resources.html#api">API Reference</a></li>
+              <li><a href="resources.html#blog">Blog</a></li>
+              <li><a href="resources.html#guides">Developer Guides</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="about.html" class="nav-link">About</a>
+          </li>
+          <li class="nav-item">
+            <a href="contact.html" class="nav-link">Contact</a>
+          </li>
+        </ul>
+
+        <!-- Auth actions -->
+        <div class="nav-actions">
+          <a href="login.html" class="btn btn--ghost" aria-label="Log in to your FinPay account">Log In</a>
+          <a href="signup.html" class="btn btn--primary" aria-label="Create a free FinPay account">Sign Up Free</a>
+        </div>
+
+      </div>
+    </nav>
+  </header>
+
+  <!-- ===========================================================
+       MAIN CONTENT
+       =========================================================== -->
+  <main id="main-content" tabindex="-1">
+
+    <!-- ===========================================================
+         SECTION 01 — HERO
+         =========================================================== -->
+    <section class="section-hero section-hero--payments" aria-labelledby="payments-hero-heading" id="hero">
+      <div class="container">
+
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol class="breadcrumb-list" role="list">
+            <li class="breadcrumb-item">
+              
+            </li>
+            <li class="breadcrumb-separator" aria-hidden="true">/</li>
+            <li class="breadcrumb-item breadcrumb-item--current" aria-current="page">Payments</li>
+          </ol>
+        </nav>
+
+        <div class="hero-content-wrap">
+          <div class="hero-text">
+            <div class="hero-badge" aria-label="Product highlight">
+              <span class="badge-dot" aria-hidden="true"></span>
+              <span>120+ payment methods. One integration.</span>
+            </div>
+
+            <h1 class="hero-heading" id="payments-hero-heading">
+              Accept payments<br />
+              the way your<br />
+              customers prefer
+            </h1>
+
+            <p class="hero-subheading">
+              Cards, UPI, wallets, net banking, buy-now-pay-later, international
+              transfers — FinPay puts every payment method behind a single, unified API
+              so you never leave money on the table.
+            </p>
+
+            <div class="hero-actions">
+              <a href="signup.html" class="btn btn--primary btn--large" aria-label="Create your free FinPay account">
+                Start accepting payments
+              </a>
+              <a href="resources.html#api" class="btn btn--secondary btn--large" aria-label="View the FinPay API documentation">
+                View API docs
+              </a>
+            </div>
+
+            <ul class="hero-trust-strip" role="list" aria-label="FinPay trust highlights">
+              <li class="trust-item">
+                <span class="trust-icon" aria-hidden="true">&#10003;</span>
+                PCI DSS Level 1
+              </li>
+              <li class="trust-item">
+                <span class="trust-icon" aria-hidden="true">&#10003;</span>
+                99.99% uptime SLA
+              </li>
+              <li class="trust-item">
+                <span class="trust-icon" aria-hidden="true">&#10003;</span>
+                Sub-100ms API response
+              </li>
+              <li class="trust-item">
+                <span class="trust-icon" aria-hidden="true">&#10003;</span>
+                135+ currencies
+              </li>
+            </ul>
+          </div>
+
+          <!-- Hero visual: payment method grid -->
+          <div class="hero-visual" role="img" aria-label="Grid of supported payment methods including cards, UPI, wallets, and more">
+            <div class="payment-methods-grid" aria-hidden="true">
+              <div class="pm-group">
+                <p class="pm-group-label">Cards</p>
+                <ul class="pm-badges" role="list">
+                  <li class="pm-badge pm-badge--visa">Visa</li>
+                  <li class="pm-badge pm-badge--mc">Mastercard</li>
+                  <li class="pm-badge pm-badge--amex">Amex</li>
+                  <li class="pm-badge pm-badge--rupay">RuPay</li>
+                </ul>
+              </div>
+              <div class="pm-group">
+                <p class="pm-group-label">Wallets</p>
+                <ul class="pm-badges" role="list">
+                  <li class="pm-badge">Apple Pay</li>
+                  <li class="pm-badge">Google Pay</li>
+                  <li class="pm-badge">PayPal</li>
+                  <li class="pm-badge">Amazon Pay</li>
+                </ul>
+              </div>
+              <div class="pm-group">
+                <p class="pm-group-label">Bank &amp; UPI</p>
+                <ul class="pm-badges" role="list">
+                  <li class="pm-badge pm-badge--upi">UPI</li>
+                  <li class="pm-badge">SEPA</li>
+                  <li class="pm-badge">ACH</li>
+                  <li class="pm-badge">Net Banking</li>
+                </ul>
+              </div>
+              <div class="pm-group">
+                <p class="pm-group-label">Buy Now Pay Later</p>
+                <ul class="pm-badges" role="list">
+                  <li class="pm-badge">Simpl</li>
+                  <li class="pm-badge">LazyPay</li>
+                  <li class="pm-badge">Afterpay</li>
+                  <li class="pm-badge">Klarna</li>
+                </ul>
+              </div>
+              <div class="pm-group">
+                <p class="pm-group-label">Local Methods</p>
+                <ul class="pm-badges" role="list">
+                  <li class="pm-badge">PIX</li>
+                  <li class="pm-badge">OXXO</li>
+                  <li class="pm-badge">Alipay</li>
+                  <li class="pm-badge">M-Pesa</li>
+                </ul>
+              </div>
+              <div class="pm-group pm-group--more">
+                <p class="pm-group-more-label">+95 more payment methods</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===========================================================
+         SECTION 02 — IN-PAGE NAVIGATION
+         =========================================================== -->
+    <nav class="section-subnav" aria-label="Payments sections navigation">
+      <div class="container">
+        <ul class="subnav-list" role="list">
+          <li><a href="#gateway" class="subnav-link">Gateway</a></li>
+          <li><a href="#links" class="subnav-link">Payment Links</a></li>
+          <li><a href="#pages" class="subnav-link">Payment Pages</a></li>
+          <li><a href="#subscriptions" class="subnav-link">Subscriptions</a></li>
+          <li><a href="#international" class="subnav-link">International</a></li>
+          <li><a href="#settlement" class="subnav-link">Settlement</a></li>
+          <li><a href="#security" class="subnav-link">Security</a></li>
+          <li><a href="#developer-apis" class="subnav-link">Developer APIs</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- ===========================================================
+         SECTION 03 — PAYMENT GATEWAY
+         =========================================================== -->
+    <section class="section-feature" aria-labelledby="gateway-heading" id="gateway">
+      <div class="container">
+        <div class="feature-layout feature-layout--text-left">
+
+          <div class="feature-content">
+            <p class="section-eyebrow">Payment Gateway</p>
+            <h2 class="section-heading" id="gateway-heading">
+              The checkout your customers deserve
+            </h2>
+            <p class="section-body">
+              FinPay's payment gateway delivers a conversion-optimised checkout experience
+              out of the box. Smart payment routing, real-time card validation, and
+              one-click repeat payments work together to maximise every transaction.
+            </p>
+
+            <ul class="feature-checklist" role="list">
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                Customisable, embeddable checkout widget
+              </li>
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                Smart routing across multiple acquirers
+              </li>
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                One-click checkout for returning customers
+              </li>
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                3D Secure 2.0 &amp; dynamic fraud scoring
+              </li>
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                Real-time payment status webhooks
+              </li>
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                Mobile-first, fully responsive checkout
+              </li>
+            </ul>
+
+            <div class="feature-actions">
+              <a href="signup.html" class="btn btn--primary" aria-label="Start using FinPay payment gateway">Get started</a>
+              <a href="resources.html#docs" class="btn btn--ghost" aria-label="Read gateway integration documentation">Integration docs &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Gateway visual: checkout mockup -->
+          <div class="feature-visual" role="img" aria-label="FinPay checkout widget showing card payment form">
+            <figure class="checkout-mockup" aria-hidden="true">
+              <div class="checkout-header">
+                <div class="checkout-merchant-info">
+                  <span class="checkout-merchant-logo" aria-hidden="true">&#9670;</span>
+                  <div>
+                    <span class="checkout-merchant-name">Orbis Commerce</span>
+                    <span class="checkout-amount">$49.99</span>
+                  </div>
+                </div>
+                <span class="checkout-secure-badge">&#128274; Secured by FinPay</span>
+              </div>
+              <div class="checkout-tabs" role="tablist" aria-label="Payment method tabs">
+                <button class="checkout-tab checkout-tab--active" role="tab" aria-selected="true" type="button">Card</button>
+                <button class="checkout-tab" role="tab" aria-selected="false" type="button">UPI</button>
+                <button class="checkout-tab" role="tab" aria-selected="false" type="button">Wallets</button>
+                <button class="checkout-tab" role="tab" aria-selected="false" type="button">More</button>
+              </div>
+              <div class="checkout-form-mock" role="form" aria-label="Card payment form preview">
+                <div class="mock-field mock-field--full">
+                  <span class="mock-label">Card number</span>
+                  <span class="mock-input">4111 1111 1111 ••••</span>
+                </div>
+                <div class="mock-field-row">
+                  <div class="mock-field mock-field--half">
+                    <span class="mock-label">Expiry</span>
+                    <span class="mock-input">12 / 27</span>
+                  </div>
+                  <div class="mock-field mock-field--half">
+                    <span class="mock-label">CVV</span>
+                    <span class="mock-input">•••</span>
+                  </div>
+                </div>
+                <div class="mock-field mock-field--full">
+                  <span class="mock-label">Name on card</span>
+                  <span class="mock-input">James Okafor</span>
+                </div>
+                <button class="checkout-pay-btn" type="button" aria-label="Pay button preview">
+                  Pay $49.99 &rarr;
+                </button>
+              </div>
+              <p class="checkout-footer-note">
+                &#128275; 256-bit TLS encrypted &middot; PCI DSS Compliant
+              </p>
+            </figure>
+          </div>
+
+        </div>
+
+        <!-- Gateway stats row -->
+        <ul class="feature-stats-row" role="list" aria-label="Payment gateway statistics">
+          <li class="feature-stat">
+            <span class="stat-number">99.1%</span>
+            <span class="stat-label">Payment success rate</span>
+          </li>
+          <li class="feature-stat">
+            <span class="stat-number">84ms</span>
+            <span class="stat-label">Avg. API response</span>
+          </li>
+          <li class="feature-stat">
+            <span class="stat-number">+23%</span>
+            <span class="stat-label">Avg. checkout conversion lift</span>
+          </li>
+          <li class="feature-stat">
+            <span class="stat-number">120+</span>
+            <span class="stat-label">Payment methods</span>
+          </li>
+        </ul>
+
+      </div>
+    </section>
+
+    <!-- ===========================================================
+         SECTION 04 — PAYMENT LINKS
+         =========================================================== -->
+    <section class="section-feature section-feature--alt" aria-labelledby="links-heading" id="links">
+      <div class="container">
+        <div class="feature-layout feature-layout--text-right">
+
+          <!-- Payment links visual -->
+          <div class="feature-visual" role="img" aria-label="FinPay payment link creation interface and sharing options">
+            <figure class="links-mockup" aria-hidden="true">
+              <div class="links-create-panel">
+                <p class="links-panel-title">Create Payment Link</p>
+                <div class="links-field-row">
+                  <span class="links-field-label">Amount</span>
+                  <span class="links-field-value">$250.00</span>
+                </div>
+                <div class="links-field-row">
+                  <span class="links-field-label">Description</span>
+                  <span class="links-field-value">Website Design — Q3</span>
+                </div>
+                <div class="links-field-row">
+                  <span class="links-field-label">Expiry</span>
+                  <span class="links-field-value">30 days</span>
+                </div>
+                <div class="links-field-row">
+                  <span class="links-field-label">Link</span>
+                  <span class="links-field-value links-url">finpay.io/l/xK9m2p</span>
+                </div>
+                <div class="links-share-strip">
+                  <span class="links-share-btn">&#9993; Email</span>
+                  <span class="links-share-btn">&#128241; SMS</span>
+                  <span class="links-share-btn">&#128279; Copy</span>
+                  <span class="links-share-btn">&#128204; WhatsApp</span>
+                </div>
+              </div>
+              <div class="links-activity">
+                <p class="links-activity-title">Link Activity</p>
+                <ul class="links-activity-list" role="list">
+                  <li class="links-activity-item links-activity-item--paid">
+                    <span class="activity-status" aria-hidden="true">&#10003;</span>
+                    <span>$250.00 paid &middot; 2 min ago</span>
+                  </li>
+                  <li class="links-activity-item links-activity-item--viewed">
+                    <span class="activity-status" aria-hidden="true">&#9679;</span>
+                    <span>Link opened &middot; 5 min ago</span>
+                  </li>
+                  <li class="links-activity-item links-activity-item--sent">
+                    <span class="activity-status" aria-hidden="true">&#9658;</span>
+                    <span>Sent via email &middot; 12 min ago</span>
+                  </li>
+                </ul>
+              </div>
+            </figure>
+          </div>
+
+          <div class="feature-content">
+            <p class="section-eyebrow">Payment Links</p>
+            <h2 class="section-heading" id="links-heading">
+              Get paid without writing a line of code
+            </h2>
+            <p class="section-body">
+              Generate a shareable payment link in seconds from the FinPay dashboard
+              or via API. Share via email, SMS, WhatsApp, or any channel — your customer
+              clicks, pays, and you get notified instantly.
+            </p>
+
+            <ul class="feature-checklist" role="list">
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                Create links in under 30 seconds
+              </li>
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                Set custom amounts, descriptions, and expiry dates
+              </li>
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                Partial payments and overpayment handling
+              </li>
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                Real-time payment notifications
+              </li>
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                Bulk link generation via API
+              </li>
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                All major payment methods supported
+              </li>
+            </ul>
+
+            <div class="feature-actions">
+              <a href="signup.html" class="btn btn--primary" aria-label="Start creating payment links with FinPay">Create your first link</a>
+              <a href="resources.html#docs" class="btn btn--ghost" aria-label="Read payment links documentation">View docs &rarr;</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===========================================================
+         SECTION 05 — PAYMENT PAGES
+         =========================================================== -->
+    <section class="section-feature" aria-labelledby="pages-heading" id="pages">
+      <div class="container">
+        <div class="feature-layout feature-layout--text-left">
+
+          <div class="feature-content">
+            <p class="section-eyebrow">Payment Pages</p>
+            <h2 class="section-heading" id="pages-heading">
+              Branded payment pages — no engineering required
+            </h2>
+            <p class="section-body">
+              Launch a fully customised, mobile-optimised payment page in minutes.
+              Upload your logo, set your brand colours, choose the fields you need,
+              and share the URL — your page is live.
+            </p>
+
+            <ul class="feature-checklist" role="list">
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                Drag-and-drop page builder in the dashboard
+              </li>
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                Custom domain support (pay.yourbrand.com)
+              </li>
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                Configurable form fields with validation
+              </li>
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                Automatic receipt emails to payers
+              </li>
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                Embed on your existing website or share as a link
+              </li>
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                Multi-language support
+              </li>
+            </ul>
+
+            <div class="feature-actions">
+              <a href="signup.html" class="btn btn--primary" aria-label="Build your first FinPay payment page">Build a page</a>
+              <a href="resources.html#docs" class="btn btn--ghost" aria-label="View payment pages documentation">View docs &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Payment pages visual -->
+          <div class="feature-visual" role="img" aria-label="Branded FinPay payment page with company logo and colour customisation">
+            <figure class="page-mockup" aria-hidden="true">
+              <!-- Browser chrome -->
+              <div class="page-browser-bar">
+                <span class="mockup-dot mockup-dot--red"></span>
+                <span class="mockup-dot mockup-dot--amber"></span>
+                <span class="mockup-dot mockup-dot--green"></span>
+                <span class="mockup-url">pay.orbis.com/checkout</span>
+              </div>
+              <!-- Branded page preview -->
+              <div class="page-preview">
+                <div class="page-preview-header">
+                  <div class="page-preview-logo-area">
+                    <span class="page-preview-logo-dot" aria-hidden="true">&#9670;</span>
+                    <span class="page-preview-brand">Orbis Commerce</span>
+                  </div>
+                  <p class="page-preview-title">Complete your purchase</p>
+                  <p class="page-preview-amount">$149.00</p>
+                </div>
+                <div class="page-preview-form">
+                  <div class="page-preview-field">
+                    <span class="page-preview-label">Full name</span>
+                    <span class="page-preview-input">Sara Lindqvist</span>
+                  </div>
+                  <div class="page-preview-field">
+                    <span class="page-preview-label">Email address</span>
+                    <span class="page-preview-input">sara@sphera.io</span>
+                  </div>
+                  <div class="page-preview-field">
+                    <span class="page-preview-label">Phone number</span>
+                    <span class="page-preview-input">+44 7700 900 123</span>
+                  </div>
+                  <div class="page-preview-method-row">
+                    <span class="page-preview-method-tab page-preview-method-tab--active">Card</span>
+                    <span class="page-preview-method-tab">UPI</span>
+                    <span class="page-preview-method-tab">Wallet</span>
+                  </div>
+                  <span class="page-preview-pay-btn">Pay $149.00</span>
+                </div>
+                <p class="page-preview-footer">Powered by FinPay &middot; &#128274; Secured</p>
+              </div>
+            </figure>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===========================================================
+         SECTION 06 — SUBSCRIPTIONS
+         =========================================================== -->
+    <section class="section-feature section-feature--alt" aria-labelledby="subscriptions-heading" id="subscriptions">
+      <div class="container">
+        <div class="feature-layout feature-layout--text-right">
+
+          <!-- Subscriptions visual -->
+          <div class="feature-visual" role="img" aria-label="FinPay subscription billing dashboard showing MRR, churn rate, and active plan breakdown">
+            <figure class="subs-mockup" aria-hidden="true">
+              <div class="subs-header">
+                <span class="subs-title">Subscription Overview</span>
+                <span class="subs-period">Last 30 days</span>
+              </div>
+              <div class="subs-metrics">
+                <div class="subs-metric">
+                  <span class="subs-metric-label">MRR</span>
+                  <span class="subs-metric-value">$182,400</span>
+                  <span class="subs-metric-delta subs-metric-delta--up">&#x25B2; 12.4%</span>
+                </div>
+                <div class="subs-metric">
+                  <span class="subs-metric-label">Active Subscribers</span>
+                  <span class="subs-metric-value">14,220</span>
+                  <span class="subs-metric-delta subs-metric-delta--up">&#x25B2; 5.7%</span>
+                </div>
+                <div class="subs-metric">
+                  <span class="subs-metric-label">Churn Rate</span>
+                  <span class="subs-metric-value">1.8%</span>
+                  <span class="subs-metric-delta subs-metric-delta--down">&#x25BC; 0.3%</span>
+                </div>
+                <div class="subs-metric">
+                  <span class="subs-metric-label">Renewal Rate</span>
+                  <span class="subs-metric-value">96.2%</span>
+                  <span class="subs-metric-delta subs-metric-delta--up">&#x25B2; 1.1%</span>
+                </div>
+              </div>
+              <div class="subs-plan-breakdown">
+                <p class="subs-breakdown-title">Plan Breakdown</p>
+                <ul class="subs-plan-list" role="list">
+                  <li class="subs-plan-item">
+                    <span class="subs-plan-name">Starter</span>
+                    <div class="subs-plan-bar-wrap">
+                      <div class="subs-plan-bar subs-plan-bar--30" aria-label="30 percent"></div>
+                    </div>
+                    <span class="subs-plan-pct">30%</span>
+                  </li>
+                  <li class="subs-plan-item">
+                    <span class="subs-plan-name">Growth</span>
+                    <div class="subs-plan-bar-wrap">
+                      <div class="subs-plan-bar subs-plan-bar--50" aria-label="50 percent"></div>
+                    </div>
+                    <span class="subs-plan-pct">50%</span>
+                  </li>
+                  <li class="subs-plan-item">
+                    <span class="subs-plan-name">Enterprise</span>
+                    <div class="subs-plan-bar-wrap">
+                      <div class="subs-plan-bar subs-plan-bar--20" aria-label="20 percent"></div>
+                    </div>
+                    <span class="subs-plan-pct">20%</span>
+                  </li>
+                </ul>
+              </div>
+            </figure>
+          </div>
+
+          <div class="feature-content">
+            <p class="section-eyebrow">Subscriptions</p>
+            <h2 class="section-heading" id="subscriptions-heading">
+              Build recurring revenue that compounds
+            </h2>
+            <p class="section-body">
+              FinPay's subscription engine handles the complexity of recurring billing —
+              smart retries, dunning management, proration, and plan changes — so your
+              team can focus on growth, not payment edge cases.
+            </p>
+
+            <ul class="feature-checklist" role="list">
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                Flexible billing: daily, weekly, monthly, annual, or custom
+              </li>
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                Free trials, grace periods, and pause functionality
+              </li>
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                Smart payment retry with intelligent scheduling
+              </li>
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                Automated dunning emails and in-app notifications
+              </li>
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                Pro-rata billing on plan upgrades and downgrades
+              </li>
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                Usage-based billing for metered products
+              </li>
+              <li class="feature-check-item">
+                <span class="check-icon" aria-hidden="true">&#10003;</span>
+                MRR, ARR, churn, and LTV analytics dashboard
+              </li>
+            </ul>
+
+            <div class="feature-actions">
+              <a href="signup.html" class="btn btn--primary" aria-label="Set up subscription billing with FinPay">Set up subscriptions</a>
+              <a href="resources.html#docs" class="btn btn--ghost" aria-label="Read subscription billing documentation">Read the docs &rarr;</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===========================================================
+         SECTION 07 — INTERNATIONAL PAYMENTS
+         =========================================================== -->
+    <section class="section-feature" aria-labelledby="international-heading" id="international">
+      <div class="container">
+
+        <header class="section-header section-header--centered">
+          <p class="section-eyebrow">International Payments</p>
+          <h2 class="section-heading" id="international-heading">
+            Go global from day one
+          </h2>
+          <p class="section-subheading">
+            FinPay's international payment infrastructure lets you accept money in
+            135+ currencies, settle in your local currency, and offer the local
+            payment methods your customers already use and trust.
+          </p>
+        </header>
+
+        <ul class="international-regions" role="list" aria-label="Supported payment regions and methods">
+          <li class="region-card">
+            <div class="region-icon" aria-hidden="true">&#127758;</div>
+            <h3 class="region-name">North America</h3>
+            <p class="region-currencies">USD, CAD, MXN</p>
+            <ul class="region-methods" role="list">
+              <li>Visa / Mastercard / Amex</li>
+              <li>ACH Bank Transfer</li>
+              <li>Apple Pay / Google Pay</li>
+              <li>PayPal</li>
+              <li>OXXO (Mexico)</li>
+            </ul>
+          </li>
+          <li class="region-card">
+            <div class="region-icon" aria-hidden="true">&#127466;&#127482;</div>
+            <h3 class="region-name">Europe</h3>
+            <p class="region-currencies">EUR, GBP, CHF, SEK, NOK +14 more</p>
+            <ul class="region-methods" role="list">
+              <li>SEPA Direct Debit</li>
+              <li>Open Banking</li>
+              <li>iDEAL (Netherlands)</li>
+              <li>Sofort / Klarna</li>
+              <li>Bancontact (Belgium)</li>
+            </ul>
+          </li>
+          <li class="region-card">
+            <div class="region-icon" aria-hidden="true">&#127462;&#127480;</div>
+            <h3 class="region-name">Asia Pacific</h3>
+            <p class="region-currencies">INR, SGD, AUD, JPY, MYR +12 more</p>
+            <ul class="region-methods" role="list">
+              <li>UPI (India)</li>
+              <li>PayNow (Singapore)</li>
+              <li>PromptPay (Thailand)</li>
+              <li>Alipay / WeChat Pay</li>
+              <li>GrabPay / Touch &apos;n Go</li>
+            </ul>
+          </li>
+          <li class="region-card">
+            <div class="region-icon" aria-hidden="true">&#127463;&#127479;</div>
+            <h3 class="region-name">Latin America</h3>
+            <p class="region-currencies">BRL, COP, CLP, PEN, ARS</p>
+            <ul class="region-methods" role="list">
+              <li>PIX (Brazil)</li>
+              <li>PSE (Colombia)</li>
+              <li>Boleto Bancário</li>
+              <li>WebPay (Chile)</li>
+              <li>Mercado Pago</li>
+            </ul>
+          </li>
+          <li class="region-card">
+            <div class="region-icon" aria-hidden="true">&#127462;&#127467;</div>
+            <h3 class="region-name">Middle East &amp; Africa</h3>
+            <p class="region-currencies">AED, SAR, KES, ZAR, NGN</p>
+            <ul class="region-methods" role="list">
+              <li>Mada (Saudi Arabia)</li>
+              <li>M-Pesa (Kenya)</li>
+              <li>JazzCash (Pakistan)</li>
+              <li>Fawry (Egypt)</li>
+              <li>Ozow (South Africa)</li>
+            </ul>
+          </li>
+        </ul>
+
+        <div class="international-cta-strip">
+          <p class="intl-cta-text">
+            Need a specific region or payment method?
+          </p>
+          <a href="contact.html" class="btn btn--primary" aria-label="Contact FinPay sales about international payment coverage">Talk to our team</a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===========================================================
+         SECTION 08 — SETTLEMENT PROCESS
+         =========================================================== -->
+    <section class="section-settlement" aria-labelledby="settlement-heading" id="settlement">
+      <div class="container">
+
+        <header class="section-header section-header--centered">
+          <p class="section-eyebrow">Settlement</p>
+          <h2 class="section-heading" id="settlement-heading">
+            Your money, on your schedule
+          </h2>
+          <p class="section-subheading">
+            Transparent settlement with no hidden deductions, real-time tracking,
+            and flexible payout schedules to match your cash flow needs.
+          </p>
+        </header>
+
+        <ol class="settlement-steps" role="list" aria-label="Settlement process steps">
+          <li class="settlement-step">
+            <div class="step-number" aria-hidden="true">01</div>
+            <div class="step-content">
+              <h3 class="step-heading">Customer pays</h3>
+              <p class="step-description">
+                Payment is authorised, processed, and confirmed in real time.
+                Your FinPay dashboard updates instantly.
+              </p>
+            </div>
+          </li>
+          <li class="settlement-step-divider" aria-hidden="true">&rarr;</li>
+          <li class="settlement-step">
+            <div class="step-number" aria-hidden="true">02</div>
+            <div class="step-content">
+              <h3 class="step-heading">Funds held securely</h3>
+              <p class="step-description">
+                Collected funds are held in a segregated, regulated escrow account
+                while fraud checks and reconciliation complete.
+              </p>
+            </div>
+          </li>
+          <li class="settlement-step-divider" aria-hidden="true">&rarr;</li>
+          <li class="settlement-step">
+            <div class="step-number" aria-hidden="true">03</div>
+            <div class="step-content">
+              <h3 class="step-heading">Settlement initiated</h3>
+              <p class="step-description">
+                On your chosen schedule — same day, next day, or T+2 —
+                FinPay batches and initiates the transfer to your bank account.
+              </p>
+            </div>
+          </li>
+          <li class="settlement-step-divider" aria-hidden="true">&rarr;</li>
+          <li class="settlement-step">
+            <div class="step-number" aria-hidden="true">04</div>
+            <div class="step-content">
+              <h3 class="step-heading">Funds in your account</h3>
+              <p class="step-description">
+                Money arrives in your bank account. A full settlement report is
+                available in your dashboard and via the Settlements API.
+              </p>
+            </div>
+          </li>
+        </ol>
+
+        <ul class="settlement-options" role="list" aria-label="Available settlement schedule options">
+          <li class="settlement-option">
+            <h3 class="settlement-option-title">Same-Day Settlement</h3>
+            <p class="settlement-option-desc">Available for eligible businesses. Funds reach your account the same day payments are collected.</p>
+            <span class="settlement-option-badge">For qualifying accounts</span>
+          </li>
+          <li class="settlement-option settlement-option--featured">
+            <h3 class="settlement-option-title">Next-Day Settlement</h3>
+            <p class="settlement-option-desc">The FinPay standard. Payments collected today are in your bank account by 9 AM the next business day.</p>
+            <span class="settlement-option-badge settlement-option-badge--featured">Standard</span>
+          </li>
+          <li class="settlement-option">
+            <h3 class="settlement-option-title">Custom Schedule</h3>
+            <p class="settlement-option-desc">Enterprise customers can configure custom settlement windows — weekly, bi-weekly, or on-demand via API.</p>
+            <span class="settlement-option-badge">Enterprise</span>
+          </li>
+        </ul>
+
+      </div>
+    </section>
+
+    <!-- ===========================================================
+         SECTION 09 — SECURITY
+         =========================================================== -->
+    <section class="section-security" aria-labelledby="security-heading" id="security">
+      <div class="container">
+
+        <header class="section-header section-header--centered">
+          <p class="section-eyebrow">Security &amp; Compliance</p>
+          <h2 class="section-heading" id="security-heading">
+            Security isn't a feature. It's the foundation.
+          </h2>
+          <p class="section-subheading">
+            Every payment processed through FinPay is protected by the highest
+            security standards in the industry — active by default, with no
+            configuration required.
+          </p>
+        </header>
+
+        <ul class="security-grid" role="list">
+
+          <li class="security-card">
+            <div class="security-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                <path d="M14 2L4 7v8c0 5.52 4.3 10.74 10 12 5.7-1.26 10-6.48 10-12V7L14 2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M9 14l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="security-card-heading">PCI DSS Level 1</h3>
+            <p class="security-card-description">
+              The highest tier of payment card security certification — independently
+              audited annually. Your card data never touches your servers.
+            </p>
+          </li>
+
+          <li class="security-card">
+            <div class="security-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                <rect x="3" y="12" width="22" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                <path d="M9 12V8a5 5 0 0110 0v4" stroke="currentColor" stroke-width="2"/>
+                <circle cx="14" cy="19" r="2" fill="currentColor"/>
+              </svg>
+            </div>
+            <h3 class="security-card-heading">AES-256 Encryption</h3>
+            <p class="security-card-description">
+              All sensitive data is encrypted at rest using AES-256 and in transit
+              using TLS 1.3. Payment tokens replace raw card data throughout.
+            </p>
+          </li>
+
+          <li class="security-card">
+            <div class="security-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                <circle cx="14" cy="14" r="11" stroke="currentColor" stroke-width="2"/>
+                <path d="M10 14l3 3 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="security-card-heading">3D Secure 2.0</h3>
+            <p class="security-card-description">
+              Frictionless authentication for low-risk transactions, step-up
+              challenge only when needed — maximising conversion while minimising fraud.
+            </p>
+          </li>
+
+          <li class="security-card">
+            <div class="security-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                <path d="M14 3l3 8h8l-6.5 5 2.5 8L14 19l-7 5 2.5-8L3 11h8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3 class="security-card-heading">ML Fraud Detection</h3>
+            <p class="security-card-description">
+              Our machine-learning fraud engine analyses 200+ signals per transaction
+              in real time, blocking fraud before it reaches your customers.
+            </p>
+          </li>
+
+          <li class="security-card">
+            <div class="security-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                <rect x="3" y="5" width="22" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                <path d="M3 11h22" stroke="currentColor" stroke-width="2"/>
+                <path d="M9 17h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 class="security-card-heading">Tokenisation</h3>
+            <p class="security-card-description">
+              Card numbers are replaced with secure tokens at the point of entry —
+              stored tokens can be re-used for one-click and subscription payments.
+            </p>
+          </li>
+
+          <li class="security-card">
+            <div class="security-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                <circle cx="14" cy="14" r="11" stroke="currentColor" stroke-width="2"/>
+                <path d="M14 9v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 class="security-card-heading">24/7 Monitoring</h3>
+            <p class="security-card-description">
+              Round-the-clock infrastructure monitoring, automated incident response,
+              and a dedicated security team that never sleeps.
+            </p>
+          </li>
+
+        </ul>
+
+        <div class="compliance-badges-row" aria-label="Compliance certifications held by FinPay">
+          <div class="compliance-badge">
+            <strong>PCI DSS</strong>
+            <span>Level 1</span>
+          </div>
+          <div class="compliance-badge">
+            <strong>ISO 27001</strong>
+            <span>Certified</span>
+          </div>
+          <div class="compliance-badge">
+            <strong>SOC 2</strong>
+            <span>Type II</span>
+          </div>
+          <div class="compliance-badge">
+            <strong>GDPR</strong>
+            <span>Compliant</span>
+          </div>
+          <div class="compliance-badge">
+            <strong>CCPA</strong>
+            <span>Compliant</span>
+          </div>
+          <div class="compliance-badge">
+            <strong>RBI</strong>
+            <span>Authorised</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===========================================================
+         SECTION 10 — DEVELOPER APIs
+         =========================================================== -->
+    <section class="section-developer" aria-labelledby="dev-apis-heading" id="developer-apis">
+      <div class="container">
+
+        <div class="developer-layout">
+
+          <div class="developer-content">
+            <p class="section-eyebrow">Developer APIs</p>
+            <h2 class="section-heading" id="dev-apis-heading">
+              Build exactly what you need
+            </h2>
+            <p class="section-body">
+              Every FinPay feature is accessible via a clean, versioned REST API.
+              With SDKs in 12 languages, Postman collections, and an interactive API
+              explorer, integration is as fast as your team wants it to be.
+            </p>
+
+            <ul class="api-feature-list" role="list">
+              <li class="api-feature-item">
+                <div class="api-feature-icon" aria-hidden="true">&#9654;</div>
+                <div>
+                  <strong>REST API</strong>
+                  <p>Versioned, predictable, and fully documented with OpenAPI 3.0.</p>
+                </div>
+              </li>
+              <li class="api-feature-item">
+                <div class="api-feature-icon" aria-hidden="true">&#9654;</div>
+                <div>
+                  <strong>SDKs in 12 languages</strong>
+                  <p>Node.js, Python, Ruby, Go, PHP, Java, .NET, Swift, Kotlin, and more.</p>
+                </div>
+              </li>
+              <li class="api-feature-item">
+                <div class="api-feature-icon" aria-hidden="true">&#9654;</div>
+                <div>
+                  <strong>Webhooks</strong>
+                  <p>Real-time event notifications with automatic retries and delivery logs.</p>
+                </div>
+              </li>
+              <li class="api-feature-item">
+                <div class="api-feature-icon" aria-hidden="true">&#9654;</div>
+                <div>
+                  <strong>Sandbox environment</strong>
+                  <p>Test every flow — including failures and edge cases — without touching live funds.</p>
+                </div>
+              </li>
+              <li class="api-feature-item">
+                <div class="api-feature-icon" aria-hidden="true">&#9654;</div>
+                <div>
+                  <strong>Idempotency keys</strong>
+                  <p>Safely retry requests without risk of duplicate charges.</p>
+                </div>
+              </li>
+            </ul>
+
+            <div class="developer-actions">
+              <a href="resources.html#api" class="btn btn--primary" aria-label="View full FinPay API reference">API reference</a>
+              <a href="resources.html#guides" class="btn btn--ghost" aria-label="View developer quick-start guides">Quick-start guides &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Webhook payload snippet -->
+          <div class="developer-visual">
+            <figure class="code-panel" role="img" aria-label="Example FinPay webhook payload for a successful payment event">
+              <figcaption class="code-panel-caption">Webhook event — payment.captured</figcaption>
+              <pre class="code-block"><code>{
+  <span class="code-string">"id"</span>: <span class="code-string">"evt_FpWk92mXc8Hq"</span>,
+  <span class="code-string">"type"</span>: <span class="code-string">"payment.captured"</span>,
+  <span class="code-string">"created_at"</span>: <span class="code-number">1719302400</span>,
+  <span class="code-string">"data"</span>: {
+    <span class="code-string">"payment_id"</span>: <span class="code-string">"pay_NlMk7HbX9AQr"</span>,
+    <span class="code-string">"order_id"</span>: <span class="code-string">"order_9wKj2pLm3Xc"</span>,
+    <span class="code-string">"amount"</span>: <span class="code-number">4999</span>,
+    <span class="code-string">"currency"</span>: <span class="code-string">"USD"</span>,
+    <span class="code-string">"status"</span>: <span class="code-string">"captured"</span>,
+    <span class="code-string">"method"</span>: <span class="code-string">"card"</span>,
+    <span class="code-string">"card"</span>: {
+      <span class="code-string">"network"</span>: <span class="code-string">"visa"</span>,
+      <span class="code-string">"last4"</span>: <span class="code-string">"4242"</span>,
+      <span class="code-string">"issuer"</span>: <span class="code-string">"Chase"</span>
+    },
+    <span class="code-string">"customer_id"</span>: <span class="code-string">"cus_8f2k1jPqRt"</span>,
+    <span class="code-string">"fee"</span>: <span class="code-number">145</span>,
+    <span class="code-string">"tax"</span>: <span class="code-number">26</span>
+  }
+}</code></pre>
+              <div class="code-panel-footer">
+                <span class="code-lang-badge">JSON</span>
+                <a href="resources.html#api" class="code-docs-link" aria-label="View webhook documentation">Webhook docs &rarr;</a>
+              </div>
+            </figure>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===========================================================
+         SECTION 11 — CALL TO ACTION
+         =========================================================== -->
+    <section class="section-cta" aria-labelledby="payments-cta-heading" id="cta">
+      <div class="container">
+        <div class="cta-inner">
+
+          <h2 class="cta-heading" id="payments-cta-heading">
+            Start accepting payments today
+          </h2>
+          <p class="cta-subheading">
+            Set up your account in minutes. Your first &#36;10,000 in transactions
+            are fee-free — our way of saying welcome.
+          </p>
+
+          <div class="cta-actions">
+            <a href="signup.html" class="btn btn--primary btn--large" aria-label="Create your free FinPay account">
+              Create free account
+            </a>
+            <a href="contact.html" class="btn btn--ghost-inverted btn--large" aria-label="Contact FinPay sales team">
+              Talk to sales
+            </a>
+          </div>
+
+          <p class="cta-footnote">
+            No credit card required &middot; Free sandbox &middot; Cancel anytime
+          </p>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===========================================================
+       GLOBAL FOOTER
+       =========================================================== -->
+  <footer class="site-footer" role="contentinfo" aria-label="Site footer">
+    <div class="container">
+
+      <!-- Footer top: brand + newsletter -->
+      <div class="footer-top">
+        <div class="footer-brand">
+          
+            <span class="brand-logo-mark" aria-hidden="true">&#9670;</span>
+            <span class="brand-name">FinPay</span>
+          </a>
+          <p class="footer-tagline">
+            Global payment infrastructure for ambitious businesses.
+          </p>
+          <ul class="footer-social" role="list" aria-label="FinPay social media links">
+            <li>
+              <a href="#" class="social-link" aria-label="FinPay on Twitter / X" rel="noopener noreferrer" target="_blank">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="social-link" aria-label="FinPay on LinkedIn" rel="noopener noreferrer" target="_blank">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="social-link" aria-label="FinPay on GitHub" rel="noopener noreferrer" target="_blank">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Newsletter signup -->
+        <div class="footer-newsletter">
+          <h3 class="newsletter-heading">Stay in the loop</h3>
+          <p class="newsletter-subheading">Product updates, fintech insights, and no spam.</p>
+          <form class="newsletter-form" action="#" method="post" aria-label="Newsletter signup form">
+            <label for="newsletter-email" class="sr-only">Your email address</label>
+            <input
+              type="email"
+              id="newsletter-email"
+              name="email"
+              class="newsletter-input"
+              placeholder="you@company.com"
+              required
+              autocomplete="email"
+              aria-required="true"
+              aria-describedby="newsletter-hint"
+            />
+            <button type="submit" class="btn btn--primary newsletter-btn" aria-label="Subscribe to FinPay newsletter">
+              Subscribe
+            </button>
+            <p class="newsletter-hint" id="newsletter-hint">
+              We respect your privacy. Unsubscribe at any time.
+            </p>
+          </form>
+        </div>
+      </div>
+
+      <!-- Footer nav columns -->
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <div class="footer-nav-group">
+          <h4 class="footer-nav-heading">Products</h4>
+          <ul class="footer-nav-list" role="list">
+            <li><a href="payments.html#gateway" class="footer-nav-link">Payment Gateway</a></li>
+            <li><a href="payments.html#links" class="footer-nav-link">Payment Links</a></li>
+            <li><a href="payments.html#pages" class="footer-nav-link">Payment Pages</a></li>
+            <li><a href="payments.html#subscriptions" class="footer-nav-link">Subscriptions</a></li>
+            <li><a href="payments.html#international" class="footer-nav-link">International Payments</a></li>
+            <li><a href="pricing.html" class="footer-nav-link">Pricing</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-group">
+          <h4 class="footer-nav-heading">Resources</h4>
+          <ul class="footer-nav-list" role="list">
+            <li><a href="resources.html#docs" class="footer-nav-link">Documentation</a></li>
+            <li><a href="resources.html#api" class="footer-nav-link">API Reference</a></li>
+            <li><a href="resources.html#guides" class="footer-nav-link">Developer Guides</a></li>
+            <li><a href="resources.html#blog" class="footer-nav-link">Blog</a></li>
+            <li><a href="resources.html#help" class="footer-nav-link">Help Center</a></li>
+            <li><a href="resources.html#faqs" class="footer-nav-link">FAQs</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-group">
+          <h4 class="footer-nav-heading">Company</h4>
+          <ul class="footer-nav-list" role="list">
+            <li><a href="about.html" class="footer-nav-link">About FinPay</a></li>
+            <li><a href="about.html#team" class="footer-nav-link">Leadership Team</a></li>
+            <li><a href="about.html#timeline" class="footer-nav-link">Our Story</a></li>
+            <li><a href="contact.html" class="footer-nav-link">Contact Us</a></li>
+            <li><a href="#" class="footer-nav-link" target="_blank" rel="noopener noreferrer">Careers</a></li>
+            <li><a href="#" class="footer-nav-link">Press</a></li>
+          </ul>
+        </div>
+        <div class="footer-nav-group">
+          <h4 class="footer-nav-heading">Legal</h4>
+          <ul class="footer-nav-list" role="list">
+            <li><a href="#" class="footer-nav-link">Privacy Policy</a></li>
+            <li><a href="#" class="footer-nav-link">Terms of Service</a></li>
+            <li><a href="#" class="footer-nav-link">Cookie Policy</a></li>
+            <li><a href="#" class="footer-nav-link">Acceptable Use</a></li>
+            <li><a href="#" class="footer-nav-link">PCI Compliance</a></li>
+            <li><a href="#" class="footer-nav-link">Security</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Footer bottom bar -->
+      <div class="footer-bottom">
+        <p class="footer-copyright">
+          &copy; <time datetime="2025">2025</time> FinPay, Inc. All rights reserved.
+        </p>
+        <ul class="footer-badges" role="list" aria-label="Compliance certifications">
+          <li class="footer-badge" title="PCI DSS Level 1 Certified">PCI DSS L1</li>
+          <li class="footer-badge" title="ISO 27001 Certified">ISO 27001</li>
+          <li class="footer-badge" title="SOC 2 Type II Certified">SOC 2</li>
+          <li class="footer-badge" title="GDPR Compliant">GDPR</li>
+        </ul>
+        <div class="footer-locale">
+          <label for="footer-language" class="sr-only">Select language</label>
+          <select id="footer-language" name="language" class="locale-select" aria-label="Select display language">
+            <option value="en" selected>English (US)</option>
+            <option value="en-gb">English (UK)</option>
+            <option value="de">Deutsch</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+            <option value="ja">日本語</option>
+            <option value="hi">हिन्दी</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+<script src="Main.js"></script>
+<script src="Navigation.js"></script>
+<script src="Animations.js"></script>
+</body>
+
+</html>

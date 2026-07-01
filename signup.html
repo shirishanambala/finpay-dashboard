@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Create your free FinPay account. Accept payments, manage subscriptions, and grow your business globally — set up in under 10 minutes." />
+  <title>Create Account — FinPay</title>
+  <link rel="canonical" href="https://finpay.io/signup.html" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="Auth.css">
+  <!-- Firebase SDKs (compat version — works without bundler) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+</head>
+<body class="auth-page">
+
+  <!-- ============================================================
+       MINIMAL HEADER — Auth pages use simplified nav
+       ============================================================ -->
+  <header role="banner" id="site-header" class="auth-header">
+    <div class="auth-header-inner">
+
+      <!-- Logo -->
+      <a href="dashboard.html" class="auth-logo" aria-label="FinPay — Go to homepage">
+        <span aria-hidden="true">&#9670;</span> FinPay
+      </a>
+
+      <!-- Minimal nav -->
+      <nav role="navigation" aria-label="Auth navigation" class="auth-nav">
+        <span class="auth-nav-prompt">Already have an account?</span>
+        <a href="login.html" class="btn-ghost">Sign In</a>
+      </nav>
+
+    </div>
+  </header>
+
+  <main id="main-content" tabindex="-1" class="auth-main auth-main--signup">
+
+    <!-- ============================================================
+         SECTION 01 — SIGNUP LAYOUT (Form + Benefits Sidebar)
+         ============================================================ -->
+    <div class="signup-layout">
+
+      <!-- ============================================================
+           SIGNUP FORM COLUMN
+           ============================================================ -->
+      <section id="signup-form-section" aria-labelledby="signup-heading" class="signup-form-col">
+
+        <header class="auth-card-header">
+          <h1 id="signup-heading">Create your free account</h1>
+          <p class="auth-card-subtext">Start accepting payments in under 10 minutes. No setup fees.</p>
+        </header>
+
+        <!-- Social Signup Placeholder -->
+        <div class="social-login-wrap" aria-label="Sign up with a third-party provider">
+          <button type="button" class="btn-social-google" aria-label="Continue with Google account">
+            <img
+              src="assets/icons/google-logo.svg"
+              alt=""
+              aria-hidden="true"
+              width="20"
+              height="20"
+            />
+            Continue with Google
+          </button>
+        </div>
+
+        <!-- Divider -->
+        <div class="auth-divider" role="separator" aria-label="Or create an account with email">
+          <span>or create an account with email</span>
+        </div>
+
+        <!-- ============================================================
+             SIGNUP FORM
+             ============================================================ -->
+       <form
+  id="signup-form"
+  novalidate
+  aria-label="Create a FinPay account"
+  onsubmit="return false;"
+>
+
+          <!-- Full Name -->
+          <div class="form-group">
+            <label for="signup-fullname">Full Name <span aria-hidden="true" class="required-star">*</span><span class="sr-only">(required)</span></label>
+            <input
+              type="text"
+              id="signup-fullname"
+              name="full_name"
+              autocomplete="name"
+              placeholder="Jane Doe"
+              required
+              aria-required="true"
+            />
+          </div>
+
+          <!-- Business Name -->
+          <div class="form-group">
+            <label for="signup-business">Business / Company Name <span aria-hidden="true" class="required-star">*</span><span class="sr-only">(required)</span></label>
+            <input
+              type="text"
+              id="signup-business"
+              name="business_name"
+              autocomplete="organization"
+              placeholder="Acme Inc."
+              required
+              aria-required="true"
+              aria-describedby="signup-business-hint"
+            />
+            <span id="signup-business-hint" class="form-hint">This will appear on payment receipts sent to your customers.</span>
+          </div>
+
+          <!-- Work Email -->
+          <div class="form-group">
+            <label for="signup-email">Work Email <span aria-hidden="true" class="required-star">*</span><span class="sr-only">(required)</span></label>
+            <input
+              type="email"
+              id="signup-email"
+              name="email"
+              autocomplete="email"
+              placeholder="jane@company.com"
+              required
+              aria-required="true"
+            />
+          </div>
+
+          <!-- Phone -->
+          <div class="form-group">
+            <label for="signup-phone">Phone Number <span aria-hidden="true" class="required-star">*</span><span class="sr-only">(required)</span></label>
+            <input
+              type="tel"
+              id="signup-phone"
+              name="phone"
+              autocomplete="tel"
+              placeholder="+1 555 000 1111"
+              required
+              aria-required="true"
+              aria-describedby="signup-phone-hint"
+            />
+            <span id="signup-phone-hint" class="form-hint">Used for account verification and security alerts only.</span>
+          </div>
+
+          <!-- Business Type -->
+          <div class="form-group">
+            <label for="signup-business-type">Business Type <span aria-hidden="true" class="required-star">*</span><span class="sr-only">(required)</span></label>
+            <select id="signup-business-type" name="business_type" required aria-required="true">
+              <option value="" disabled selected>Select your business type</option>
+              <option value="individual">Individual / Freelancer</option>
+              <option value="sole-proprietor">Sole Proprietor</option>
+              <option value="private-limited">Private Limited Company</option>
+              <option value="public-limited">Public Limited Company</option>
+              <option value="llp">LLP / Partnership</option>
+              <option value="ngo">NGO / Non-Profit</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <!-- Country -->
+          <div class="form-group">
+            <label for="signup-country">Country of Operation <span aria-hidden="true" class="required-star">*</span><span class="sr-only">(required)</span></label>
+            <select id="signup-country" name="country" required aria-required="true" autocomplete="country">
+              <option value="" disabled selected>Select your country</option>
+              <option value="IN">India</option>
+              <option value="US">United States</option>
+              <option value="GB">United Kingdom</option>
+              <option value="SG">Singapore</option>
+              <option value="AE">United Arab Emirates</option>
+              <option value="AU">Australia</option>
+              <option value="CA">Canada</option>
+              <option value="DE">Germany</option>
+              <option value="FR">France</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <!-- Password -->
+          <div class="form-group">
+            <label for="signup-password">Password <span aria-hidden="true" class="required-star">*</span><span class="sr-only">(required)</span></label>
+            <input
+              type="password"
+              id="signup-password"
+              name="password"
+              autocomplete="new-password"
+              placeholder="Create a strong password"
+              required
+              aria-required="true"
+              minlength="8"
+              aria-describedby="password-requirements"
+            />
+            <button
+              type="button"
+              class="password-toggle"
+              aria-label="Show password"
+              aria-pressed="false"
+              aria-controls="signup-password"
+            >
+              Show
+            </button>
+            <ul id="password-requirements" class="password-rules" aria-label="Password requirements">
+              <li>At least 8 characters</li>
+              <li>One uppercase letter</li>
+              <li>One number or symbol</li>
+            </ul>
+          </div>
+
+          <!-- Confirm Password -->
+          <div class="form-group">
+            <label for="signup-confirm-password">Confirm Password <span aria-hidden="true" class="required-star">*</span><span class="sr-only">(required)</span></label>
+            <input
+              type="password"
+              id="signup-confirm-password"
+              name="confirm_password"
+              autocomplete="new-password"
+              placeholder="Repeat your password"
+              required
+              aria-required="true"
+              minlength="8"
+            />
+          </div>
+
+          <!-- Accept Terms -->
+          <fieldset class="form-fieldset" aria-label="Agreements">
+            <legend class="sr-only">Terms and agreements</legend>
+
+            <div class="form-group form-group--checkbox">
+              <input
+                type="checkbox"
+                id="signup-terms"
+                name="accept_terms"
+                required
+                aria-required="true"
+              />
+              <label for="signup-terms">
+                I agree to FinPay's
+                <a href="terms.html" target="_blank" rel="noopener">Terms of Service</a>
+                and
+                <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.
+                <span aria-hidden="true" class="required-star">*</span><span class="sr-only">(required)</span>
+              </label>
+            </div>
+
+            <div class="form-group form-group--checkbox">
+              <input
+                type="checkbox"
+                id="signup-marketing"
+                name="marketing_consent"
+              />
+              <label for="signup-marketing">
+                Send me product updates, tips, and occasional offers from FinPay. You can unsubscribe at any time.
+              </label>
+            </div>
+
+          </fieldset>
+
+          <!-- Submit -->
+          <button type="submit" class="btn-submit btn-submit--full" aria-label="Create your FinPay account">
+            Create Free Account
+          </button>
+
+          <!-- Hidden CSRF token placeholder -->
+          <input type="hidden" name="_csrf" value="" aria-hidden="true" />
+
+          <p class="form-legal-note">
+            <small>
+              By creating an account you confirm you are at least 18 years old. FinPay is not a bank. Payment services are regulated and provided by licensed payment partners. See our <a href="compliance.html">compliance page</a> for details.
+            </small>
+          </p>
+
+        </form>
+
+        <!-- Card Footer -->
+        <footer class="auth-card-footer">
+          <p>
+            Already have an account?
+            <a href="login.html" aria-label="Sign in to your existing FinPay account">Sign In</a>
+          </p>
+        </footer>
+
+      </section>
+
+      <!-- ============================================================
+           BENEFITS SIDEBAR COLUMN
+           ============================================================ -->
+      <aside class="signup-benefits-col" aria-label="Why choose FinPay">
+
+        <div class="benefits-sticky">
+
+          <h2 class="benefits-heading">Why 500,000+ businesses trust FinPay</h2>
+
+          <!-- Benefit Items -->
+          <ul class="benefits-list" role="list">
+
+            <li class="benefit-item">
+              <span class="benefit-icon" aria-hidden="true">&#9889;</span>
+              <div>
+                <h3>Instant Activation</h3>
+                <p>Go live in minutes. No complex paperwork, no waiting for approval. Start accepting payments the same day.</p>
+              </div>
+            </li>
+
+            <li class="benefit-item">
+              <span class="benefit-icon" aria-hidden="true">&#127758;</span>
+              <div>
+                <h3>100+ Currencies</h3>
+                <p>Accept payments from customers across 150+ countries with automatic currency conversion and local payment methods.</p>
+              </div>
+            </li>
+
+            <li class="benefit-item">
+              <span class="benefit-icon" aria-hidden="true">&#128274;</span>
+              <div>
+                <h3>Bank-Grade Security</h3>
+                <p>PCI DSS Level 1 certified. 256-bit SSL encryption on every transaction. Fraud detection powered by machine learning.</p>
+              </div>
+            </li>
+
+            <li class="benefit-item">
+              <span class="benefit-icon" aria-hidden="true">&#128200;</span>
+              <div>
+                <h3>Real-Time Analytics</h3>
+                <p>Track revenue, monitor failed payments, and understand your customers with a live dashboard designed for action.</p>
+              </div>
+            </li>
+
+            <li class="benefit-item">
+              <span class="benefit-icon" aria-hidden="true">&#128104;&#8205;&#128187;</span>
+              <div>
+                <h3>Developer-First APIs</h3>
+                <p>RESTful APIs, SDKs in 10+ languages, webhooks, and Sandbox testing. Integrate in hours, not days.</p>
+              </div>
+            </li>
+
+            <li class="benefit-item">
+              <span class="benefit-icon" aria-hidden="true">&#128172;</span>
+              <div>
+                <h3>24/7 Human Support</h3>
+                <p>Get answers from real people — not bots. Our support team is available via chat, email, and phone around the clock.</p>
+              </div>
+            </li>
+
+          </ul>
+
+          <!-- Social Proof Strip -->
+          <div class="benefits-social-proof" aria-label="Customer statistics">
+            <dl class="proof-stats">
+              <div class="proof-stat">
+                <dt>Businesses onboarded</dt>
+                <dd>500,000+</dd>
+              </div>
+              <div class="proof-stat">
+                <dt>Transactions processed annually</dt>
+                <dd>$18B+</dd>
+              </div>
+              <div class="proof-stat">
+                <dt>Countries supported</dt>
+                <dd>150+</dd>
+              </div>
+            </dl>
+          </div>
+
+          <!-- Customer Quote -->
+          <figure class="benefit-quote" aria-label="Customer testimonial">
+            <blockquote>
+              <p>"We integrated FinPay in a single afternoon and were processing real payments by the next morning. The API documentation is genuinely the best I've worked with."</p>
+            </blockquote>
+            <figcaption>
+              <cite>
+                Priya Mehta, CTO — NovaCraft Solutions
+              </cite>
+            </figcaption>
+          </figure>
+
+          <!-- Compliance Logos -->
+          <div class="benefit-certifications" aria-label="Security certifications">
+            <p class="certifications-label">Certified &amp; compliant:</p>
+            <ul role="list" class="certifications-list">
+              <li>PCI DSS Level 1</li>
+              <li>ISO 27001</li>
+              <li>SOC 2 Type II</li>
+              <li>GDPR</li>
+            </ul>
+          </div>
+
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <!-- ============================================================
+       MINIMAL FOOTER — Auth pages
+       ============================================================ -->
+  <footer role="contentinfo" id="site-footer" class="auth-footer" aria-label="Footer">
+    <div class="auth-footer-inner">
+      <p>
+        <small>&copy; 2025 FinPay Technologies Pvt. Ltd. All rights reserved.</small>
+      </p>
+      <nav aria-label="Legal links">
+        <ul role="list" class="auth-footer-links">
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="security.html">Security</a></li>
+          <li><a href="contact.html">Help</a></li>
+        </ul>
+      </nav>
+    </div>
+  </footer>
+
+<script>
+  /* ============================================================
+     FIREBASE GOOGLE AUTH
+     ▸ Replace the 6 placeholder values below with your actual
+       Firebase project keys from:
+       Firebase Console → Project Settings → Your apps → Config
+     ============================================================ */
+const firebaseConfig = {
+  apiKey: "AIzaSyAvUTD9GsgUmxIkTmiHaSu-BtK2sBErGPs",
+  authDomain: "finp-f52ed.firebaseapp.com",
+  projectId: "finp-f52ed",
+  storageBucket: "finp-f52ed.firebasestorage.app",
+  messagingSenderId: "324532577400",
+  appId: "1:324532577400:web:2e4436e22a8e472893798d",
+  measurementId: "G-G86EJFW5K1"
+};
+  /* Initialise Firebase (safe — won't double-init if called twice) */
+  if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+
+  const auth     = firebase.auth();
+  const provider = new firebase.auth.GoogleAuthProvider();
+
+  /* ── Wire up the button ── */
+  const googleBtn = document.querySelector('.btn-social-google');
+
+  if (googleBtn) {
+    googleBtn.addEventListener('click', async function () {
+      googleBtn.disabled    = true;
+      googleBtn.textContent = 'Signing in…';
+
+      try {
+        const result = await auth.signInWithPopup(provider);
+        const user   = result.user;
+
+        /* Store user data in sessionStorage */
+        sessionStorage.setItem('pl_user', JSON.stringify({
+          uid:         user.uid,
+          name:        user.displayName,
+          email:       user.email,
+          photo:       user.photoURL,
+          accessToken: result._tokenResponse?.oauthAccessToken || ''
+        }));
+
+        /* ── Redirect after login ──────────────────────────────────
+             Change the path below to wherever your dashboard lives.
+             Common values:
+               'dashboard.html'   — if dashboard is a separate file
+               '/dashboard'       — if you use a router
+               'index.html'       — if this IS the login page
+           ─────────────────────────────────────────────────────── */
+        window.location.href = 'dashboard.html';
+
+      } catch (err) {
+        /* Silently restore button on cancel or error */
+        if (err.code !== 'auth/popup-closed-by-user') {
+          console.error('Google sign-in error:', err.message);
+          alert('Sign-in failed: ' + err.message);
+        }
+        googleBtn.disabled    = false;
+        googleBtn.innerHTML   =
+          '<img src="assets/icons/google-logo.svg" alt="" width="20" height="20"/> Continue with Google';
+      }
+    });
+  }
+
+
+const signupForm = document.getElementById("signup-form");
+
+signupForm.addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  alert("Signup Successful!");
+
+  window.location.href = "dashboard.html";
+});
+</script>
+</body>
+</html>
